@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "660166892915",
+    "firebase_url": "https://test-fire-base-project-1fe40-default-rtdb.firebaseio.com",
+    "project_id": "test-fire-base-project-1fe40",
+    "storage_bucket": "test-fire-base-project-1fe40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660166892915:android:6f95244e5808d418483906",
+        "android_client_info": {
+          "package_name": "com.generagames.happy.town.farm.wordandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660166892915-rp0sr0tdli3tnlgggigqorublo38f7li.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwN04LhK6y-5U-DLIkJZxlQvTX4kHpm10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660166892915-rp0sr0tdli3tnlgggigqorublo38f7li.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/play_list_nav_graph"
+    app:startDestination="@id/playListFragment">
+    <include app:graph="@navigation/exerscise_nav_graph" />
+
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.PlayListFragment"
+        android:label="fragment_play_list"
+        tools:layout="@layout/fragment_play_list" >
+        <action
+            android:id="@+id/action_playListFragment_to_openDetails"
+            app:destination="@id/playListDetailsFragment" />
+        <action
+            android:id="@+id/action_playListFragment_to_createPlayListFragmentDialog"
+            app:destination="@id/createPlayListFragmentDialog" />
+        <action
+            android:id="@+id/action_playListFragment_to_playListFilterFragment"
+            app:destination="@id/playListFilterFragment" />
+        <action
+            android:id="@+id/action_playListFragment_to_scanPlayListFragment"
+            app:destination="@id/scanPlayListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playListDetailsFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.PlayListDetailsFragment"
+        android:label="PlayListDetailsFragment"
+        tools:layout="@layout/fragment_play_list_details">
+        <argument
+            android:name="playListId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_playListDetailsFragment_to_wordFragment"
+            app:destination="@id/word_details_graph">
+            <argument
+                android:name="word"
+                app:argType="can.lucky.of.core.domain.models.data.words.Word" />
+            <argument
+                android:name="details"
+                android:defaultValue="@null"
+                app:argType="can.lucky.of.core.domain.models.data.words.UserWordDetails"
+                app:nullable="true" />
+        </action>
+        <action
+            android:id="@+id/action_playListDetailsFragment_to_exerscise_nav_graph"
+            app:destination="@id/exerscise_nav_graph" />
+        <action
+            android:id="@+id/action_playListDetailsFragment_to_editPlayListFragment"
+            app:destination="@id/editPlayListFragment" />
+        <action
+            android:id="@+id/action_playListDetailsFragment_to_sharePlayListFragment"
+            app:destination="@id/sharePlayListFragment" />
+
+    </fragment>
+    <dialog
+        android:id="@+id/createPlayListFragmentDialog"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.dialogs.CreatePlayListFragmentDialog"
+        android:label="CreatePlayListFragmentDialog"
+        tools:layout="@layout/dialog_fragment_create_play_list"/>
+    <fragment
+        android:id="@+id/editPlayListFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.EditPlayListFragment"
+        android:label="EditPlayListFragment"
+        tools:layout="@layout/fragment_edit_play_list">
+        <argument
+            android:name="editParams"
+            app:argType="com.generagames.happy.town.farm.wordandroid.domain.models.bundles.EditPlayListBundle" />
+    </fragment>
+    <fragment
+        android:id="@+id/playListFilterFragment"
+        tools:layout="@layout/fragment_play_list_filter"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.PlayListFilterFragment"
+        android:label="PlayListFilterFragment" >
+        <argument
+            android:name="filter"
+            app:argType="com.generagames.happy.town.farm.wordandroid.domain.models.bundles.PlayListFilterBundle" />
+    </fragment>
+    <include app:graph="@navigation/word_details_graph" />
+    <fragment
+        android:id="@+id/sharePlayListFragment"
+        tools:layout="@layout/fragment_share_by_qr_code"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.SharePlayListFragment"
+        android:label="SharePlayListFragment" >
+        <argument android:name="playListId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanPlayListFragment"
+        tools:layout="@layout/fragment_scan_play_list"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.ScanPlayListFragment"
+        android:label="ScanPlayListFragment" />
+
+</navigation>

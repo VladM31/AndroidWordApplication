@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@android:color/transparent"
+    app:backgroundTint="@android:color/transparent"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:fabAlignmentMode="center"
+        app:backgroundTint="@android:color/transparent"
+        android:background="@android:color/transparent"
+        app:fabCradleRoundedCornerRadius="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@null"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/delete"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textColor="@color/primary_red"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:textSize="@dimen/bottom_tool_bar_btn_text_size"
+                android:text="@string/delete"
+                app:backgroundTint="@null"
+                android:background="@drawable/box_red_back"
+                android:layout_margin="7dp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cancel"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textColor="@color/primary_green"
+                android:textSize="@dimen/bottom_tool_bar_btn_text_size"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:text="@string/cancel"
+                app:backgroundTint="@null"
+                android:background="@drawable/box_back"
+                android:layout_margin="7dp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/ok"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/primary_green"
+                android:textSize="@dimen/bottom_tool_bar_btn_text_size"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:backgroundTint="@null"
+                android:background="@drawable/box_back"
+                android:layout_margin="7dp"
+                android:text="@string/ok"
+
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

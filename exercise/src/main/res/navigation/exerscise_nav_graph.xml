@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exerscise_nav_graph"
+    app:startDestination="@id/exerciseSelectionFragment">
+
+    <activity
+        android:id="@+id/exerciseActivity"
+        android:name="can.lucky.of.exercise.ui.activities.ExerciseActivity"
+        tools:layout="@layout/activity_exercise"
+        android:label="activity_exercise">
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+        <argument
+            android:name="playListId"
+            app:argType="string"
+            app:nullable="true" />
+    </activity>
+    <fragment
+        android:id="@+id/exerciseSelectionFragment"
+        android:name="can.lucky.of.exercise.ui.fragments.ExerciseSelectionFragment"
+        tools:layout="@layout/fragment_exercise_selection"
+        android:label="ExerciseSelectionFragment">
+        <action
+            android:id="@+id/action_exerciseSelectionFragment_to_exerciseActivity"
+            app:destination="@id/exerciseActivity" />
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+        <argument
+            android:name="playListId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

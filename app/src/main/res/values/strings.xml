@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Words</string>
+    <string name="edit">Edit</string>
+    <string name="end">End</string>
+    <string name="start">Start</string>
+    <string name="my_words">My words</string>
+    <string name="cefr_level">CEFR level: %s</string>
+    <string name="cefr_level_text">CEFR level</string>
+    <string name="lang_word_template">(%s): %s</string>
+    <string name="count_0">Count: 0</string>
+    <string name="name">Name</string>
+</resources>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_marginTop="70dp"
+    android:layout_width="match_parent"
+    android:background="@color/primary_back"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Words learned today"
+            android:textColor="@color/primary_green"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/wordsLearnedToday"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0 / 10"
+            android:textColor="@color/primary_green"
+            android:textSize="36sp"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="200dp"
+            android:layout_height="230dp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+        <!--       Words count-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/primary_green"
+                android:text="Added words"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/primary_green"
+                android:text="Learned words"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/addedWords"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                android:textColor="@color/primary_green"
+                android:text="11"/>
+
+            <TextView
+                android:id="@+id/learningWords"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                android:textColor="@color/primary_green"
+                android:text="31"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+        <!--       CEFR-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="CEFR level"
+            android:textColor="@color/primary_green"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/cefrLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="B1"
+            android:textColor="@color/primary_green"
+            android:textSize="36sp"
+            />
+
+        <!--        Language-->
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/primary_green"
+                android:text="@string/native_language"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/primary_green"
+                android:text="@string/learning_language"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/nativeLanguage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                android:textColor="@color/primary_green"
+                android:text="English"/>
+
+            <TextView
+                android:id="@+id/learningLanguage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="32sp"
+                android:textColor="@color/primary_green"
+                android:text="Ukraine"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="default_text">Input data</string>
+    <string name="by_image">By image</string>
+    <string name="generate_sound">Generate sound</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="reset">Reset</string>
+    <string name="it_s_not_obligatory">It\'s not obligatory</string>
+    <string name="reset_image">Reset image</string>
+    <string name="cefr">CEFR</string>
+    <string name="set_image">Set image</string>
+    <string name="set_sound">Set sound</string>
+    <string name="by_qr_code">By qr code</string>
+    <string name="accept">Accept</string>
+    <string name="rescan_qr_code">Rescan QR code</string>
+    <string name="recognize">Recognize</string>
+</resources>

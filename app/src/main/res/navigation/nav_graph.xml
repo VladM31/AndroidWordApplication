@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/naw_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="can.lucky.of.auth.ui.fragments.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_nav_bar_graph"
+            app:destination="@id/nav_bar_graph" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_telegramLoginFragment"
+            app:destination="@id/telegramLoginFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_bar_graph" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        tools:layout="@layout/fragment_sign_up"
+        android:name="can.lucky.of.auth.ui.fragments.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_confirmSignUpFragment"
+            app:destination="@id/confirmSignUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.StartFragment"
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_loading">
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmSignUpFragment"
+        android:name="can.lucky.of.auth.ui.fragments.ConfirmSignUpFragment"
+        android:label="ConfirmSignUpFragment"
+        tools:layout="@layout/fragment_confirm_sign_up">
+        <argument
+            android:name="logInBundle"
+            app:argType="can.lucky.of.auth.domain.models.data.LogInBundle" />
+        <action
+            android:id="@+id/action_confirmSignUpFragment_to_nav_bar_graph"
+            app:destination="@id/nav_bar_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/telegramLoginFragment"
+        android:name="can.lucky.of.auth.ui.fragments.TelegramLoginFragment"
+        tools:layout="@layout/fragment_telegram_login"
+        android:label="TelegramLoginFragment" >
+        <action
+            android:id="@+id/action_telegramLoginFragment_to_nav_bar_graph"
+            app:destination="@id/nav_bar_graph" />
+    </fragment>
+
+</navigation>

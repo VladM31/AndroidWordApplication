@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="currency">Currency</string>
+    <string name="email">Email</string>
+    <string name="edit">Edit</string>
+</resources>

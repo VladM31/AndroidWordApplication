@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_app_nav_graph"
+    app:startDestination="@id/settingAppFragment">
+
+    <fragment
+        android:id="@+id/settingAppFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.SettingAppFragment"
+        android:label="fragment_setting_app"
+
+        tools:layout="@layout/fragment_setting_app" >
+        <action
+            android:id="@+id/action_settingAppFragment_to_subscribeFragment"
+            app:destination="@id/subscribeFragment" />
+        <action
+            android:id="@+id/action_settingAppFragment_to_nav_learning_history"
+            app:destination="@id/nav_learning_history" />
+        <action
+            android:id="@+id/action_settingAppFragment_to_learning_plan_graph"
+            app:destination="@id/learning_plan_graph" />
+        <action
+            android:id="@+id/action_settingAppFragment_to_profile_graph"
+            app:destination="@id/profile_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscribeFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.SubscribeFragment"
+        android:label="SubscribeFragment"
+        tools:layout="@layout/fragment_subscribe">
+        <action
+            android:id="@+id/action_subscribeFragment_to_subscribeListFragment"
+            app:destination="@id/subscribeListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardPayFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.CardPayFragment"
+        android:label="CardPayFragment"
+        tools:layout="@layout/fragment_card_pay">
+        <argument
+            android:name="costValue"
+            app:argType="float" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscribeListFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.SubscribeListFragment"
+        android:label="SubscribeListFragment"
+        tools:layout="@layout/fragment_subscribe_list">
+        <action
+            android:id="@+id/action_subscribeListFragment_to_cardPayFragment"
+            app:destination="@id/cardPayFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_learning_history" />
+    <include app:graph="@navigation/learning_plan_graph" />
+    <include app:graph="@navigation/profile_graph" />
+</navigation>

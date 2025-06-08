@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_back"
+    tools:context=".ui.fragments.words.WordFilterFragment">
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+
+        <LinearLayout
+            android:layout_width="@dimen/input_width"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            tools:ignore="TextSizeCheck">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutWord"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary_green"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="2dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="255"
+                app:counterTextColor="@color/primary_green"
+                app:cursorColor="@color/primary_green"
+                app:hintTextColor="@color/primary_green"
+
+                tools:ignore="PrivateResource">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputWord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/word"
+                    android:textColor="@color/primary_green"
+
+                    android:textSize="25sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textLayoutTranslate"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary_green"
+                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                app:boxStrokeWidth="2dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="255"
+                app:counterTextColor="@color/primary_green"
+                app:cursorColor="@color/primary_green"
+                app:hintTextColor="@color/primary_green"
+
+                tools:ignore="PrivateResource">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTranslate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/translate"
+                    android:textColor="@color/primary_green"
+
+                    android:textSize="25sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/word_language"
+                android:textAlignment="center"
+                android:textColor="@color/primary_green"
+                android:textSize="25sp" />
+
+            <GridLayout
+                android:id="@+id/wordLanguageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:padding="5dp"
+                android:rowCount="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/translate_language"
+                android:textAlignment="center"
+                android:textColor="@color/primary_green"
+                android:textSize="25sp" />
+
+            <GridLayout
+                android:id="@+id/translateLanguageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:padding="5dp"
+                android:rowCount="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cefr_level_text"
+                android:textAlignment="center"
+                android:textColor="@color/primary_green"
+                android:textSize="25sp" />
+
+            <GridLayout
+                android:id="@+id/cefrLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="3"
+                android:padding="5dp"
+                android:rowCount="2" />
+
+            <include
+                android:id="@+id/categoryInput"
+                layout="@layout/box_multi_input" />
+
+            <include
+                android:id="@+id/sortBy"
+                layout="@layout/box_sort_by" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/findButton"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@null"
+        android:background="@drawable/button_back"
+        app:backgroundTint="@null"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:textColor="@color/primary_back"
+        android:text="@string/find"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

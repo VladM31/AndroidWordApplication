@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type">Type:</string>
+    <string name="date">Date:</string>
+    <string name="word">Word:</string>
+    <string name="create_plan">Create plan</string>
+    <string name="native_language">Native language</string>
+    <string name="learning_language">Learning language</string>
+    <string name="minus_count">Minus count</string>
+    <string name="plus_count">Plus count</string>
+    <string name="cefr_level">CEFR Level</string>
+    <string name="change_cefr_level">CEFR Level</string>
+    <string name="create">Create</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="card_pay_column_count">2</string>
+    <string name="card_pay_row_count">3</string>
+</resources>

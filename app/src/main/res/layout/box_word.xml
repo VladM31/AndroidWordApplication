@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:paddingVertical="10dp"
+    android:background="@drawable/box_back">
+
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/originText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_green"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/translateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/primary_green"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/originText" />
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="70dp"
+        android:text="@string/category_template"
+        android:textColor="@color/primary_green"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textContainer" />
+
+    <ImageButton
+        android:id="@+id/openWordButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow"
+        android:contentDescription="@string/open_word" />
+
+    <ImageView
+        android:id="@+id/checkMark"
+        style="@style/small_picture"
+        app:layout_constraintBottom_toTopOf="@+id/openWordButton"
+        app:layout_constraintEnd_toEndOf="@+id/openWordButton"
+        app:layout_constraintStart_toStartOf="@+id/openWordButton"
+        app:srcCompat="@drawable/check_mark"
+        android:contentDescription="@string/selected_word_label" />
+
+    <ImageView
+        android:id="@+id/hasImage"
+        style="@style/small_picture"
+        app:layout_constraintStart_toStartOf="@+id/openWordButton"
+        app:layout_constraintTop_toBottomOf="@+id/openWordButton"
+        app:srcCompat="@drawable/image_icon"
+        android:contentDescription="@string/word_has_image" />
+
+    <ImageView
+        android:id="@+id/hasSound"
+        style="@style/small_picture"
+        app:layout_constraintEnd_toEndOf="@+id/openWordButton"
+        app:layout_constraintTop_toBottomOf="@+id/openWordButton"
+        app:srcCompat="@drawable/sound"
+        android:contentDescription="@string/word_has_sound" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

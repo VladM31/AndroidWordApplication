@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/choose_add_word_graph"
+    app:startDestination="@id/chooseAddWordFragment">
+
+    <fragment
+        android:id="@+id/chooseAddWordFragment"
+        android:name="can.lucky.of.addword.ui.fragments.ChooseAddWordFragment"
+        tools:layout="@layout/fragment_choose_add_word"
+        android:label="ChooseAddWordFragment" >
+        <action
+            android:id="@+id/action_chooseAddWordFragment_to_defaultAddWordFragment"
+            app:destination="@id/defaultAddWordFragment" />
+        <action
+            android:id="@+id/action_chooseAddWordFragment_to_addWordByImageFragment"
+            app:destination="@id/addWordByImageFragment" />
+        <action
+            android:id="@+id/action_chooseAddWordFragment_to_addWordByQrCodeFragment"
+            app:destination="@id/addWordByQrCodeFragment" />
+        <action
+            android:id="@+id/action_chooseAddWordFragment_to_addWordByTextFragment"
+            app:destination="@id/addWordByTextFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/defaultAddWordFragment"
+        android:name="can.lucky.of.addword.ui.fragments.DefaultAddWordFragment"
+        tools:layout="@layout/fragment_default_add_word"
+        android:label="DefaultAddWordFragment" >
+        <argument
+            android:name="word"
+            app:argType="can.lucky.of.core.domain.models.data.words.Word"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWordByImageFragment"
+        android:name="can.lucky.of.addword.ui.fragments.AddWordByImageFragment"
+        android:label="AddWordByImageFragment"
+        tools:layout="@layout/fragment_add_word_by_image">
+        <action
+            android:id="@+id/action_addWordByImageFragment_to_defaultAddWordFragment"
+            app:destination="@id/defaultAddWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWordByQrCodeFragment"
+        tools:layout="@layout/fragment_add_word_by_qr_code"
+        android:name="can.lucky.of.addword.ui.fragments.AddWordByQrCodeFragment"
+        android:label="AddWordByQrCodeFragment" />
+    <fragment
+        android:id="@+id/addWordByTextFragment"
+        android:name="can.lucky.of.addword.ui.fragments.AddWordByTextFragment"
+        tools:layout="@layout/fragment_add_word_by_text"
+        android:label="AddWordByTextFragment" >
+        <action
+            android:id="@+id/action_addWordByTextFragment_to_defaultAddWordFragment"
+            app:destination="@id/defaultAddWordFragment" />
+    </fragment>
+
+
+</navigation>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_nav_graph"
+    app:startDestination="@id/menuFragment">
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.MenuFragment"
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_wordsFragment"
+            app:destination="@id/wordsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_userWordsFragment"
+            app:destination="@id/userWordsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_choose_add_word_graph"
+            app:destination="@id/choose_add_word_graph" />
+    </fragment>
+    <include app:graph="@navigation/word_details_graph" />
+    <fragment
+        android:id="@+id/wordsFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.WordsFragment"
+        android:label="fragment_words"
+        tools:layout="@layout/fragment_words" >
+        <action
+            android:id="@+id/action_wordsFragment_to_wordFragment"
+            app:destination="@id/word_details_graph">
+
+            <argument
+                android:name="word"
+                app:argType="can.lucky.of.core.domain.models.data.words.Word" />
+            <argument
+                android:name="details"
+                android:defaultValue="@null"
+                app:argType="can.lucky.of.core.domain.models.data.words.UserWordDetails"
+                app:nullable="true" />
+        </action>
+        <action
+            android:id="@+id/action_wordsFragment_to_wordFilterFragment"
+            app:destination="@id/wordFilterFragment" />
+        <action
+            android:id="@+id/action_wordsFragment_to_pinUserWordsFragment"
+            app:destination="@id/pinUserWordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordFilterFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.WordFilterFragment"
+        android:label="fragment_word_filter"
+        tools:layout="@layout/fragment_word_filter" >
+        <argument
+            android:name="filter"
+            app:argType="string"
+            android:defaultValue="{}" />
+    </fragment>
+    <fragment
+        android:id="@+id/pinUserWordsFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.PinUserWordsFragment"
+        android:label="PinUserWordsFragment"
+        tools:layout="@layout/fragment_pin_user_words">
+        <argument
+            android:name="wordIds"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_pinUserWordsFragment_to_userWordsFragment"
+            app:destination="@id/userWordsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userWordsFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.UserWordsFragment"
+        android:label="UserWordsFragment"
+        tools:layout="@layout/fragment_words">
+        <action
+            android:id="@+id/action_userWordsFragment_to_wordFragment"
+            app:destination="@id/word_details_graph">
+            <argument
+                android:name="word"
+                app:argType="can.lucky.of.core.domain.models.data.words.Word" />
+            <argument
+                android:name="details"
+                android:defaultValue="@null"
+                app:argType="can.lucky.of.core.domain.models.data.words.UserWordDetails"
+                app:nullable="true" />
+        </action>
+        <action
+            android:id="@+id/action_userWordsFragment_to_playListChooserDialog"
+            app:destination="@id/playListChooserDialog" />
+        <action
+            android:id="@+id/action_userWordsFragment_to_userWordFilterFragment"
+            app:destination="@id/userWordFilterFragment" />
+
+    </fragment>
+    <dialog
+        android:id="@+id/playListChooserDialog"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.dialogs.PlayListChooserDialog"
+        android:label="PlayListChooserDialog"
+        tools:layout="@layout/fragment_play_list_chooser"/>
+    <include app:graph="@navigation/choose_add_word_graph" />
+    <fragment
+        android:id="@+id/userWordFilterFragment"
+        tools:layout="@layout/fragment_user_word_filter"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.UserWordFilterFragment"
+        android:label="UserWordFilterFragment" >
+        <argument
+            android:name="filter"
+            app:argType="com.generagames.happy.town.farm.wordandroid.domain.models.bundles.UserWordFilterBundle" />
+    </fragment>
+
+
+</navigation>

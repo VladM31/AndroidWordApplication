@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_back">
+
+
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginVertical="80dp"
+       android:paddingHorizontal="20dp"
+       app:layout_constraintTop_toTopOf="parent">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:orientation="vertical">
+
+           <ImageView
+               android:id="@+id/selectedImage"
+               android:layout_width="280dp"
+               android:layout_height="280dp"
+               android:layout_gravity="center"
+               android:adjustViewBounds="true"
+               android:contentDescription="@string/selected_image"
+               app:srcCompat="@drawable/image_icon" />
+
+           <Button
+               android:id="@+id/makePhotoButton"
+               android:layout_width="240dp"
+               android:layout_height="wrap_content"
+               android:backgroundTint="@null"
+               android:background="@drawable/button_back"
+               app:backgroundTint="@null"
+               android:textSize="24sp"
+               android:layout_gravity="center"
+               android:textAllCaps="false"
+               android:layout_marginBottom="10dp"
+               android:textColor="@color/primary_back"
+               android:text="Make a photo" />
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/word_language"
+               android:textAlignment="center"
+               android:textColor="@color/primary_green"
+               android:textSize="25sp" />
+
+
+           <Spinner
+               android:id="@+id/spinnerWordLang"
+               android:layout_width="@dimen/input_width"
+               android:layout_height="50dp"
+               android:padding="5dp"
+               android:textAlignment="center"
+               android:background="@drawable/button_back"
+               />
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/translate_language"
+               android:textAlignment="center"
+               android:textColor="@color/primary_green"
+               android:textSize="25sp" />
+
+           <Spinner
+               android:id="@+id/spinnerTranLang"
+               android:layout_width="@dimen/input_width"
+               android:layout_height="50dp"
+               android:padding="5dp"
+               android:textAlignment="center"
+               android:background="@drawable/button_back"
+               />
+
+       </LinearLayout>
+   </ScrollView>
+
+    <Button
+        android:id="@+id/addWordButton"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@null"
+        android:background="@drawable/button_back"
+        app:backgroundTint="@null"
+        android:textSize="30sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/primary_back"
+        android:text="@string/recognize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/fragment_loading"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_tool_bar_btn_text_size">22sp</dimen>
+    <dimen name="input_width">300dp</dimen>
+    <dimen name="input_width_land">250dp</dimen>
+    <dimen name="layout_width_land">510dp</dimen>
+
+    <dimen name="card_pay_layout_width">310dp</dimen>
+
+    <dimen name="box_text_content_size">18sp</dimen>
+
+</resources>

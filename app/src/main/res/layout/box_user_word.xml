@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@drawable/box_back">
+
+    <TextView
+        android:id="@+id/originText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/translateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:textColor="@color/primary_green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/originText" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_template"
+        android:textColor="@color/primary_green"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/openWordButton"
+   />
+
+
+    <TextView
+        android:id="@+id/lastDateRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:text="@string/last_date_read_template"
+        android:textColor="@color/primary_green"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/openWordButton"
+        app:layout_constraintTop_toBottomOf="@+id/category" />
+
+    <ImageView
+        android:id="@+id/checkMark"
+        style="@style/small_picture"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:contentDescription="@string/selected_word_label"
+        app:layout_constraintBottom_toTopOf="@+id/openWordButton"
+        app:layout_constraintEnd_toEndOf="@+id/openWordButton"
+        app:layout_constraintStart_toStartOf="@+id/openWordButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/check_mark" />
+
+    <ImageButton
+        android:id="@+id/openWordButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/open_word"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/translateText"
+        app:srcCompat="@drawable/arrow" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="menu_button_text_size">60sp</dimen>
+    <dimen name="menu_button_width">450dp</dimen>
+
+    <dimen name="play_list_box_title_text_size">33sp</dimen>
+    <dimen name="play_list_box_details_text_size">24sp</dimen>
+    <dimen name="play_list_box_open_btn_width_height">65sp</dimen>
+    <dimen name="play_list_box_height">170dp</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_learning_history"
+    app:startDestination="@id/statisticLearningHistoryFragment">
+
+    <fragment
+        android:id="@+id/statisticLearningHistoryFragment"
+        tools:layout="@layout/fragment_statistic_learning_history"
+        android:name="can.lucky.of.history.ui.fragments.StatisticLearningHistoryFragment"
+        android:label="StatisticLearningHistoryFragment" >
+        <action
+            android:id="@+id/action_statisticLearningHistoryFragment_to_listLearningHistoryFragment"
+            app:destination="@id/listLearningHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listLearningHistoryFragment"
+        tools:layout="@layout/fragment_list_learning_history"
+        android:name="can.lucky.of.history.ui.fragments.ListLearningHistoryFragment"
+        android:label="ListLearningHistoryFragment" />
+</navigation>

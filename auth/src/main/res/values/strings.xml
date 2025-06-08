@@ -1,0 +1,12 @@
+<resources>
+    <string name="currency">Currency</string>
+    <string name="phone_number">Phone number</string>
+    <string name="password">Password</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="submit">Submit</string>
+    <string name="open_telegram_bot">Open telegram bot</string>
+    <string name="input_phone_number">Input phone number</string>
+    <string name="please_open_telegram_and_confirm_login">Please open telegram and confirm login</string>
+</resources>

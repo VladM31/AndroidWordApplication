@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_back">
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView android:layout_width="match_parent"
+        android:layout_marginTop="80dp"
+        android:layout_height="match_parent"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/byDefaultBtn"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="32sp"
+                android:textColor="@color/primary_back"
+                android:background="@drawable/button_back"
+                app:backgroundTint="@null"
+                android:text="@string/default_text" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/byQrCodeBtn"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="32sp"
+                android:textColor="@color/primary_back"
+                android:background="@drawable/button_back"
+                app:backgroundTint="@null"
+                android:text="@string/by_qr_code" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/byImageBtn"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="32sp"
+                android:enabled="false"
+                android:clickable="false"
+                android:textColor="@color/primary_back"
+                android:background="@drawable/button_back"
+                app:backgroundTint="@null"
+                android:text="@string/by_image" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/byTextBtn"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="32sp"
+                android:textColor="@color/primary_back"
+                android:background="@drawable/button_back"
+                app:backgroundTint="@null"
+                android:text="By text-word" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

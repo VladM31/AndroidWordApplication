@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_back">
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/wordImage"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/word_image"
+
+                app:srcCompat="@drawable/image_icon" />
+
+            <TextView
+                android:id="@+id/translateWord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:paddingHorizontal="10dp"
+                android:text="@string/translate_the_word"
+                android:textColor="@color/primary_green"
+                android:textAlignment="center"
+                android:textSize="@dimen/write_by_image_and_field_exercise"
+                />
+
+            <LinearLayout
+                android:id="@+id/originalWordInputLayout"
+                android:layout_width="300dp"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/box_back"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/originalWordInput"
+                    android:layout_width="280dp"
+                    android:saveEnabled="true"
+                    android:labelFor="@id/translateWord"
+                    android:textColor="@color/primary_green"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@null"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+            </LinearLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="300dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/addLetter"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/add_letter"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/write_letters" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_back"
+        android:backgroundTint="@null"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/primary_back"
+        android:textSize="24sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/word_details_graph"
+    app:startDestination="@id/wordFragment">
+
+
+    <fragment
+        android:id="@+id/wordFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.WordFragment"
+        android:label="fragment_word"
+        tools:layout="@layout/fragment_word" >
+        <argument
+            android:name="word"
+            app:argType="can.lucky.of.core.domain.models.data.words.Word" />
+        <argument
+            android:name="details"
+            app:argType="can.lucky.of.core.domain.models.data.words.UserWordDetails"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_wordFragment_to_shareUserWordFragment"
+            app:destination="@id/shareUserWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareUserWordFragment"
+        tools:layout="@layout/fragment_share_by_qr_code"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.words.ShareUserWordFragment"
+        android:label="ShareUserWordFragment" >
+        <argument
+            android:name="userWordId"
+            app:argType="string" />
+    </fragment>
+</navigation>
