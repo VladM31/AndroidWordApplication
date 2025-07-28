@@ -52,13 +52,14 @@ class WordsViewModel(
     override fun sent(action: WordsAction) {
         if (action is WordsAction.UpdateFilter) {
             mutableFilter.value = action.filter.copy(
-                userId = WordFilter.UserId(id = userCacheManager.user.id, isIn = false)
+                userId = WordFilter.UserId(id = userCacheManager.user.id, isIn = false),
             )
             mutableState.apply {
                 value = value.copy(
                     filter = action.filter.copy(
                         userId = WordFilter.UserId(id = userCacheManager.user.id, isIn = false)
-                    )
+                    ),
+                    selectedWords = action.selectedWords
                 )
             }
             return

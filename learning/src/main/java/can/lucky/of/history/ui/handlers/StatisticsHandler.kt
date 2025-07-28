@@ -2,8 +2,8 @@ package can.lucky.of.history.ui.handlers
 
 import android.content.Context
 import can.lucky.of.core.R
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.domain.models.data.StatisticsLearningHistory
-import can.lucky.of.history.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.domain.vms.StatisticLearningHistoryVm
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis

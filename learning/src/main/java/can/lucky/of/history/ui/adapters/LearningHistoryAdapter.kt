@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.databinding.BoxLearningHistoryBinding
 import can.lucky.of.history.domain.models.data.LearningHistory
-import can.lucky.of.history.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.ui.mappers.LearningHistoryTypeMapper
 
 internal class LearningHistoryAdapter : PagingDataAdapter<LearningHistory,LearningHistoryAdapter.LearningHistoryHolder>(LearningHistoryDiffCallback)  {

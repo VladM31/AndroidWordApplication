@@ -30,7 +30,9 @@ internal val managerModule = module {
     single<ExerciseStatisticalManager> {
         ExerciseStatisticalManagerImpl(
             client = get(),
-            userManager = get()
+            userManager = get(),
+            learningPlanClient = get(),
+            learningHistoryClient = get()
         )
     }
 }

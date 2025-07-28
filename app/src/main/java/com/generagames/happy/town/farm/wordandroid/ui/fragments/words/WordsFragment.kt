@@ -78,7 +78,12 @@ class WordsFragment : Fragment(R.layout.fragment_words) {
     private fun clearSelectedWords(newBinding : FragmentWordsBinding){
         val temp = viewModel.state.value.selectedWords
         viewModel.sent(WordsAction.Clear)
-        temp.values.forEach { position ->
+        newBinding.wordsRecyclerView.adapter?.itemCount?.let { count ->
+            for (i in 0 until count) {
+                newBinding.wordsRecyclerView.adapter?.notifyItemChanged(i)
+            }
+        }
+        temp.values.filterNotNull().forEach { position ->
             newBinding.wordsRecyclerView.adapter?.notifyItemChanged(position)
         }
     }
@@ -131,8 +136,9 @@ class WordsFragment : Fragment(R.layout.fragment_words) {
             }.getOrElse { WordFilter() }
 
             if (filter != viewModel.state.value.filter) {
+                val action = WordsAction.UpdateFilter(filter, viewModel.state.value.selectedWords)
                 clearSelectedWords(newBinding)
-                viewModel.sent(WordsAction.UpdateFilter(filter))
+                viewModel.sent(action)
             }
         }
     }

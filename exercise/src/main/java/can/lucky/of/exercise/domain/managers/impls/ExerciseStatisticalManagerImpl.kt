@@ -2,6 +2,10 @@ package can.lucky.of.exercise.domain.managers.impls
 
 import android.util.Log
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
+import can.lucky.of.core.net.clients.LearningHistoryClient
+import can.lucky.of.core.net.clients.LearningPlanClient
+import can.lucky.of.core.net.responses.LearningPlanResponse
 import can.lucky.of.core.utils.toPair
 import can.lucky.of.exercise.domain.managers.ExerciseStatisticalManager
 import can.lucky.of.exercise.domain.models.data.EndExerciseTransaction
@@ -11,13 +15,22 @@ import can.lucky.of.exercise.net.clients.ExerciseStatisticalClient
 import can.lucky.of.exercise.net.requests.EndExerciseTransactionRequest
 import can.lucky.of.exercise.net.requests.StartExerciseTransactionRequest
 import can.lucky.of.exercise.net.requests.WordCompletedRequest
+import java.util.Collections.emptyMap
 
 internal class ExerciseStatisticalManagerImpl(
     private val client: ExerciseStatisticalClient,
-    private val userManager: UserCacheManager
+    private val userManager: UserCacheManager,
+    private val learningPlanClient: LearningPlanClient,
+    private val learningHistoryClient : LearningHistoryClient
 ) : ExerciseStatisticalManager {
     override suspend fun startExercise(data: StartExerciseTransaction) {
-        data.toRequest().runCatching {
+        data.toRequest(
+            plan = runCatching { learningPlanClient.getPlan(userManager.token.value) }.getOrNull(),
+            countMap = runCatching {
+                learningHistoryClient.getCount(userManager.token.value)
+                    .associate { LearningHistoryType.valueOf(it.type) to it.count }
+            }.getOrDefault(emptyMap())
+        ).runCatching {
             client.startExercise(this, userManager.toPair())
         }.onFailure {
             Log.e("ExerciseStatisticalManager", "Failed to start exercise: ${it.message}")
@@ -40,12 +53,30 @@ internal class ExerciseStatisticalManagerImpl(
         }
     }
 
-    private fun StartExerciseTransaction.toRequest(): StartExerciseTransactionRequest {
+    private fun StartExerciseTransaction.toRequest(
+        countMap: Map<LearningHistoryType, Int> = emptyMap(),
+        plan: LearningPlanResponse? = null
+    ): StartExerciseTransactionRequest {
         return StartExerciseTransactionRequest(
             transactionId = this.transactionId,
             exercises = this.exercises,
             createdAt = this.createdAt,
             words = this.words.map { it.toRequest() },
+            wordCount = StartExerciseTransactionRequest.WordCountRequest(
+                addedToLearning = countMap[LearningHistoryType.CREATE] ?: 0,
+                repetitions = countMap[LearningHistoryType.UPDATE] ?: 0
+            ),
+            learningPlan = plan?.toRequest()
+        )
+    }
+
+    private fun LearningPlanResponse.toRequest(): StartExerciseTransactionRequest.LearningPlan {
+        return StartExerciseTransactionRequest.LearningPlan(
+            wordsPerDay = this.wordsPerDay,
+            nativeLang = this.nativeLang,
+            learningLang = this.learningLang,
+            cefr = this.cefr,
+            dateOfCreation = this.dateOfCreation.toString()
         )
     }
 

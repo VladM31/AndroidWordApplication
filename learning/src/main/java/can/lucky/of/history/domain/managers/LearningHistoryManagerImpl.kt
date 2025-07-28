@@ -3,10 +3,10 @@ package can.lucky.of.history.domain.managers
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.models.enums.CEFR
 import can.lucky.of.core.domain.models.enums.Language
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.domain.models.data.CountLearningHistory
 import can.lucky.of.history.domain.models.data.LearningHistory
 import can.lucky.of.history.domain.models.data.StatisticsLearningHistory
-import can.lucky.of.history.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.domain.models.filters.LearningHistoryFilter
 import can.lucky.of.history.domain.models.filters.StatisticsLearningHistoryFilter
 import can.lucky.of.core.net.clients.LearningHistoryClient

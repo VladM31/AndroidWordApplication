@@ -31,11 +31,20 @@ class StartFragment : Fragment(can.lucky.of.core.R.layout.fragment_loading) {
                 setHost(it)
             }
 
+            val currentVersion = getString(R.string.current_version)
+            val remoteVersion = Firebase.remoteConfig.getString("version")
+
             get<SubscribeCacheManager>().fetch()
 
             withContext(Dispatchers.Main){
+                if (currentVersion == remoteVersion){
+                    findNavController(). navigate(
+                        StartFragmentDirections.actionStartFragmentToLoginFragment(),
+                        NavOptions.Builder().setPopUpTo(R.id.startFragment, true).build())
+                    return@withContext
+                }
                 findNavController(). navigate(
-                    StartFragmentDirections.actionStartFragmentToLoginFragment(),
+                    StartFragmentDirections.actionStartFragmentToUpdateVersionFragment(),
                     NavOptions.Builder().setPopUpTo(R.id.startFragment, true).build())
             }
         }

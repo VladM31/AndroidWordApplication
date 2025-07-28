@@ -7,39 +7,26 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import can.lucky.of.core.domain.models.filters.Range
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.models.ToolBarPopupButton
 import can.lucky.of.history.R
 import can.lucky.of.core.R as CoreR
 import can.lucky.of.history.databinding.FragmentStatisticLearningHistoryBinding
 import can.lucky.of.history.domain.actions.StatisticLearningHistoryAction
-import can.lucky.of.history.domain.managers.LearningHistoryManager
 import can.lucky.of.history.domain.models.data.StatisticsLearningHistory
-import can.lucky.of.history.domain.models.enums.LearningHistoryType
-import can.lucky.of.history.domain.models.filters.LearningHistoryFilter
-import can.lucky.of.history.domain.models.filters.StatisticsLearningHistoryFilter
 import can.lucky.of.history.domain.vms.StatisticLearningHistoryVm
 import can.lucky.of.history.ui.handlers.StatisticsHandler
 import can.lucky.of.history.ui.mappers.LearningHistoryTypeMapper
 import can.lucky.of.history.ui.navigators.ListLearningHistoryNavigator
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 class StatisticLearningHistoryFragment : Fragment(R.layout.fragment_statistic_learning_history) {
     private var binding: FragmentStatisticLearningHistoryBinding? = null

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import can.lucky.of.core.domain.managers.LearningPlanManager
 import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.models.data.LearningPlan
+import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.core.domain.models.filters.Range
 import can.lucky.of.core.domain.vms.AbstractMviViewModel
 import can.lucky.of.history.domain.models.states.LearningPlanState
@@ -11,7 +12,6 @@ import can.lucky.of.history.domain.actions.LearningPlanAction
 import can.lucky.of.history.domain.managers.LearningHistoryManager
 import can.lucky.of.history.domain.models.data.CountLearningHistory
 import can.lucky.of.history.domain.models.enums.PlanFragmentType
-import can.lucky.of.history.domain.models.enums.LearningHistoryType
 import can.lucky.of.history.domain.models.filters.LearningHistoryFilter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,12 +1,30 @@
 package can.lucky.of.exercise.net.requests
 
+import java.time.LocalDateTime
+
 
 data class StartExerciseTransactionRequest(
     val transactionId : String,
     val exercises : List<Int>,
     val words : List<WordRequest>,
-    var createdAt : Long
+    val createdAt : Long,
+    val wordCount: WordCountRequest,
+    val learningPlan: LearningPlan?
 ){
+
+    data class WordCountRequest(
+        val addedToLearning: Int,
+        val repetitions: Int,
+    )
+
+    data class LearningPlan(
+        val wordsPerDay: Int,
+        val nativeLang: String,
+        val learningLang: String,
+        val cefr: String,
+        val dateOfCreation: String
+    )
+
 
     data class WordRequest(
 
