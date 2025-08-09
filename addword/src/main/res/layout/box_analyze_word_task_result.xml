@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:paddingVertical="10dp"
+    android:background="@drawable/box_back">
+
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="110dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/originText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_green"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="(EN) Hello World!"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/translateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/primary_green"
+            android:textSize="16sp"
+            android:text="(ZH) 你好，世界！"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/originText" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_back"
+        android:padding="7dp"
+        android:text="@string/completed"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textContainer"
+        app:layout_constraintTop_toTopOf="@+id/textContainer" />
+
+
+    <TextView
+        android:id="@+id/createdAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2025-01-01 12:00"
+        android:textColor="@color/primary_green"
+        android:textSize="9sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        app:layout_constraintTop_toBottomOf="@+id/textContainer"
+        tools:ignore="SmallSp" />
+
+
+    <Button
+        android:id="@+id/processResultBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:background="@drawable/button_back"
+        android:text="Open"
+        android:layout_marginTop="5dp"
+        android:textAllCaps="false"
+        android:textColor="@color/primary_back"
+        android:textSize="16sp"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textContainer"
+        app:layout_constraintTop_toBottomOf="@+id/status"
+      />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

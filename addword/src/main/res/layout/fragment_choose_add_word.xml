@@ -28,7 +28,7 @@
                 android:layout_width="@dimen/input_width"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:textColor="@color/primary_back"
                 android:background="@drawable/button_back"
                 app:backgroundTint="@null"
@@ -43,7 +43,7 @@
                 android:layout_width="@dimen/input_width"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:textColor="@color/primary_back"
                 android:background="@drawable/button_back"
                 app:backgroundTint="@null"
@@ -54,11 +54,26 @@
                 android:layout_height="10dp" />
 
             <Button
+                android:id="@+id/byTextBtn"
+                android:layout_width="@dimen/input_width"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="28sp"
+                android:textColor="@color/primary_back"
+                android:background="@drawable/button_back"
+                app:backgroundTint="@null"
+                android:text="@string/recognize_by_text" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="10dp" />
+
+            <Button
                 android:id="@+id/byImageBtn"
                 android:layout_width="@dimen/input_width"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:enabled="false"
                 android:clickable="false"
                 android:textColor="@color/primary_back"
@@ -66,20 +81,7 @@
                 app:backgroundTint="@null"
                 android:text="@string/by_image" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="10dp" />
 
-            <Button
-                android:id="@+id/byTextBtn"
-                android:layout_width="@dimen/input_width"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="32sp"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
-                app:backgroundTint="@null"
-                android:text="By text-word" />
 
         </LinearLayout>
 

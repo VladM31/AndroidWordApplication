@@ -2,6 +2,7 @@ package can.lucky.of.addword.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -10,12 +11,14 @@ import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentAddWordByTextBinding
 import can.lucky.of.addword.domain.actions.AddWordByImageAction
 import can.lucky.of.addword.domain.actions.AddWordByTextAction
+import can.lucky.of.addword.domain.models.keys.RecognizeWordTaskKeys
 import can.lucky.of.addword.domain.vms.AddWordByTextVm
 import can.lucky.of.addword.ui.listeners.ItemSelectedListener
 import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
+import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
 import can.lucky.of.core.utils.setContent
 import kotlinx.coroutines.flow.collectLatest
@@ -43,29 +46,18 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
         ToolBarController(
             findNavController(),
             binding?.toolBar ?: return,
-            "Add word by text"
+            "Recognize by Text",
         ).setDefaultSettings()
+
+        vm.state.onEnd(lifecycleScope) {
+            parentFragmentManager.setFragmentResult(RecognizeWordTaskKeys.REQUEST_CODE, bundleOf())
+            findNavController().navigateUp()
+        }
     }
 
     private fun setStateListeners() {
         vm.state.onError(lifecycleScope) {
             requireActivity().showError(it.message).show()
-        }
-
-
-        lifecycleScope.launch {
-            vm.state.map { it.word }
-                .filterNotNull()
-                .take(1)
-                .collectLatest {
-                    findNavController().navigate(
-                        AddWordByTextFragmentDirections.actionAddWordByTextFragmentToDefaultAddWordFragment(
-                            it
-                        ),
-                        NavOptions.Builder().setPopUpTo(R.id.chooseAddWordFragment, false).build()
-                    )
-                }
-
         }
 
         lifecycleScope.launch {

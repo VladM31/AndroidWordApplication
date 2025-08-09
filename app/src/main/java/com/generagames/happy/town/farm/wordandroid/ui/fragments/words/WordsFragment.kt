@@ -78,13 +78,11 @@ class WordsFragment : Fragment(R.layout.fragment_words) {
     private fun clearSelectedWords(newBinding : FragmentWordsBinding){
         val temp = viewModel.state.value.selectedWords
         viewModel.sent(WordsAction.Clear)
-        newBinding.wordsRecyclerView.adapter?.itemCount?.let { count ->
-            for (i in 0 until count) {
-                newBinding.wordsRecyclerView.adapter?.notifyItemChanged(i)
+        val itemCount = newBinding.wordsRecyclerView.adapter?.itemCount ?: 0
+        temp.values.filter { it < itemCount }.forEach { position ->
+            newBinding.wordsRecyclerView.adapter?.runCatching {
+                notifyItemChanged(position)
             }
-        }
-        temp.values.filterNotNull().forEach { position ->
-            newBinding.wordsRecyclerView.adapter?.notifyItemChanged(position)
         }
     }
 

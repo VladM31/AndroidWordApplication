@@ -8,9 +8,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentChooseAddWordBinding
+import can.lucky.of.addword.domain.managers.recognizes.AiRecognizeWordManager
+import can.lucky.of.addword.domain.models.filters.RecognizeResultFilter
 import can.lucky.of.addword.domain.vms.ChooseAddWordVm
+import can.lucky.of.addword.net.clients.AiRecognizeWordClient
+import can.lucky.of.addword.net.models.requests.AiRecognizeWordByTextRequest
+import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.ui.controllers.ToolBarController
+import can.lucky.of.core.utils.toPair
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("UseCompatLoadingForDrawables")
@@ -55,7 +64,7 @@ class ChooseAddWordFragment : Fragment(R.layout.fragment_choose_add_word) {
         }
 
         binding?.byTextBtn?.setOnClickListener {
-            findNavController().navigate(ChooseAddWordFragmentDirections.actionChooseAddWordFragmentToAddWordByTextFragment())
+            findNavController().navigate(ChooseAddWordFragmentDirections.actionChooseAddWordFragmentToAnalyzeWordTasksFragment())
         }
 
         lifecycleScope.launch {
@@ -69,6 +78,7 @@ class ChooseAddWordFragment : Fragment(R.layout.fragment_choose_add_word) {
                 binding?.byTextBtn?.isClickable = true
             }
         }
+
     }
 
     override fun onDestroy() {

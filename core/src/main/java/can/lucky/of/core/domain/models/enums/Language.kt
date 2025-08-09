@@ -16,6 +16,9 @@ enum class Language(
     val shortName: String
         get() = _shortName.toString()
 
+    val fixedShortName: String
+        get() =  if (UKRAINIAN == this) "ua" else shortName
+
     val titleCase = this.titleCase()
 
     companion object {

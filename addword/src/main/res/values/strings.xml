@@ -14,4 +14,6 @@
     <string name="accept">Accept</string>
     <string name="rescan_qr_code">Rescan QR code</string>
     <string name="recognize">Recognize</string>
+    <string name="completed">Completed</string>
+    <string name="recognize_by_text">Recognize by text</string>
 </resources>

@@ -20,8 +20,8 @@
             android:id="@+id/action_chooseAddWordFragment_to_addWordByQrCodeFragment"
             app:destination="@id/addWordByQrCodeFragment" />
         <action
-            android:id="@+id/action_chooseAddWordFragment_to_addWordByTextFragment"
-            app:destination="@id/addWordByTextFragment" />
+            android:id="@+id/action_chooseAddWordFragment_to_analyzeWordTasksFragment"
+            app:destination="@id/analyzeWordTasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/defaultAddWordFragment"
@@ -52,9 +52,17 @@
         android:id="@+id/addWordByTextFragment"
         android:name="can.lucky.of.addword.ui.fragments.AddWordByTextFragment"
         tools:layout="@layout/fragment_add_word_by_text"
-        android:label="AddWordByTextFragment" >
+        android:label="AddWordByTextFragment" />
+    <fragment
+        android:id="@+id/analyzeWordTasksFragment"
+        android:name="can.lucky.of.addword.ui.fragments.RecognizeWordTasksFragment"
+        android:label="fragment_analyze_word_tasks"
+        tools:layout="@layout/fragment_analyze_word_tasks" >
         <action
-            android:id="@+id/action_addWordByTextFragment_to_defaultAddWordFragment"
+            android:id="@+id/action_analyzeWordTasksFragment_to_addWordByTextFragment"
+            app:destination="@id/addWordByTextFragment" />
+        <action
+            android:id="@+id/action_analyzeWordTasksFragment_to_defaultAddWordFragment"
             app:destination="@id/defaultAddWordFragment" />
     </fragment>
 

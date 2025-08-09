@@ -94,6 +94,7 @@
     <string name="next">Next</string>
     <string name="add_letter">Add letter</string>
     <string name="share_word_qr_code">Share word qr code</string>
+    <string name="icon_menu_button_descr">Icon Menu Button</string>
 
 </resources>
 

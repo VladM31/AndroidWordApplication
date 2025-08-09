@@ -43,9 +43,15 @@ dependencies {
     implementation project(":validation")
 
     implementation("io.github.g00fy2.quickie:quickie-bundled:1.10.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.5")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.5")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.5")
+
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
 
     implementation "io.insert-koin:koin-core:3.4.3"
     implementation "io.insert-koin:koin-android:3.4.3"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     testImplementation "io.insert-koin:koin-test:3.4.3"
 
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.12.0'

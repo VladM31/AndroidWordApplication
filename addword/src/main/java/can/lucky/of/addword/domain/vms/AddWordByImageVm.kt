@@ -4,11 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import can.lucky.of.addword.domain.models.states.AddWordByImageState
 import can.lucky.of.addword.domain.actions.AddWordByImageAction
-import can.lucky.of.addword.domain.managers.WordRecognizeManager
-import can.lucky.of.addword.domain.models.WordImageOptions
 import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.models.enums.Language
-import can.lucky.of.core.domain.results.ConfirmBox
 import can.lucky.of.core.domain.vms.MviViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 internal class AddWordByImageVm(
-    private val wordRecognizeManager: WordRecognizeManager
+
 ) : ViewModel(), MviViewModel<AddWordByImageState, AddWordByImageAction> {
 
     private val mutableState = MutableStateFlow(AddWordByImageState())
@@ -59,16 +56,10 @@ internal class AddWordByImageVm(
 
 
         viewModelScope.launch(Dispatchers.IO) {
-            val wordOption = WordImageOptions(
-                imageUri = state.value.image!!,
-                wordLang = state.value.language,
-                translateLang = state.value.translateLanguage
-            )
+
 
             try {
                 mutableState.value = state.value.copy(isLoading = true)
-                val word = wordRecognizeManager.recognize(wordOption)
-                mutableState.value = mutableState.value.copy(word = word)
             }catch (e: Exception){
                 mutableState.value = state.value.copy(
                     error = ErrorMessage(message = e.message.orEmpty()),

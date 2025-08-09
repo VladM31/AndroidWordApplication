@@ -8,5 +8,7 @@
     <dimen name="card_pay_layout_width">310dp</dimen>
 
     <dimen name="box_text_content_size">18sp</dimen>
+    <dimen name="tool_bar_btn_size">50dp</dimen>
+
 
 </resources>

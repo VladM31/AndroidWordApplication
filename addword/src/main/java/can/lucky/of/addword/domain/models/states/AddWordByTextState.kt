@@ -12,6 +12,6 @@ internal data class AddWordByTextState(
     val language: Language = Language.ENGLISH,
     val translateLang: Language = Language.ENGLISH,
     val isLoading: Boolean = false,
-    val word: Word? = null,
+    override val isEnd: Boolean = false,
     override val errorMessage: ErrorMessage? = null
-) : ErrorableState
+) : ErrorableState, EndetableState
