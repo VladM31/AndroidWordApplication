@@ -8,10 +8,12 @@ import can.lucky.of.core.domain.managers.word.WordManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.cache.SharedUserCacheManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PinPlayListManagerImpl
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.media.ExoCacheMediaManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.SharePlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PlayListManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.SharePlayListManagerImpl
@@ -80,6 +82,12 @@ val managerModule = module {
         ExoCacheMediaManager(
             context = androidContext(),
             headerFactory = get()
+        )
+    }
+
+    single< PayPropositionManager> {
+        PayPropositionManagerImpl(
+            context = androidContext()
         )
     }
 }

@@ -1,6 +1,6 @@
 package com.generagames.happy.town.farm.wordandroid.valid
 
-import com.generagames.happy.town.farm.wordandroid.domain.models.states.CardPayState
+import com.generagames.happy.town.farm.wordandroid.domain.models.states.pay.CardPayState
 
 object CardPayStateValidator {
     private val cardNumberValidators = listOf(

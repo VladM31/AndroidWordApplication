@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.ui.fragments
+package com.generagames.happy.town.farm.wordandroid.ui.fragments.pays
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,12 +14,11 @@ import com.generagames.happy.town.farm.wordandroid.databinding.FragmentCardPayBi
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.utils.onError
-import com.generagames.happy.town.farm.wordandroid.domain.vms.CardPayViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
@@ -61,6 +60,12 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 }
         }
 
+        lifecycleScope.launch {
+            viewModel.state.map { it.isBack }.distinctUntilChanged().filter { it }.take(1).collectLatest {
+                findNavController().popBackStack(R.id.subscribeFragment,false)
+            }
+        }
+
 
 
         newBinding.confirmPayButton.setOnClickListener {
@@ -75,13 +80,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 )
             )
         }
-
-
-        viewModel.sent(
-            CardPayAction.SetCost(
-                CardPayFragmentArgs.fromBundle(requireArguments()).costValue
-            )
-        )
 
         ToolBarController(
             binding = newBinding.toolBar,

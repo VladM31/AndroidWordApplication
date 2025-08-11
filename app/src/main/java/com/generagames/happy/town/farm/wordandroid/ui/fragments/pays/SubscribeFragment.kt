@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.ui.fragments
+package com.generagames.happy.town.farm.wordandroid.ui.fragments.pays
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentSubscribeBinding
 import can.lucky.of.core.ui.controllers.ToolBarController
 import com.generagames.happy.town.farm.wordandroid.actions.SubscribeAction
-import com.generagames.happy.town.farm.wordandroid.domain.vms.SubscribeViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubscribeViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import can.lucky.of.core.R as CoreR

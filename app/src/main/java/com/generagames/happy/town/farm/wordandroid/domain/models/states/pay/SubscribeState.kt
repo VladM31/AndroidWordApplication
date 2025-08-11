@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.domain.models.states
+package com.generagames.happy.town.farm.wordandroid.domain.models.states.pay
 
 import can.lucky.of.core.utils.titleCase
 

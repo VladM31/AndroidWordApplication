@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.ui.fragments
+package com.generagames.happy.town.farm.wordandroid.ui.fragments.pays
 
 import android.os.Bundle
 import android.view.View
@@ -10,8 +10,11 @@ import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentSubscribeListBinding
 import com.generagames.happy.town.farm.wordandroid.ui.adapters.SubCostAdapter
 import can.lucky.of.core.ui.controllers.ToolBarController
-import com.generagames.happy.town.farm.wordandroid.domain.vms.SubCostViewModel
+import com.generagames.happy.town.farm.wordandroid.actions.SubCostAction
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubCostViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import can.lucky.of.core.R as CoreR
@@ -28,11 +31,27 @@ class SubscribeListFragment : Fragment(R.layout.fragment_subscribe_list) {
         binding?.subCostRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
         lifecycleScope.launch {
-            subCostViewModel.state.filter { it.content.isNotEmpty() }.collect {
-                binding?.subCostRecyclerView?.adapter = SubCostAdapter(it.content){ cost ->
-                    findNavController().navigate(SubscribeListFragmentDirections.actionSubscribeListFragmentToCardPayFragment(cost))
+            subCostViewModel.state
+                .map { it.content }
+                .distinctUntilChanged()
+                .filter { it.isNotEmpty() }.collect {
+                    binding?.subCostRecyclerView?.adapter = SubCostAdapter(it) { cost ->
+                        subCostViewModel.sent(SubCostAction.Selected(cost))
+
+                    }
                 }
-            }
+        }
+
+        lifecycleScope.launch {
+            subCostViewModel.state
+                .map { it.isSelected }
+                .distinctUntilChanged()
+                .filter { it }
+                .collect {
+                    findNavController().navigate(
+                        SubscribeListFragmentDirections.actionSubscribeListFragmentToChoosePayFragment()
+                    )
+                }
         }
 
         ToolBarController(

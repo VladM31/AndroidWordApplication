@@ -15,4 +15,6 @@
     <string name="update">Update</string>
     <string name="please_update_the_app_to_continue">Please update the app to continue</string>
     <string name="current_version">1.0.0</string>
+    <string name="google_pay">Google pay</string>
+    <string name="card_pay">Card pay</string>
 </resources>

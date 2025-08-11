@@ -1,11 +1,11 @@
-package com.generagames.happy.town.farm.wordandroid.domain.vms
+package com.generagames.happy.town.farm.wordandroid.domain.vms.pay
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
 import can.lucky.of.core.domain.vms.MviViewModel
 import com.generagames.happy.town.farm.wordandroid.actions.SubscribeAction
-import com.generagames.happy.town.farm.wordandroid.domain.models.states.SubscribeState
+import com.generagames.happy.town.farm.wordandroid.domain.models.states.pay.SubscribeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

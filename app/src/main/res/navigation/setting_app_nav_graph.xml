@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/subscribeFragment"
-        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.SubscribeFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.pays.SubscribeFragment"
         android:label="SubscribeFragment"
         tools:layout="@layout/fragment_subscribe">
         <action
@@ -35,23 +35,33 @@
     </fragment>
     <fragment
         android:id="@+id/cardPayFragment"
-        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.CardPayFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.pays.CardPayFragment"
         android:label="CardPayFragment"
         tools:layout="@layout/fragment_card_pay">
-        <argument
-            android:name="costValue"
-            app:argType="float" />
+
     </fragment>
     <fragment
         android:id="@+id/subscribeListFragment"
-        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.SubscribeListFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.pays.SubscribeListFragment"
         android:label="SubscribeListFragment"
         tools:layout="@layout/fragment_subscribe_list">
         <action
             android:id="@+id/action_subscribeListFragment_to_cardPayFragment"
             app:destination="@id/cardPayFragment" />
+        <action
+            android:id="@+id/action_subscribeListFragment_to_choosePayFragment"
+            app:destination="@id/choosePayFragment" />
     </fragment>
     <include app:graph="@navigation/nav_learning_history" />
     <include app:graph="@navigation/learning_plan_graph" />
     <include app:graph="@navigation/profile_graph" />
+    <fragment
+        android:id="@+id/choosePayFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.pays.ChoosePayFragment"
+        android:label="fragment_choose_pay"
+        tools:layout="@layout/fragment_choose_pay" >
+        <action
+            android:id="@+id/action_choosePayFragment_to_cardPayFragment"
+            app:destination="@id/cardPayFragment" />
+    </fragment>
 </navigation>

@@ -9,5 +9,4 @@ sealed interface CardPayAction {
         val phoneNumber: String,
         val email: String) : CardPayAction
 
-    data class SetCost(val cost: Float) : CardPayAction
 }

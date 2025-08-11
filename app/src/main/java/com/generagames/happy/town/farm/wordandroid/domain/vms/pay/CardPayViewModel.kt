@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.domain.vms
+package com.generagames.happy.town.farm.wordandroid.domain.vms.pay
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,8 +8,9 @@ import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.vms.MviViewModel
 import com.generagames.happy.town.farm.wordandroid.actions.CardPayAction
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManager
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.CardPay
-import com.generagames.happy.town.farm.wordandroid.domain.models.states.CardPayState
+import com.generagames.happy.town.farm.wordandroid.domain.models.states.pay.CardPayState
 import com.generagames.happy.town.farm.wordandroid.utils.toLocalDateTime
 import com.generagames.happy.town.farm.wordandroid.valid.CardPayStateValidator
 import kotlinx.coroutines.cancel
@@ -21,22 +22,26 @@ import kotlinx.coroutines.launch
 class CardPayViewModel(
     userCacheManager: UserCacheManager,
     private val payManager: PayManager,
+    private val payPropositionManager: PayPropositionManager,
     private val subscribeCacheManager: SubscribeCacheManager
 ) : ViewModel(), MviViewModel<CardPayState, CardPayAction> {
 
-    private val mutableState = MutableStateFlow(CardPayState(
+    private val mutableState = MutableStateFlow(
+        CardPayState(
         phoneNumber = userCacheManager.user.phoneNumber,
         email = userCacheManager.user.email.orEmpty()
-    ))
+    )
+    )
     override val state: StateFlow<CardPayState> = mutableState
 
+
+    init {
+        mutableState.value = state.value.copy(
+            cost = payPropositionManager.getProposition()?.originalCost ?: 0.0f,
+        )
+    }
+
     override fun sent(action: CardPayAction) {
-        if (action is CardPayAction.SetCost) {
-            mutableState.value = state.value.copy(
-                cost = action.cost
-            )
-            return
-        }
 
         if (action !is CardPayAction.ConfirmPay) {
             return
@@ -53,7 +58,7 @@ class CardPayViewModel(
         }
 
         viewModelScope.launch {
-            val result = payManager.payCard(state.value.toCardPay())
+            val result = payManager.pay(state.value.toCardPay())
 
             if (result.error!= null) {
                 mutableState.value = state.value.copy(
@@ -68,8 +73,8 @@ class CardPayViewModel(
                 dateCacheId = result.dateCacheId.orEmpty()
             )
 
-            repeat(13){
-                delay(10000)
+            repeat(30){
+                delay(5000)
                 val waitResult = payManager.waitExpirationDate(state.value.dateCacheId)
                 if (waitResult.errorMessage != null) {
                     mutableState.value = state.value.copy(

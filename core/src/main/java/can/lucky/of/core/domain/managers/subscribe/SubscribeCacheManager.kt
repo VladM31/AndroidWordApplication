@@ -14,4 +14,6 @@ interface SubscribeCacheManager {
     suspend fun isActiveSubscribe(): Boolean
 
     suspend fun update(expirationDate: LocalDateTime)
+
+
 }
