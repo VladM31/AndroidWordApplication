@@ -1,20 +1,19 @@
 package com.generagames.happy.town.farm.wordandroid.domain.vms
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import can.lucky.of.core.domain.managers.playlist.PlayListManager
+import can.lucky.of.core.domain.models.data.playlists.PinPlayList
+import can.lucky.of.core.domain.models.filters.DeletePlayListFilter
+import can.lucky.of.core.domain.models.filters.PlayListFilter
 import can.lucky.of.core.domain.vms.MviViewModel
 import can.lucky.of.exercise.domain.managers.ExerciseTransactionManager
 import can.lucky.of.exercise.domain.managers.ExerciseWordManager
 import can.lucky.of.exercise.domain.models.data.ExerciseTransaction
 import can.lucky.of.exercise.domain.models.data.ExerciseWord
 import com.generagames.happy.town.farm.wordandroid.actions.PlayListDetailsAction
-
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
-import can.lucky.of.core.domain.managers.playlist.PlayListManager
-
-import can.lucky.of.core.domain.models.data.playlists.PinPlayList
-import can.lucky.of.core.domain.models.filters.DeletePlayListFilter
-import can.lucky.of.core.domain.models.filters.PlayListFilter
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.PlayListDetailsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -58,9 +57,14 @@ class PlayListDetailsVm(
 
     private fun handleDelete() {
         viewModelScope.launch {
-            val isDeleted = playListManager.delete(DeletePlayListFilter(state.value.id))
+            try {
+                playListManager.delete(DeletePlayListFilter(state.value.id))
+            } catch (e: Exception) {
+                Log.e("PlayListDetailsVm", "handleDelete: ", e)
+            }
+
             mutableState.value = mutableState.value.copy(
-                isEnd = isDeleted != 0
+                isEnd = true
             )
         }
     }
@@ -102,9 +106,7 @@ class PlayListDetailsVm(
                     playListId = state.value.id
                 )
             }
-            val isNotUnPinned = pinPlayListManager.unpin(upPinWords).toList().all { it == 0 }
-
-            if (isNotUnPinned) return@launch
+            pinPlayListManager.unpin(upPinWords)
 
             val newWords = state.value.words.filter { state.value.selectedWords.containsKey(it.userWord.id).not() }
 
@@ -143,7 +145,7 @@ class PlayListDetailsVm(
         viewModelScope.launch {
             val list = playListManager.findBy(PlayListFilter(ids = Collections.singletonList(id)))
 
-            list.firstOrNull()?.let {
+            list.content.firstOrNull()?.let {
                 mutableState.apply {
                     value = value.copy(
                         name = it.name,

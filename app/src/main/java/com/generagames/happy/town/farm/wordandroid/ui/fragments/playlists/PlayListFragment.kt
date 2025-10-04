@@ -14,14 +14,13 @@ import can.lucky.of.core.domain.models.filters.PlayListCountFilter
 import can.lucky.of.core.domain.models.filters.Range
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.actions.PlayListAction
-import com.generagames.happy.town.farm.wordandroid.ui.adapters.PlayListCountAdapter
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPlayListBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.bundles.PlayListFilterBundle
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.NavigateBarButton
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.PlayListState
-import com.generagames.happy.town.farm.wordandroid.ui.fragments.dialogs.CreatePlayListFragmentDialog
-import com.generagames.happy.town.farm.wordandroid.ui.controllers.NavigateBarController
 import com.generagames.happy.town.farm.wordandroid.domain.vms.PlayListViewModel
+import com.generagames.happy.town.farm.wordandroid.ui.adapters.PlayListCountAdapter
+import com.generagames.happy.town.farm.wordandroid.ui.controllers.NavigateBarController
 import com.generagames.happy.town.farm.wordandroid.ui.navigations.PlayListFilterNavigator
 import com.generagames.happy.town.farm.wordandroid.ui.navigations.ReFetchPlayListsNavigator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -81,10 +80,10 @@ class PlayListFragment : Fragment(R.layout.fragment_play_list) {
             true
         }
 
-        popup.menu.add("Scan QrCode").setOnMenuItemClickListener {
-            findNavController().navigate(PlayListFragmentDirections.actionPlayListFragmentToScanPlayListFragment())
-            true
-        }
+//        popup.menu.add("Scan QrCode").setOnMenuItemClickListener {
+//            findNavController().navigate(PlayListFragmentDirections.actionPlayListFragmentToScanPlayListFragment())
+//            true
+//        }
 
         binding?.addPlayListButton?.setOnClickListener {
             popup.show()

@@ -3,6 +3,8 @@ package com.generagames.happy.town.farm.wordandroid.di.configs
 
 import can.lucky.of.core.domain.keepers.MainOkClientKeeper
 import can.lucky.of.core.domain.keepers.MainRetrofitKeeper
+import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClient
+import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClientImpl
 import com.generagames.happy.town.farm.wordandroid.net.clients.payment.PayClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.playlist.PinPlayListClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.playlist.PlayListClient
@@ -10,11 +12,11 @@ import com.generagames.happy.town.farm.wordandroid.net.clients.playlist.SharePla
 import com.generagames.happy.town.farm.wordandroid.net.clients.subscribe.OkHttpSubscribeClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.subscribe.SubscribeClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.userword.UserWordClient
-import com.generagames.happy.town.farm.wordandroid.net.clients.word.OkHttpWordClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.word.WordClient
-import com.generagames.happy.town.farm.wordandroid.utils.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
 import com.generagames.happy.town.farm.wordandroid.utils.ToStringConverterFactory
 import com.generagames.happy.town.farm.wordandroid.utils.baseUrl
+import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
+import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonOffsetDateTimeAdapter.addOffsetDateTimeAdapter
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -35,7 +37,11 @@ val clientModule = module {
         MainRetrofitKeeper(retrofit = Retrofit.Builder()
             .baseUrl( baseUrl() )
             .addConverterFactory(ToStringConverterFactory())
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().addLocalDateTimeAdapter().create()))
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().addOffsetDateTimeAdapter().addLocalDateTimeAdapter().create()
+                )
+            )
             .client(get<MainOkClientKeeper>().okHttpClient)
             .build())
     }
@@ -43,10 +49,7 @@ val clientModule = module {
 
 
     single<WordClient> {
-        OkHttpWordClient(
-            client = get<MainOkClientKeeper>().okHttpClient,
-            userCacheManager = get()
-        )
+        get<MainRetrofitKeeper>().retrofit.create(WordClient::class.java)
     }
 
     single<SubscribeClient> {
@@ -74,5 +77,12 @@ val clientModule = module {
 
     single {
         get<MainRetrofitKeeper>().retrofit.create(SharePlayListClient::class.java)
+    }
+
+    single<FileApiClient> {
+        FileApiClientImpl(
+            userCacheManager = get(),
+            client = get<MainOkClientKeeper>().okHttpClient
+        )
     }
 }

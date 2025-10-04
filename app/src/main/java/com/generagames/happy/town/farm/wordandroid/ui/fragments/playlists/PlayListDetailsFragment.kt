@@ -8,17 +8,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import can.lucky.of.core.domain.models.data.words.UserWordDetails
-import com.generagames.happy.town.farm.wordandroid.R
-import com.generagames.happy.town.farm.wordandroid.actions.PlayListDetailsAction
-import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPlayListDetailsBinding
-import com.generagames.happy.town.farm.wordandroid.domain.vms.PlayListDetailsVm
-import com.generagames.happy.town.farm.wordandroid.ui.adapters.PinnedWordAdapter
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.models.ToolBarPopupButton
 import can.lucky.of.core.ui.navigators.WordRemoveListener
 import can.lucky.of.core.utils.onEnd
+import com.generagames.happy.town.farm.wordandroid.R
+import com.generagames.happy.town.farm.wordandroid.actions.PlayListDetailsAction
+import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPlayListDetailsBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.bundles.EditPlayListBundle
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.PlayListDetailsState
+import com.generagames.happy.town.farm.wordandroid.domain.vms.PlayListDetailsVm
+import com.generagames.happy.town.farm.wordandroid.ui.adapters.PinnedWordAdapter
 import com.generagames.happy.town.farm.wordandroid.ui.navigations.EditPlayListNavigator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -118,14 +118,14 @@ class PlayListDetailsFragment : Fragment(R.layout.fragment_play_list_details) {
     }
 
     private fun initToolBar(newBinding: FragmentPlayListDetailsBinding) : ToolBarController {
-        val share = ToolBarPopupButton("Share"){
-            findNavController().navigate(
-                PlayListDetailsFragmentDirections.actionPlayListDetailsFragmentToSharePlayListFragment(
-                    viewModel.state.value.id
-                )
-            )
-            return@ToolBarPopupButton true
-        }
+//        val share = ToolBarPopupButton("Share"){
+//            findNavController().navigate(
+//                PlayListDetailsFragmentDirections.actionPlayListDetailsFragmentToSharePlayListFragment(
+//                    viewModel.state.value.id
+//                )
+//            )
+//            return@ToolBarPopupButton true
+//        }
 
         val edit = ToolBarPopupButton("Edit"){
             navigator.navigateToEdit(findNavController(), viewModel.state.toEditBundle())
@@ -143,7 +143,7 @@ class PlayListDetailsFragment : Fragment(R.layout.fragment_play_list_details) {
             title = viewModel.state.value.name
         ).apply {
             setDefaultSettings()
-            addContextMenu(CoreR.drawable.setting,share,edit,remove)
+            addContextMenu(CoreR.drawable.setting, edit, remove)
         }
     }
 

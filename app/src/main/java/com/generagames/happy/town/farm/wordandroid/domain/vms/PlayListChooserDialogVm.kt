@@ -3,12 +3,11 @@ package com.generagames.happy.town.farm.wordandroid.domain.vms
 import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import can.lucky.of.core.domain.models.filters.PageFilter
-import can.lucky.of.core.domain.vms.MviViewModel
-import com.generagames.happy.town.farm.wordandroid.actions.PlayListChooserDialogAction
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
 import can.lucky.of.core.domain.models.data.playlists.PlayListCount
 import can.lucky.of.core.domain.models.filters.PlayListCountFilter
+import can.lucky.of.core.domain.vms.MviViewModel
+import com.generagames.happy.town.farm.wordandroid.actions.PlayListChooserDialogAction
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.PlayListChooserState
 import com.generagames.happy.town.farm.wordandroid.ui.sources.PlayListCountLoader
 import com.generagames.happy.town.farm.wordandroid.ui.sources.PlayListCountPagingSource
@@ -42,9 +41,10 @@ class PlayListChooserDialogVm(
         val loafer: PlayListCountLoader = { page, pageSize ->
             playListManager.countBy(
                 PlayListCountFilter(
-                    pagination = PageFilter(page.toLong(), pageSize.toLong())
+                    page = page,
+                    size = pageSize
                 )
-            )
+            ).content
         }
 
         return Pager(

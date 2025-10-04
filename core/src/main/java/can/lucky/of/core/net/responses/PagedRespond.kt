@@ -10,4 +10,17 @@ data class PagedRespond<T>(
         val totalElements: Long,
         val totalPages: Long
     )
+
+    companion object {
+        fun <T> empty() = PagedRespond<T>(
+            content = emptyList(),
+            page = PagedRespond(
+                number = 0,
+                size = 0,
+                totalElements = 0,
+                totalPages = 0
+            )
+        )
+
+    }
 }

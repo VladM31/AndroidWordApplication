@@ -2,9 +2,12 @@ package com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.imp
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
+import can.lucky.of.core.domain.models.PagedModels
 import can.lucky.of.core.domain.models.data.playlists.PlayList
 import can.lucky.of.core.domain.models.data.playlists.PlayListCount
 import can.lucky.of.core.domain.models.data.playlists.PlayListGrade
+import can.lucky.of.core.domain.models.data.playlists.SavePlayList
+import can.lucky.of.core.domain.models.data.playlists.UpdatePlayList
 import can.lucky.of.core.domain.models.data.words.PinnedWord
 import can.lucky.of.core.domain.models.data.words.UserWord
 import can.lucky.of.core.domain.models.data.words.Word
@@ -12,8 +15,6 @@ import can.lucky.of.core.domain.models.filters.DeletePlayListFilter
 import can.lucky.of.core.domain.models.filters.PlayListCountFilter
 import can.lucky.of.core.domain.models.filters.PlayListFilter
 import can.lucky.of.core.utils.toPair
-import can.lucky.of.core.domain.models.data.playlists.SavePlayList
-import can.lucky.of.core.domain.models.data.playlists.UpdatePlayList
 import com.generagames.happy.town.farm.wordandroid.net.clients.playlist.PlayListClient
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.PlayListGradeRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.SavePlayListRequest
@@ -30,35 +31,34 @@ class PlayListManagerImpl(
 ) : PlayListManager {
     private val gson = Gson()
 
-    override suspend fun countBy(filter: PlayListCountFilter): List<PlayListCount> {
+    override suspend fun countBy(filter: PlayListCountFilter): PagedModels<PlayListCount> {
         return withContext(Dispatchers.IO) {
-            playListClient.countBy(userCacheManager.toPair().second, filter.toQueryMap(gson)).map {
+            val respond =
+                playListClient.countBy(userCacheManager.toPair().second, filter.toQueryMap(gson))
+            PagedModels.of(respond) {
                 PlayListCount(
                     id = it.id,
                     name = it.name,
-                    dateOfCreated = it.dateOfCreated,
+                    createdAt = it.createdAt,
                     count = it.count
                 )
             }
         }
     }
 
-    override suspend fun save(playLists: List<SavePlayList>): List<String?> {
+    override suspend fun save(playLists: List<SavePlayList>): Result<*> {
         return withContext(Dispatchers.IO) {
-            try {
+            runCatching {
                 playListClient.save(userCacheManager.toPair().second, playLists.map {
                     SavePlayListRequest(
                         name = it.name
                     )
                 })
-            }catch (e: Exception) {
-                e.printStackTrace()
-                return@withContext emptyList()
             }
         }
     }
 
-    override suspend fun update(playLists: List<UpdatePlayList>): IntArray {
+    override suspend fun update(playLists: List<UpdatePlayList>) {
         return withContext(Dispatchers.IO) {
             playListClient.update(userCacheManager.toPair().second, playLists.map {
                 UpdatePlayListRequest(
@@ -69,11 +69,10 @@ class PlayListManagerImpl(
         }
     }
 
-    override suspend fun updateGrades(grades: List<PlayListGrade>): IntArray {
+    override suspend fun updateGrades(grades: List<PlayListGrade>) {
         return withContext(Dispatchers.IO) {
             playListClient.updateGrades(userCacheManager.toPair().second, grades.map {
                 PlayListGradeRequest(
-                    playListGrade = it.playListGrade,
                     wordId = it.wordId,
                     wordGrade = it.wordGrade
                 )
@@ -81,15 +80,17 @@ class PlayListManagerImpl(
         }
     }
 
-    override suspend fun delete(filter: DeletePlayListFilter): Int {
+    override suspend fun delete(filter: DeletePlayListFilter) {
         return withContext(Dispatchers.IO) {
             playListClient.delete(userCacheManager.toPair().second, filter.toQueryMap(gson))
         }
     }
 
-    override suspend fun findBy(filter: PlayListFilter): List<PlayList> {
+    override suspend fun findBy(filter: PlayListFilter): PagedModels<PlayList> {
         return withContext(Dispatchers.IO) {
-            playListClient.findBy(userCacheManager.toPair().second, filter.toQueryMap(gson)).map {
+            val respond =
+                playListClient.findBy(userCacheManager.toPair().second, filter.toQueryMap(gson))
+            PagedModels.of(respond) {
                 it.toPlayList()
             }
         }
@@ -114,7 +115,7 @@ class PlayListManagerImpl(
         return UserWord(
             id = id,
             learningGrade = learningGrade,
-            dateOfAdded = dateOfAdded,
+            createdAt = createdAt,
             lastReadDate = lastReadDate,
             word = word.toWord()
         )
@@ -132,7 +133,7 @@ class PlayListManagerImpl(
         return PlayList(
             id = id,
             name = name,
-            dateOfCreated = dateOfCreated,
+            createdAt = createdAt,
             words = words.map { it.toPinnedWord() }
         )
     }

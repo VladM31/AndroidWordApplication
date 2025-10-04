@@ -1,33 +1,31 @@
 package com.generagames.happy.town.farm.wordandroid.utils.mappers
 
-import can.lucky.of.core.domain.models.filters.PageFilter
+import can.lucky.of.core.domain.models.enums.WordSortBy
 import can.lucky.of.core.domain.models.filters.WordFilter
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.WordFilterState
 
 fun WordFilterState.toWordFilter(): WordFilter {
     return WordFilter(
         original = this.original,
-        originalLang = this.originalLang,
         translate = this.translate,
-        translateLang = this.translateLang,
+        languages = this.originalLang?.let { setOf(it) },
+        translateLanguages = this.translateLang?.let { setOf(it) },
         categories = this.categories?.toSet(),
-        pagination = PageFilter(
-            asc = this.asc,
-            sort = this.sortBy
-        ),
+        asc = this.asc,
+        sortField = this.sortBy ?: WordSortBy.ORIGIN,
         cefrs = cefrs
     )
 }
 
 fun WordFilter.toWordFilterState(): WordFilterState{
     return WordFilterState(
-        asc = this.pagination?.asc ?: false,
+        asc = this.asc,
         categories = this.categories?.toList(),
         original = this.original,
-        originalLang = this.originalLang,
-        sortBy = this.pagination?.sort,
+        originalLang = this.languages?.firstOrNull(),
+        sortBy = this.sortField,
         translate = this.translate,
-        translateLang = this.translateLang,
+        translateLang = this.translateLanguages?.firstOrNull(),
         cefrs = this.cefrs
     )
 }

@@ -9,11 +9,9 @@ import can.lucky.of.addword.domain.actions.DefaultAddWordAction
 import can.lucky.of.addword.domain.models.states.DefaultAddWordState
 import can.lucky.of.addword.domain.valid.defaultAddWordValidator
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
-import can.lucky.of.core.domain.managers.word.WordManager
+import can.lucky.of.core.domain.managers.userwords.UserWordManager
 import can.lucky.of.core.domain.models.data.ErrorMessage
-import can.lucky.of.core.domain.models.data.words.InsertWord
-import can.lucky.of.core.domain.models.enums.CEFR
-import can.lucky.of.core.domain.models.enums.Language
+import can.lucky.of.core.domain.models.data.words.SaveWord
 import can.lucky.of.core.domain.vms.MviViewModel
 import can.lucky.of.validation.schemes.length
 import can.lucky.of.validation.schemes.notBlank
@@ -24,7 +22,7 @@ import kotlinx.coroutines.launch
 
 
 internal class DefaultAddWordVm(
-    private val wordManager: WordManager,
+    private val wordManager: UserWordManager,
     private val subscribeCacheManager: SubscribeCacheManager
 ) : ViewModel(), MviViewModel<DefaultAddWordState, DefaultAddWordAction> {
 
@@ -77,14 +75,14 @@ internal class DefaultAddWordVm(
         }
     }
 
-    private fun DefaultAddWordState.toInsertWord() = InsertWord(
+    private fun DefaultAddWordState.toInsertWord() = SaveWord(
         word = word,
-        language = language.shortName,
-        translationLanguage = translationLanguage.shortName,
-        translation = translation.ifBlank { null },
+        language = language,
+        translationLanguage = translationLanguage,
+        translation = translation,
         category = category.ifBlank { null },
         description = description.ifBlank { null },
-        cefr = cefr.name,
+        cefr = cefr,
         image = image,
         sound = sound,
         needSound = needSound
@@ -103,7 +101,7 @@ internal class DefaultAddWordVm(
             val insertWord = mutableState.value.toInsertWord()
             mutableState.value = mutableState.value.copy(isLoading = true)
             try {
-                wordManager.insert(listOf(insertWord))
+                wordManager.save(listOf(insertWord))
                 mutableState.value = mutableState.value.copy(isEnd = true)
             }catch (e: Exception){
                 Log.e("DefaultAddWordVm", "handleAdd: ", e)
@@ -162,12 +160,12 @@ internal class DefaultAddWordVm(
         }
         mutableState.value = state.value.copy(
             word = action.word.original,
-            language = Language.valueOf(action.word.lang),
-            translationLanguage = Language.valueOf(action.word.translateLang),
+            language = action.word.lang,
+            translationLanguage = action.word.translateLang,
             translation = action.word.translate,
             category = action.word.category ?: "",
             description = action.word.description ?: "",
-            cefr = CEFR.valueOf(action.word.cefr),
+            cefr = action.word.cefr,
             image = action.word.imageLink?.toUri()?.toFile(),
             isInited = true
         )

@@ -7,7 +7,7 @@ enum class UserWordSortBy {
     ORIGIN,
     TRANSLATE,
     CATEGORY,
-    DATE_OF_ADDED,
+    CREATED_AT,
     LAST_READ_DATE,
     TRANSLATE_LANG;
 

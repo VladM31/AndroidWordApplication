@@ -44,8 +44,9 @@
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
                 android:textSize="28sp"
+                android:enabled="false"
                 android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
+                android:background="@drawable/disable_back"
                 app:backgroundTint="@null"
                 android:text="@string/by_qr_code" />
 

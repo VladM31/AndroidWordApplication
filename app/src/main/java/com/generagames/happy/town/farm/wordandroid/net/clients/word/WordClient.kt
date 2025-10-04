@@ -1,14 +1,16 @@
 package com.generagames.happy.town.farm.wordandroid.net.clients.word
 
-import can.lucky.of.core.domain.models.filters.WordFilter
-import com.generagames.happy.town.farm.wordandroid.net.models.requests.PinUserWordRequest
-import com.generagames.happy.town.farm.wordandroid.net.models.requests.WordRequest
+import can.lucky.of.core.net.responses.PagedRespond
 import com.generagames.happy.town.farm.wordandroid.net.models.responses.WordRespond
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.QueryMap
 
 interface WordClient {
-    suspend fun save(words: Collection<WordRequest>): IntArray
 
-    suspend fun pin(words: Collection<PinUserWordRequest>): IntArray
-
-    suspend fun findBy(filter: WordFilter): List<WordRespond>
+    @GET("words-api/words")
+    suspend fun findBy(
+        @Header("Authorization") token: String,
+        @QueryMap filter: Map<String, String>
+    ): PagedRespond<WordRespond>
 }

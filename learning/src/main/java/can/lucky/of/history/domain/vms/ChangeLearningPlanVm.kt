@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 internal class ChangeLearningPlanVm(
     private val learningPlanManager: LearningPlanManager
@@ -121,7 +122,7 @@ internal class ChangeLearningPlanVm(
             nativeLang = nativeLang,
             learningLang = learningLang,
             cefr = cefr,
-            dateOfCreation = LocalDateTime.now()
+            createdAt = OffsetDateTime.now()
         )
     }
 }

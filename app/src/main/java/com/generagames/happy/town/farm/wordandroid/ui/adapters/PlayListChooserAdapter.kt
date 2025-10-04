@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.generagames.happy.town.farm.wordandroid.databinding.BoxPlayListChoosersBinding
 import can.lucky.of.core.domain.models.data.playlists.PlayListCount
+import can.lucky.of.core.utils.toZoneDateTimeFormat
+import com.generagames.happy.town.farm.wordandroid.databinding.BoxPlayListChoosersBinding
 import can.lucky.of.core.R as CoreR
 
 class PlayListChooserAdapter(
     private val isChose: (String) -> Boolean,
-    private val onChoose: (String?,Int) -> Unit
+    private val onChoose: (String?, Int) -> Unit
 ) : PagingDataAdapter<PlayListCount, PlayListChooserAdapter.ViewHolderChooser>(
     PlayListChooserDiffUtil
 ) {
@@ -20,7 +21,7 @@ class PlayListChooserAdapter(
 
     class ViewHolderChooser(
         private val binding: BoxPlayListChoosersBinding,
-        private val onChoose: (String?,Int) -> Unit,
+        private val onChoose: (String?, Int) -> Unit,
         private val isChose: (String) -> Boolean
     ) : RecyclerView.ViewHolder(binding.root) {
         private val dateOfCreationTemplate =
@@ -30,7 +31,8 @@ class PlayListChooserAdapter(
             if (isChose(playList.id)) activate() else deactivate()
 
             binding.nameText.text = playList.name
-            binding.dateOfCreationText.text = dateOfCreationTemplate.format(playList.dateOfCreated)
+            binding.dateOfCreationText.text =
+                dateOfCreationTemplate.format(playList.createdAt.toZoneDateTimeFormat())
             binding.root.setOnClickListener {
                 onChoose(playList.id, bindingAdapterPosition)
                 activate()
@@ -64,7 +66,8 @@ class PlayListChooserAdapter(
         )
     }
 
-    companion object PlayListChooserDiffUtil : DiffUtil.ItemCallback<PlayListCount>() {
+
+    object PlayListChooserDiffUtil : DiffUtil.ItemCallback<PlayListCount>() {
         override fun areItemsTheSame(oldItem: PlayListCount, newItem: PlayListCount): Boolean {
             return oldItem.id == newItem.id
         }

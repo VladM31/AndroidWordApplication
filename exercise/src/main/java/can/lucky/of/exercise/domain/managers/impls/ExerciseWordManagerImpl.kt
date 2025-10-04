@@ -1,14 +1,14 @@
 package can.lucky.of.exercise.domain.managers.impls
 
+import can.lucky.of.core.domain.managers.userwords.UserWordManager
+import can.lucky.of.core.domain.models.data.words.UserWord
+import can.lucky.of.core.domain.models.filters.UserWordFilter
 import can.lucky.of.exercise.db.dao.ExerciseWordDao
 import can.lucky.of.exercise.db.entities.ExerciseWordEntity
-import can.lucky.of.core.domain.managers.userwords.UserWordManager
+import can.lucky.of.exercise.domain.managers.ExerciseWordManager
 import can.lucky.of.exercise.domain.models.data.ExerciseWord
 import can.lucky.of.exercise.domain.models.data.ExerciseWordDetails
 import can.lucky.of.exercise.domain.models.filters.ExerciseWordFilter
-import can.lucky.of.core.domain.models.filters.UserWordFilter
-import can.lucky.of.core.domain.models.data.words.UserWord
-import can.lucky.of.exercise.domain.managers.ExerciseWordManager
 
 internal class ExerciseWordManagerImpl(
     private val exerciseWordDao: ExerciseWordDao,
@@ -19,9 +19,9 @@ internal class ExerciseWordManagerImpl(
 
         val ids = entities.map { it.userWordId }
 
-        val idMap = userWordManager.findBy(UserWordFilter(ids = ids)).let {
+        val idMap = userWordManager.findBy(UserWordFilter(userWordIds = ids)).let {
             mutableMapOf<String, UserWord>().apply {
-                it.forEach { put(it.id, it) }
+                it.content.forEach { put(it.id, it) }
             }
         }
 
@@ -73,13 +73,13 @@ internal class ExerciseWordManagerImpl(
         grade = grade,
         userWordId = id,
         wordId = word.id,
-        dateOfAdded = dateOfAdded,
-        lastReadDate = lastReadDate,
+        dateOfAdded = createdAt.toLocalDateTime().toString(),
+        lastReadDate = lastReadDate.toLocalDateTime().toString(),
         original = word.original,
         translate = word.translate,
-        lang = word.lang,
-        translateLang = word.translateLang,
-        cefr = word.cefr,
+        lang = word.lang.name,
+        translateLang = word.translateLang.name,
+        cefr = word.cefr.name,
         description = word.description,
         category = word.category,
         soundLink = word.soundLink,

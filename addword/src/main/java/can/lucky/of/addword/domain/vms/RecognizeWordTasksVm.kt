@@ -1,6 +1,5 @@
 package can.lucky.of.addword.domain.vms
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -19,7 +18,6 @@ import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.models.data.words.Word
 import can.lucky.of.core.domain.vms.MviViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -95,9 +93,9 @@ internal class RecognizeWordTasksVm(
             id = UUID.randomUUID().toString(),
             original = this.word,
             translate = this.translation,
-            lang = this.language.name,
-            translateLang = this.translationLanguage.name,
-            cefr = this.cefr.name,
+            lang = this.language,
+            translateLang = this.translationLanguage,
+            cefr = this.cefr,
             description = this.description,
             category = this.category,
         )
