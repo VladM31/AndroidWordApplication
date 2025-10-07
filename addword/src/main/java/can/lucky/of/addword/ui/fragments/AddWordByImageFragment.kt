@@ -9,11 +9,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentAddWordByImageBinding
-import can.lucky.of.core.R as CoreR
-import can.lucky.of.core.choosers.ImageChooser
-import can.lucky.of.addword.domain.vms.AddWordByImageVm
 import can.lucky.of.addword.domain.actions.AddWordByImageAction
+import can.lucky.of.addword.domain.vms.AddWordByImageVm
 import can.lucky.of.addword.ui.listeners.ItemSelectedListener
+import can.lucky.of.core.choosers.ImageChooser
 import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.utils.setContent
@@ -28,6 +27,7 @@ import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import can.lucky.of.core.R as CoreR
 
 class AddWordByImageFragment : Fragment(R.layout.fragment_add_word_by_image) {
     private var binding: FragmentAddWordByImageBinding? = null
@@ -62,7 +62,7 @@ class AddWordByImageFragment : Fragment(R.layout.fragment_add_word_by_image) {
 
         setSpinnerListeners()
 
-        newBinding.addWordButton.setOnClickListener {
+        newBinding.addWordBtn.setOnClickListener {
             vm.sent(AddWordByImageAction.Confirm)
         }
 
@@ -78,7 +78,6 @@ class AddWordByImageFragment : Fragment(R.layout.fragment_add_word_by_image) {
                 .filterNotNull()
                 .take(1)
                 .collectLatest {
-
                     findNavController().navigate(
                         AddWordByImageFragmentDirections.actionAddWordByImageFragmentToDefaultAddWordFragment(it),
                         NavOptions.Builder().setPopUpTo(R.id.chooseAddWordFragment, false).build()
@@ -89,8 +88,8 @@ class AddWordByImageFragment : Fragment(R.layout.fragment_add_word_by_image) {
 
         lifecycleScope.launch {
             vm.state.map { it.isLoading }.distinctUntilChanged().collectLatest {
-                newBinding.addWordButton.isEnabled = it.not()
-                newBinding.addWordButton.visibility = if (it) View.INVISIBLE else View.VISIBLE
+                newBinding.addWordBtn.isEnabled = it.not()
+                newBinding.addWordBtn.visibility = if (it) View.INVISIBLE else View.VISIBLE
                 newBinding.loading.root.visibility = if (it) View.VISIBLE else View.INVISIBLE
             }
         }

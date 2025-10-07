@@ -9,7 +9,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface UserWordClient {
@@ -17,9 +16,7 @@ interface UserWordClient {
     @GET("words-api/user-words")
     suspend fun findBy(
         @Header("Authorization") token: String,
-        @QueryMap filter: Map<String, String>,
-        @Query(value = "wordIds") wordIds: Collection<String>?,
-        @Query(value = "ids") ids: Collection<String>?
+        @QueryMap filter: Map<String, String>
     ): PagedRespond<UserWordRespond>
 
     @POST("words-api/user-words")

@@ -52,7 +52,7 @@
     <string name="date_of_add_template">Date of add: %s</string>
     <string name="date_of_creation_template">Created At: %s</string>
 
-    <string name="user_word_title_template">User words %s</string>
+    <string name="user_word_title_template">My words %s</string>
     <string name="changes_saved">Changes saved</string>
     <string name="add_play_list">Add play list</string>
     <string name="find_play_lists">Find play lists</string>

@@ -12,6 +12,8 @@ import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayMa
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.SharePlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PinPlayListManagerImpl
@@ -89,6 +91,13 @@ val managerModule = module {
 
     single< PayPropositionManager> {
         PayPropositionManagerImpl(
+            context = androidContext()
+        )
+    }
+
+    single<InstructionManager> {
+        InstructionManagerImpl(
+            downloadClient = get(),
             context = androidContext()
         )
     }

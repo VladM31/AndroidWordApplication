@@ -3,6 +3,7 @@ package com.generagames.happy.town.farm.wordandroid.di.configs
 
 import can.lucky.of.core.domain.keepers.MainOkClientKeeper
 import can.lucky.of.core.domain.keepers.MainRetrofitKeeper
+import com.generagames.happy.town.farm.wordandroid.net.clients.files.DownloadClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClientImpl
 import com.generagames.happy.town.farm.wordandroid.net.clients.payment.PayClient
@@ -78,6 +79,11 @@ val clientModule = module {
     single {
         get<MainRetrofitKeeper>().retrofit.create(SharePlayListClient::class.java)
     }
+
+    single {
+        get<MainRetrofitKeeper>().retrofit.create(DownloadClient::class.java)
+    }
+
 
     single<FileApiClient> {
         FileApiClientImpl(

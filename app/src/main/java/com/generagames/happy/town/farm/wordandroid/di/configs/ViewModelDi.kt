@@ -15,6 +15,7 @@ import com.generagames.happy.town.farm.wordandroid.domain.vms.UserWordsViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordFilterViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordsViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.infos.InstructionViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.ChoosePayViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubCostViewModel
@@ -140,6 +141,12 @@ val viewModelModule = module {
             payManager = get(),
             payPropositionManager = get(),
             subscribeCacheManager = get()
+        )
+    }
+
+    viewModel {
+        InstructionViewModel(
+            instructionManager = get()
         )
     }
 }

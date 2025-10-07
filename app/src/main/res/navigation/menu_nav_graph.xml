@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_menuFragment_to_choose_add_word_graph"
             app:destination="@id/choose_add_word_graph" />
+        <action
+            android:id="@+id/action_menuFragment_to_instructionFragment"
+            app:destination="@id/instructionFragment" />
     </fragment>
     <include app:graph="@navigation/word_details_graph" />
     <fragment
@@ -107,6 +110,11 @@
             android:name="filter"
             app:argType="com.generagames.happy.town.farm.wordandroid.domain.models.bundles.UserWordFilterBundle" />
     </fragment>
+    <fragment
+        android:id="@+id/instructionFragment"
+        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.infos.InstructionFragment"
+        android:label="fragment_instruction"
+        tools:layout="@layout/fragment_instruction" />
 
 
 </navigation>

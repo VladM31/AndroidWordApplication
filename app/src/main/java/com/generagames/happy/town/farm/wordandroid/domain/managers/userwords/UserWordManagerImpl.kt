@@ -54,9 +54,7 @@ class UserWordManagerImpl(
     override suspend fun findBy(filter: UserWordFilter): PagedModels<UserWord> {
         val paged = userWordClient.findBy(
             userCacheManager.toPair().second,
-            filter.copy(userWordIds = null, wordIds = null).toQueryMap(gson),
-            filter.wordIds,
-            filter.userWordIds
+            filter.toQueryMap(gson)
         )
 
         return PagedModels.of(paged) {

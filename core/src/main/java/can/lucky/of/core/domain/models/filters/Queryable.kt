@@ -16,9 +16,9 @@ private fun appendQuery(obj: JsonObject, stringBuilder : MutableList<String>, pr
         }
 
         if (element.value.isJsonArray){
-            val currentKey = prefix + element.key
-            val params = element.value.asJsonArray.joinToString(",") { it.asString }
-            stringBuilder.add((currentKey to params).encode())
+            val currentKey = (prefix + element.key).encode()
+            val params = element.value.asJsonArray.joinToString(",") { it.asString.encode() }
+            stringBuilder.add("$currentKey=$params")
             continue
         }
 
@@ -33,6 +33,14 @@ private fun Pair<String,String>.encode() : String {
         URLEncoder.encode(this.first, StandardCharsets.UTF_8.name()) + "=" + URLEncoder.encode(this.second, StandardCharsets.UTF_8.name())
     }.getOrDefault("")
 }
+
+private fun String.encode(): String {
+    return runCatching {
+        URLEncoder.encode(this, StandardCharsets.UTF_8.name())
+    }.getOrDefault("")
+}
+
+
 
 
 interface Queryable {
