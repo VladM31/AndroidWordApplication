@@ -3,6 +3,7 @@ package com.generagames.happy.town.farm.wordandroid.di.configs
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.managers.media.MediaManager
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
+import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
 import can.lucky.of.core.domain.managers.userwords.UserWordManager
 import can.lucky.of.core.domain.managers.word.WordManager
@@ -14,11 +15,14 @@ import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPr
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.PolicyManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.PolicyManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.SharePlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PinPlayListManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PlayListManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.SharePlayListManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.spotlight.SpotlightManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.subscribe.SharedPrefSubscribeCacheManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.userwords.UserWordManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.word.WordManagerImpl
@@ -97,6 +101,19 @@ val managerModule = module {
 
     single<InstructionManager> {
         InstructionManagerImpl(
+            downloadClient = get(),
+            context = androidContext()
+        )
+    }
+
+    single<SpotlightManager> {
+        SpotlightManagerImpl(
+            context = androidContext()
+        )
+    }
+
+    single<PolicyManager> {
+        PolicyManagerImpl(
             downloadClient = get(),
             context = androidContext()
         )

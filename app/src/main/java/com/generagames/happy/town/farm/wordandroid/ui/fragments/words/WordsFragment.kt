@@ -8,13 +8,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import can.lucky.of.core.domain.models.filters.WordFilter
+import can.lucky.of.core.ui.controllers.ToolBarController
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.actions.WordsAction
-import com.generagames.happy.town.farm.wordandroid.ui.adapters.WordAdapter
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentWordsBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.keys.WordFilterKeys
-import can.lucky.of.core.ui.controllers.ToolBarController
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordsViewModel
+import com.generagames.happy.town.farm.wordandroid.ui.adapters.WordAdapter
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -70,7 +70,7 @@ class WordsFragment : Fragment(R.layout.fragment_words) {
                 } else {
                     View.GONE
                 }
-                newBinding.bottomToolBar.ok.text = "OK (${selectedWords.size})"
+                    newBinding.bottomToolBar.ok.text = "Add (${selectedWords.size})"
             }
         }
     }

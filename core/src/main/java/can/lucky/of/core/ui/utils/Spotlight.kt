@@ -7,10 +7,12 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import can.lucky.of.core.databinding.OverlaySpotBinding
+import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
 import can.lucky.of.core.utils.dp
 import com.takusemba.spotlight.Target
 import com.takusemba.spotlight.effet.FlickerEffect
 import com.takusemba.spotlight.shape.RoundedRectangle
+import kotlin.reflect.KClass
 
 enum class HorizontalAlign { LEFT, CENTER, RIGHT }
 enum class VerticalAlign { TOP, CENTER, BOTTOM }
@@ -80,4 +82,15 @@ private fun View.centerInWindow(): Pair<Float, Float> {
     val loc = IntArray(2)
     getLocationInWindow(loc)
     return loc[0] + width / 2f to loc[1] + height / 2f
+}
+
+// All how extend Fragment
+fun SpotlightManager.notNeedShow(fragment: KClass<out Fragment>): Boolean {
+    return needShow(
+        fragment.simpleName ?: throw IllegalArgumentException("Fragment has no simple name")
+    ).not()
+}
+
+fun SpotlightManager.setShowed(fragment: KClass<out Fragment>) {
+    setShowed(fragment.simpleName ?: throw IllegalArgumentException("Fragment has no simple name"))
 }

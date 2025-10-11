@@ -1,5 +1,6 @@
 package com.generagames.happy.town.farm.wordandroid.ui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -22,10 +23,12 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
         val newBinding = FragmentSettingAppBinding.bind(view)
         binding = newBinding
 
-        binding?.learningHistoryButton?.setOnClickListener {
-            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToNavLearningHistory())
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            newBinding.menuGridLayout.columnCount = 2
+        } else {
+            newBinding.menuGridLayout.columnCount = 1
         }
-
 
         NavigateBarController(
             binding = newBinding.navigationBar,
@@ -42,6 +45,11 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
             })
         }
 
+        newBinding.learningHistoryButton.setOnClickListener {
+            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToNavLearningHistory())
+        }
+
+
         newBinding.subscribeButton.setOnClickListener {
             findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToSubscribeFragment())
         }
@@ -52,6 +60,10 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
 
         newBinding.profileButton.setOnClickListener {
             findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToProfileGraph())
+        }
+
+        newBinding.policyBtn.setOnClickListener {
+            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToPolicyFragment())
         }
     }
 

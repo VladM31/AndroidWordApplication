@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_back"
@@ -15,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="80dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="10dp"
         >
         <LinearLayout
@@ -23,65 +24,95 @@
             android:orientation="vertical"
             android:gravity="center"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/logOutButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:text="@string/log_out"
-                android:textSize="35sp"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
-                app:backgroundTint="@null" />
 
-            <Button
-                android:id="@+id/subscribeButton"
-                android:layout_width="300dp"
+            <GridLayout
+                android:id="@+id/menuGridLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_back"
-                android:text="@string/subscription"
-                android:textAllCaps="false"
-                android:textColor="@color/primary_back"
-                android:textSize="35sp"
-                app:backgroundTint="@null"
-                android:layout_marginTop="20dp" />
+                android:columnCount="1"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center"
+                android:alignmentMode="alignMargins"
+                android:useDefaultMargins="true"
+                tools:ignore="UselessParent">
 
-            <Button
-                android:id="@+id/learningHistoryButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_back"
-                android:text="History"
-                android:textAllCaps="false"
-                android:textColor="@color/primary_back"
-                android:textSize="35sp"
-                app:backgroundTint="@null"
-                android:layout_marginTop="20dp" />
+                <Button
+                    android:id="@+id/subscribeButton"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_back"
+                    android:text="@string/subscription"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_back"
+                    android:textSize="35sp"
+                    android:layout_margin="5dp"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/learningHistoryButton"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_back"
+                    android:text="@string/history"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_back"
+                    android:textSize="35sp"
+                    android:layout_margin="5dp"
+                    app:backgroundTint="@null" />
 
 
-            <Button
-                android:id="@+id/planButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_back"
-                android:text="Plan"
-                android:textAllCaps="false"
-                android:textColor="@color/primary_back"
-                android:textSize="35sp"
-                app:backgroundTint="@null"
-                android:layout_marginTop="20dp" />
+                <Button
+                    android:id="@+id/planButton"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_back"
+                    android:text="Plan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_back"
+                    android:textSize="35sp"
+                    app:backgroundTint="@null"
+                    android:layout_margin="5dp"
+                    tools:ignore="HardcodedText" />
 
-            <Button
-                android:id="@+id/profileButton"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_back"
-                android:text="Profile"
-                android:textAllCaps="false"
-                android:textColor="@color/primary_back"
-                android:textSize="35sp"
-                app:backgroundTint="@null"
-                android:layout_marginTop="20dp" />
+                <Button
+                    android:id="@+id/profileButton"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_back"
+                    android:text="@string/profile"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_back"
+                    android:textSize="35sp"
+                    android:layout_margin="5dp"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/policyBtn"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_back"
+                    android:text="@string/policy"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_back"
+                    android:textSize="35sp"
+                    android:layout_margin="5dp"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/logOutButton"
+                    android:layout_width="@dimen/menu_button_width"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:text="@string/log_out"
+                    android:textSize="35sp"
+                    android:textColor="@color/primary_back"
+                    android:background="@drawable/button_back"
+                    android:layout_margin="5dp"
+                    app:backgroundTint="@null" />
+
+            </GridLayout>
+
         </LinearLayout>
 
     </ScrollView>
