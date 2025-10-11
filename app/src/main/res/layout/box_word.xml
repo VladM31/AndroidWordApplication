@@ -56,42 +56,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textContainer" />
 
-    <ImageButton
-        android:id="@+id/openWordButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <LinearLayout
+        android:id="@+id/openWordBtnBox"
+        android:layout_width="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:rotation="180"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow"
-        android:contentDescription="@string/open_word" />
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/openWordButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:rotation="180"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow"
+            android:contentDescription="@string/open_word" />
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/checkMark"
         style="@style/small_picture"
-        app:layout_constraintBottom_toTopOf="@+id/openWordButton"
-        app:layout_constraintEnd_toEndOf="@+id/openWordButton"
-        app:layout_constraintStart_toStartOf="@+id/openWordButton"
+        app:layout_constraintBottom_toTopOf="@+id/openWordBtnBox"
+        app:layout_constraintEnd_toEndOf="@+id/openWordBtnBox"
+        app:layout_constraintStart_toStartOf="@+id/openWordBtnBox"
         app:srcCompat="@drawable/check_mark"
         android:contentDescription="@string/selected_word_label" />
 
     <ImageView
         android:id="@+id/hasImage"
         style="@style/small_picture"
-        app:layout_constraintStart_toStartOf="@+id/openWordButton"
-        app:layout_constraintTop_toBottomOf="@+id/openWordButton"
+        app:layout_constraintStart_toStartOf="@+id/openWordBtnBox"
+        app:layout_constraintTop_toBottomOf="@+id/openWordBtnBox"
         app:srcCompat="@drawable/image_icon"
         android:contentDescription="@string/word_has_image" />
 
     <ImageView
         android:id="@+id/hasSound"
         style="@style/small_picture"
-        app:layout_constraintEnd_toEndOf="@+id/openWordButton"
-        app:layout_constraintTop_toBottomOf="@+id/openWordButton"
+        app:layout_constraintEnd_toEndOf="@+id/openWordBtnBox"
+        app:layout_constraintTop_toBottomOf="@+id/openWordBtnBox"
         app:srcCompat="@drawable/sound"
         android:contentDescription="@string/word_has_sound" />
 
