@@ -11,7 +11,7 @@ import com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.Spotl
 
 class LifecycleFragmentListener(
     application: Application,
-    val listeners: List<SpotlightsFragmentListener>
+    private val listeners: List<SpotlightsFragmentListener>
 ) : Application.ActivityLifecycleCallbacks {
 
     init {
