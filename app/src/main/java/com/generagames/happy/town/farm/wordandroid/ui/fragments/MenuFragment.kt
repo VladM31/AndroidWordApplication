@@ -1,10 +1,10 @@
 package com.generagames.happy.town.farm.wordandroid.ui.fragments
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentMenuBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.NavigateBarButton
@@ -19,12 +19,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         val newBinding = FragmentMenuBinding.bind(view)
         binding = newBinding
 
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            newBinding.menuGridLayout.columnCount = 2
-        } else {
-            newBinding.menuGridLayout.columnCount = 1
-        }
+        newBinding.menuGridLayout.setColumnCountByOrientation(1, 2)
 
         NavigateBarController(
             binding = newBinding.navigationBar, navController = findNavController(),

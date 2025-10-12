@@ -1,6 +1,5 @@
 package can.lucky.of.addword.ui.fragments
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -16,6 +15,7 @@ import can.lucky.of.addword.ui.listeners.ItemSelectedListener
 import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
@@ -59,12 +59,7 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
     }
 
     private fun initOrientation() {
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            binding?.menuGridLayout?.columnCount = 3
-        } else {
-            binding?.menuGridLayout?.columnCount = 1
-        }
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 3)
     }
 
     private fun setStateListeners() {

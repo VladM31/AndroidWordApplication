@@ -1,7 +1,6 @@
 package can.lucky.of.addword.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -11,6 +10,7 @@ import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentChooseAddWordBinding
 import can.lucky.of.addword.domain.vms.ChooseAddWordVm
 import can.lucky.of.core.ui.controllers.ToolBarController
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -74,12 +74,7 @@ class ChooseAddWordFragment : Fragment(R.layout.fragment_choose_add_word) {
 
 
     private fun initOrientation() {
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            binding?.menuGridLayout?.columnCount = 2
-        } else {
-            binding?.menuGridLayout?.columnCount = 1
-        }
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 2)
     }
 
     private fun initButtons() {

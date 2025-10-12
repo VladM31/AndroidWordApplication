@@ -1,7 +1,6 @@
 package can.lucky.of.auth.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -18,6 +17,7 @@ import can.lucky.of.auth.ui.navigations.AuthNavigator
 import can.lucky.of.core.domain.models.enums.Currency
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import can.lucky.of.core.utils.setContent
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
@@ -109,12 +109,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun initOrientation() {
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            binding?.menuGridLayout?.columnCount = 2
-        } else {
-            binding?.menuGridLayout?.columnCount = 1
-        }
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 2)
     }
 
     private fun setListeners() {

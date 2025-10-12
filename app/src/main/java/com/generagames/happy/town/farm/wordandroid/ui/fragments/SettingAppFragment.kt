@@ -1,12 +1,12 @@
 package com.generagames.happy.town.farm.wordandroid.ui.fragments
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentSettingAppBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.NavigateBarButton
@@ -23,12 +23,7 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
         val newBinding = FragmentSettingAppBinding.bind(view)
         binding = newBinding
 
-        val orientation = resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            newBinding.menuGridLayout.columnCount = 2
-        } else {
-            newBinding.menuGridLayout.columnCount = 1
-        }
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 2)
 
         NavigateBarController(
             binding = newBinding.navigationBar,
