@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.SpotlightsFragmentListener
+import can.lucky.of.core.ui.listeners.spotlights.SpotlightsFragmentListener
 
 class LifecycleFragmentListener(
     application: Application,

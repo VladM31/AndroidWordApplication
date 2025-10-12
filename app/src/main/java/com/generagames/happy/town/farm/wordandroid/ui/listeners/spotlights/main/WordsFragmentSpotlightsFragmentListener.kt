@@ -8,11 +8,11 @@ import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
+import can.lucky.of.core.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 import can.lucky.of.core.ui.utils.buildRectangleTarget
 import com.generagames.happy.town.farm.wordandroid.databinding.BoxWordBinding
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentWordsBinding
 import com.generagames.happy.town.farm.wordandroid.ui.fragments.words.WordsFragment
-import com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.Target
 

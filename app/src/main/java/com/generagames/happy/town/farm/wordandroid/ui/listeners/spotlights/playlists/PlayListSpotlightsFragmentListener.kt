@@ -3,10 +3,10 @@ package com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.play
 import android.view.View
 import androidx.fragment.app.Fragment
 import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
+import can.lucky.of.core.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 import can.lucky.of.core.ui.utils.buildRectangleTarget
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPlayListBinding
 import com.generagames.happy.town.farm.wordandroid.ui.fragments.playlists.PlayListFragment
-import com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 import com.takusemba.spotlight.Target
 
 class PlayListSpotlightsFragmentListener(

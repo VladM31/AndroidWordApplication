@@ -3,10 +3,10 @@ package com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.main
 import android.view.View
 import androidx.fragment.app.Fragment
 import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
+import can.lucky.of.core.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 import can.lucky.of.core.ui.utils.buildRectangleTarget
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentMenuBinding
 import com.generagames.happy.town.farm.wordandroid.ui.fragments.MenuFragment
-import com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights.AbstractSpotlightsFragmentListener
 
 
 class MenuSpotlightsFragmentListener(

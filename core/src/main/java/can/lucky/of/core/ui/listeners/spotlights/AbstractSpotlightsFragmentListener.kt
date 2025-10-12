@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.ui.listeners.spotlights
+package can.lucky.of.core.ui.listeners.spotlights
 
 import android.os.Bundle
 import android.view.View
