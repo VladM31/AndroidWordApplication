@@ -47,7 +47,7 @@ class SignUpFragmentListener(
                 "Phone Number",
                 "Input your phone number with country code. E.g., 11234567890, 3801234567890",
                 onClick = onClick,
-                vertical = can.lucky.of.core.ui.utils.VerticalAlign.TOP
+                vertical = can.lucky.of.core.ui.utils.VerticalAlign.BOTTOM
             )
         )
     }
