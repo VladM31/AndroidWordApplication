@@ -12,4 +12,6 @@ interface AuthNavigator {
     fun navigateToConfirmation(navController: NavController, bundle: LogInBundle)
 
     fun navigateFromConfirmation(navController: NavController)
+
+    fun navigateToPolicy(navController: NavController)
 }

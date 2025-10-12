@@ -3,7 +3,6 @@ package com.generagames.happy.town.farm.wordandroid.ui.navigations
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import can.lucky.of.auth.domain.models.data.LogInBundle
-import can.lucky.of.auth.ui.fragments.ConfirmSignUpFragment
 import can.lucky.of.auth.ui.fragments.ConfirmSignUpFragmentDirections
 import can.lucky.of.auth.ui.fragments.LoginFragmentDirections
 import can.lucky.of.auth.ui.fragments.SignUpFragmentDirections
@@ -34,5 +33,9 @@ class AuthNavigatorImpl : AuthNavigator {
         navController.navigate(
             ConfirmSignUpFragmentDirections.actionConfirmSignUpFragmentToNavBarGraph(),
             NavOptions.Builder().setPopUpTo(R.id.confirmSignUpFragment, true).build())
+    }
+
+    override fun navigateToPolicy(navController: NavController) {
+        navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToPolicyFragment2())
     }
 }
