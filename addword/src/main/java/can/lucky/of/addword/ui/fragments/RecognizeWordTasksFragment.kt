@@ -7,13 +7,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentAnalyzeWordTasksBinding
 import can.lucky.of.addword.domain.actions.RecognizeWordTasksAction
-import can.lucky.of.addword.domain.models.AiRecognizeResult
 import can.lucky.of.addword.domain.models.keys.RecognizeWordTaskKeys
 import can.lucky.of.addword.domain.vms.RecognizeWordTasksVm
 import can.lucky.of.addword.ui.adapters.AiRecognizeResultAdapter
@@ -45,8 +42,6 @@ class RecognizeWordTasksFragment : Fragment(R.layout.fragment_analyze_word_tasks
         initToolBar()
         initOpenListener()
         setOtherListeners()
-
-
     }
 
     private fun setOtherListeners() {
