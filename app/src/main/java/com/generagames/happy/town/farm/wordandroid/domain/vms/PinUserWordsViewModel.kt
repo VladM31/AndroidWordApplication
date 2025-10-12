@@ -5,11 +5,10 @@ import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
+import can.lucky.of.core.domain.managers.userwords.UserWordManager
 import can.lucky.of.core.domain.managers.word.WordManager
 import can.lucky.of.core.domain.models.data.words.PinUserWord
-import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.domain.models.filters.WordFilter
 import can.lucky.of.core.domain.vms.MviViewModel
 import can.lucky.of.core.utils.localhostUrlToEmulator
@@ -23,6 +22,7 @@ import kotlinx.coroutines.launch
 
 class PinUserWordsViewModel(
     private val wordManager: WordManager,
+    private val userWordManager: UserWordManager,
     private val subscribeCacheManager: SubscribeCacheManager
 ) : ViewModel(), MviViewModel<PinUserWordsState, PinUserWordsAction> {
 
@@ -57,7 +57,7 @@ class PinUserWordsViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             state.value.words.toPinWords().runCatching {
-                wordManager.pin(this@runCatching)
+                userWordManager.pin(this@runCatching)
             }.onFailure {
                 Log.d("PinUserWordsViewModel", "handlePin: ${it.message}")
             }
@@ -100,11 +100,11 @@ class PinUserWordsViewModel(
         if (state.value.isInited) return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val words = wordManager.findBy(WordFilter(wordIds = wordIds)).map {
+            val words = wordManager.findBy(WordFilter(wordIds = wordIds)).content.map {
                 PinUserWordsState.Word(
                     wordId = it.id,
                     original = it.original,
-                    lang = Language.fromShortName(it.lang),
+                    lang = it.lang,
                     soundLink = it.soundLink?.localhostUrlToEmulator()?.toUri(),
                     imageLink = it.imageLink
                 )
@@ -116,7 +116,7 @@ class PinUserWordsViewModel(
             }
 
             words.toPinWords().runCatching {
-                wordManager.pin(this@runCatching)
+                userWordManager.pin(this@runCatching)
             }.onFailure {
                 Log.d("PinUserWordsViewModel", "handlePin: ${it.message}")
             }
@@ -124,7 +124,6 @@ class PinUserWordsViewModel(
             mutableState.value = state.value.copy(
                 isEnd = true
             )
-
         }
     }
 

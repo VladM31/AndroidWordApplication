@@ -33,7 +33,10 @@ class UserWordFilterVm : AbstractMviViewModel<UserWordFilterState, UserWordFilte
                 handleCategories(action)
             }
             is UserWordFilterAction.SetSortBy -> {
-                state.value.copy(sortBy = UserWordSortBy.fromTitleCase(action.sortBy) ?: UserWordSortBy.DATE_OF_ADDED)
+                state.value.copy(
+                    sortBy = UserWordSortBy.fromTitleCase(action.sortBy)
+                        ?: UserWordSortBy.CREATED_AT
+                )
             }
             is UserWordFilterAction.SetAsc -> {
                 state.value.copy(asc = action.asc)
@@ -64,6 +67,7 @@ class UserWordFilterVm : AbstractMviViewModel<UserWordFilterState, UserWordFilte
             original = action.bundle.original,
             translate = action.bundle.translate,
             lang = action.bundle.originalLang?.let { handleLang(it) },
+            cefr = action.bundle.cefr,
             translateLang = action.bundle.translateLang?.let { handleLang(it) },
             categories = action.bundle.categories,
             sortBy = action.bundle.sortBy,

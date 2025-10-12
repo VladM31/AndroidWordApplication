@@ -1,32 +1,22 @@
 package com.generagames.happy.town.farm.wordandroid.domain.vms
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import can.lucky.of.core.domain.managers.userwords.UserWordManager
+import can.lucky.of.core.domain.models.data.playlists.PinPlayList
 import can.lucky.of.core.domain.models.data.words.UserWord
-import can.lucky.of.core.domain.models.filters.PageFilter
 import can.lucky.of.core.domain.models.filters.UserWordFilter
 import can.lucky.of.core.domain.vms.MviViewModel
 import com.generagames.happy.town.farm.wordandroid.actions.UserWordsAction
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
-import can.lucky.of.core.domain.models.data.playlists.PinPlayList
-import can.lucky.of.core.domain.models.enums.UserWordSortBy
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.UserWordsState
 import com.generagames.happy.town.farm.wordandroid.ui.sources.UserWordPagingSource
 import com.generagames.happy.town.farm.wordandroid.ui.sources.UserWordsPageLoader
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-
-private val initFilter = UserWordFilter(
-    pagination = PageFilter(sort = UserWordSortBy.DATE_OF_ADDED)
-)
 
 class UserWordsViewModel(
     private val userWordManager: UserWordManager,
@@ -35,31 +25,10 @@ class UserWordsViewModel(
 
     private val mutableState: MutableStateFlow<UserWordsState> = MutableStateFlow(
         UserWordsState(
-            filter = initFilter,
-            pager = getPageWords(initFilter)
+            filter = UserWordFilter(),
+            pager = getPageWords(UserWordFilter())
         )
     )
-
-
-    init {
-        fetchCount()
-    }
-
-    private fun fetchCount() {
-        viewModelScope.launch(Dispatchers.IO) {
-           try {
-               mutableState.map { it.filter }.distinctUntilChanged().collect { filter ->
-                   userWordManager.countBy(filter).let {
-                       mutableState.value = mutableState.value.copy(
-                           count = it
-                       )
-                   }
-               }
-           }catch (e: Exception) {
-               Log.e("UserWordsViewModel", "fetchCount: ", e)
-           }
-        }
-    }
 
     override val state: StateFlow<UserWordsState> = mutableState
 
@@ -98,7 +67,6 @@ class UserWordsViewModel(
             pager = getPageWords(action.filter),
             selectedWords = emptyMap()
         )
-        fetchCount()
     }
 
     private fun pinWords(playListId: String) {
@@ -115,11 +83,7 @@ class UserWordsViewModel(
                     )
                 }
 
-            val result = pinPlayListManager.pin(pins)
-
-            if (result.isEmpty() || result.all { it == 0 }) {
-                return@launch
-            }
+            pinPlayListManager.pin(pins)
 
             mutableState.value = state.value.copy(
                 selectedWords = emptyMap(),
@@ -135,13 +99,16 @@ class UserWordsViewModel(
     private fun getPageWords(filter: UserWordFilter): Pager<Long, UserWord> {
         val loafer: UserWordsPageLoader = { page, pageSize ->
             val search = filter.copy(
-                pagination = filter.pagination?.copy(
-                    page.toLong(), pageSize.toLong()
-                ) ?: PageFilter(page.toLong(), pageSize.toLong())
+                page = page,
+                size = pageSize
             )
 
             try {
-                userWordManager.findBy(search)
+                val result = userWordManager.findBy(search)
+                mutableState.value = mutableState.value.copy(
+                    count = result.page.totalElements
+                )
+                result.content
             } catch (e: Exception) {
                 emptyList()
             }

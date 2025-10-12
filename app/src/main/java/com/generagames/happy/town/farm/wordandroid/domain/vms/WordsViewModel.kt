@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.managers.word.WordManager
 import can.lucky.of.core.domain.models.data.words.Word
-import can.lucky.of.core.domain.models.filters.PageFilter
+import can.lucky.of.core.domain.models.enums.WordSortBy
 import can.lucky.of.core.domain.models.filters.WordFilter
 import can.lucky.of.core.domain.vms.MviViewModel
 import com.generagames.happy.town.farm.wordandroid.actions.WordsAction
@@ -28,7 +28,9 @@ class WordsViewModel(
     private val userCacheManager: UserCacheManager
 ) : ViewModel(), MviViewModel<WordsState, WordsAction> {
     private val mutableFilter: MutableStateFlow<WordFilter> = MutableStateFlow(WordFilter(
-        userId = WordFilter.UserId(id = userCacheManager.user.id, isIn = false)
+        userId = WordFilter.UserId(id = userCacheManager.user.id, isIn = false),
+        sortField = WordSortBy.ORIGIN,
+        asc = true,
     ))
 
     private val mutableState : MutableStateFlow<WordsState>
@@ -84,10 +86,8 @@ class WordsViewModel(
 
     private fun getPageWords(filter: WordFilter) : Flow<PagingData<Word>>{
         val loafer: WordsPageLoader = { page, pageSize ->
-            wordManager.findBy(filter.copy(pagination = filter.pagination?.copy(
-                    page.toLong(), pageSize.toLong()
-            ) ?: PageFilter(page.toLong(), pageSize.toLong())
-            ))
+            wordManager.findBy(filter.copy(page = page, size = pageSize)).content
+
         }
 
         return Pager(
@@ -100,9 +100,7 @@ class WordsViewModel(
         ).flow
     }
 
-    private fun deleteWordFromList(){
 
-    }
 
     companion object{
         private const val WORDS_SIZE = 15

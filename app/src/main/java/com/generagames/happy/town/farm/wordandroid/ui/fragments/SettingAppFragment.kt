@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentSettingAppBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.NavigateBarButton
@@ -22,10 +23,7 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
         val newBinding = FragmentSettingAppBinding.bind(view)
         binding = newBinding
 
-        binding?.learningHistoryButton?.setOnClickListener {
-            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToNavLearningHistory())
-        }
-
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 2)
 
         NavigateBarController(
             binding = newBinding.navigationBar,
@@ -42,6 +40,11 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
             })
         }
 
+        newBinding.learningHistoryButton.setOnClickListener {
+            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToNavLearningHistory())
+        }
+
+
         newBinding.subscribeButton.setOnClickListener {
             findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToSubscribeFragment())
         }
@@ -52,6 +55,10 @@ class SettingAppFragment : Fragment(R.layout.fragment_setting_app) {
 
         newBinding.profileButton.setOnClickListener {
             findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToProfileGraph())
+        }
+
+        newBinding.policyBtn.setOnClickListener {
+            findNavController().navigate(SettingAppFragmentDirections.actionSettingAppFragmentToPolicyFragment())
         }
     }
 

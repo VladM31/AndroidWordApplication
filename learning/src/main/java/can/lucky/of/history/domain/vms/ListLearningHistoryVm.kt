@@ -2,7 +2,6 @@ package can.lucky.of.history.domain.vms
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import can.lucky.of.history.domain.models.filters.PageFilter
 import can.lucky.of.core.domain.vms.AbstractMviViewModel
 import can.lucky.of.history.domain.actions.ListLearningHistoryAction
 import can.lucky.of.history.domain.managers.LearningHistoryManager
@@ -15,13 +14,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class ListLearningHistoryVm(
     private val learningHistoryManager: LearningHistoryManager
-) : AbstractMviViewModel<ListLearningHistoryState,ListLearningHistoryAction>() {
+) : AbstractMviViewModel<ListLearningHistoryState, ListLearningHistoryAction>() {
 
-    private val mutableState = MutableStateFlow(ListLearningHistoryState(content = getPageHistory(LearningHistoryFilter())))
+    private val mutableState =
+        MutableStateFlow(ListLearningHistoryState(content = getPageHistory(LearningHistoryFilter())))
     override val state: MutableStateFlow<ListLearningHistoryState> = mutableState
 
     override fun sent(action: ListLearningHistoryAction) {
-        when(action){
+        when (action) {
             is ListLearningHistoryAction.UpdateFilter -> {
                 handleUpdateFilter(action)
             }
@@ -37,15 +37,16 @@ internal class ListLearningHistoryVm(
 
     private fun getPageHistory(filter: LearningHistoryFilter): Pager<Long, LearningHistory> {
         val loafer: LearningHistoryPageLoader = { page, pageSize ->
-           try {
-               learningHistoryManager.getLearningHistory(
-                   filter.copy(
-                       pagination = PageFilter(page, pageSize)
-                   )
-               )
-           }catch (e: Exception) {
-               emptyList()
-           }
+            try {
+                learningHistoryManager.getLearningHistory(
+                    filter.copy(
+                        page = page,
+                        size = pageSize
+                    )
+                ).content
+            } catch (e: Exception) {
+                emptyList()
+            }
         }
 
         return Pager(

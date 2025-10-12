@@ -1,6 +1,7 @@
 package com.generagames.happy.town.farm.wordandroid.di.configs
 
-import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
+import can.lucky.of.core.domain.vms.infos.InstructionViewModel
+import can.lucky.of.core.domain.vms.infos.PolicyViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.CreatePlayListViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.EditPlayListVm
 import com.generagames.happy.town.farm.wordandroid.domain.vms.PinUserWordsViewModel
@@ -11,14 +12,15 @@ import com.generagames.happy.town.farm.wordandroid.domain.vms.PlayListViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.ScanPlayListVm
 import com.generagames.happy.town.farm.wordandroid.domain.vms.SharePlayListVm
 import com.generagames.happy.town.farm.wordandroid.domain.vms.ShareUserWordVm
-import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubCostViewModel
-import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubscribeViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.UserWordFilterVm
 import com.generagames.happy.town.farm.wordandroid.domain.vms.UserWordsViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordFilterViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.WordsViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.ChoosePayViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubCostViewModel
+import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.SubscribeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -36,6 +38,7 @@ val viewModelModule = module {
     viewModel {
         PinUserWordsViewModel(
             wordManager = get(),
+            userWordManager = get(),
             subscribeCacheManager = get()
         )
     }
@@ -139,6 +142,18 @@ val viewModelModule = module {
             payManager = get(),
             payPropositionManager = get(),
             subscribeCacheManager = get()
+        )
+    }
+
+    viewModel {
+        InstructionViewModel(
+            instructionManager = get()
+        )
+    }
+
+    viewModel {
+        PolicyViewModel(
+            policyManager = get()
         )
     }
 }

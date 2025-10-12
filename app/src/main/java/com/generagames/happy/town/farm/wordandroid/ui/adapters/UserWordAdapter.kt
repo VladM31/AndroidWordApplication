@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import can.lucky.of.core.domain.models.data.words.UserWord
-import com.generagames.happy.town.farm.wordandroid.R
+import can.lucky.of.core.utils.toZoneDateTimeFormat
 import com.generagames.happy.town.farm.wordandroid.databinding.BoxUserWordBinding
 import can.lucky.of.core.R as CoreR
 
@@ -33,7 +33,8 @@ class UserWordAdapter(
                 originText.text = textTemplate.format(userWord.word.lang, userWord.word.original)
                 translateText.text =
                     textTemplate.format(userWord.word.translateLang, userWord.word.translate)
-                lastDateRead.text = lastDateReadTemplate.format(userWord.lastReadDate)
+                lastDateRead.text =
+                    lastDateReadTemplate.format(userWord.lastReadDate.toZoneDateTimeFormat())
                 openWordButton.setOnClickListener {
                     onDetails(userWord)
                 }

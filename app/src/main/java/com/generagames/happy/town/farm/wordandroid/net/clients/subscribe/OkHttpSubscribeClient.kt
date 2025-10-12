@@ -2,10 +2,10 @@ package com.generagames.happy.town.farm.wordandroid.net.clients.subscribe
 
 import android.util.Log
 import can.lucky.of.core.domain.factories.HttpOkHeaderFactory
-import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import com.generagames.happy.town.farm.wordandroid.net.models.responses.SubscribeRespond
-import com.generagames.happy.town.farm.wordandroid.utils.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
 import com.generagames.happy.town.farm.wordandroid.utils.baseUrl
+import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
+import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonOffsetDateTimeAdapter.addOffsetDateTimeAdapter
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -15,7 +15,7 @@ class OkHttpSubscribeClient(
     private val httpClient: OkHttpClient
 ) : SubscribeClient {
     private val url by lazy { "${baseUrl()}/pay/subscribe" }
-    private val gson = GsonBuilder().addLocalDateTimeAdapter().create()
+    private val gson = GsonBuilder().addLocalDateTimeAdapter().addOffsetDateTimeAdapter().create()
 
     override suspend fun fetch(): SubscribeRespond? {
         val req = Request.Builder()

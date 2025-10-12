@@ -2,14 +2,16 @@ package can.lucky.of.core.domain.models.data.words
 
 import android.os.Parcel
 import android.os.Parcelable
+import can.lucky.of.core.domain.models.enums.CEFR
+import can.lucky.of.core.domain.models.enums.Language
 
 data class Word(
     val id: String,
     val original: String,
     val translate: String,
-    val lang: String,
-    val translateLang: String,
-    val cefr: String,
+    val lang: Language,
+    val translateLang: Language,
+    val cefr: CEFR,
     val description: String? = null,
     val category: String? = null,
     val soundLink: String? = null,
@@ -19,9 +21,9 @@ data class Word(
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
         parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
+        Language.valueOf(parcel.readString().orEmpty()),
+        Language.valueOf(parcel.readString().orEmpty()),
+        CEFR.valueOf(parcel.readString().orEmpty()),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -33,9 +35,9 @@ data class Word(
         parcel.writeString(id)
         parcel.writeString(original)
         parcel.writeString(translate)
-        parcel.writeString(lang)
-        parcel.writeString(translateLang)
-        parcel.writeString(cefr)
+        parcel.writeString(lang.name)
+        parcel.writeString(translateLang.name)
+        parcel.writeString(cefr.name)
         parcel.writeString(description)
         parcel.writeString(category)
         parcel.writeString(soundLink)

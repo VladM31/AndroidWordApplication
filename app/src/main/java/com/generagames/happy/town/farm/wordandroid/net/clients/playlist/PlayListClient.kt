@@ -1,5 +1,6 @@
 package com.generagames.happy.town.farm.wordandroid.net.clients.playlist
 
+import can.lucky.of.core.net.responses.PagedRespond
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.PlayListGradeRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.SavePlayListRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.UpdatePlayListRequest
@@ -16,21 +17,39 @@ import retrofit2.http.QueryMap
 
 interface PlayListClient {
 
-    @GET("storage/play-list/count")
-    suspend fun countBy(@Header("Authorization") token: String,@QueryMap filter: Map<String,String>): List<PlayListCountRespond>
+    @GET("words-api/play-list/count")
+    suspend fun countBy(
+        @Header("Authorization") token: String,
+        @QueryMap filter: Map<String, String>
+    ): PagedRespond<PlayListCountRespond>
 
-    @GET("storage/play-list")
-    suspend fun findBy(@Header("Authorization") token: String,@QueryMap filter: Map<String,String>): List<PlayListRespond>
+    @GET("words-api/play-list")
+    suspend fun findBy(
+        @Header("Authorization") token: String,
+        @QueryMap filter: Map<String, String>
+    ): PagedRespond<PlayListRespond>
 
-    @POST("storage/play-list")
-    suspend fun save(@Header("Authorization") token: String,@Body playLists: List<SavePlayListRequest>): List<String?>
+    @POST("words-api/play-list")
+    suspend fun save(
+        @Header("Authorization") token: String,
+        @Body playLists: List<SavePlayListRequest>
+    )
 
-    @PUT("storage/play-list")
-    suspend fun update(@Header("Authorization") token: String,@Body playLists: List<UpdatePlayListRequest>): IntArray
+    @PUT("words-api/play-list")
+    suspend fun update(
+        @Header("Authorization") token: String,
+        @Body playLists: List<UpdatePlayListRequest>
+    )
 
-    @PUT("storage/play-list/grades")
-    suspend fun updateGrades(@Header("Authorization") token: String,@Body grades: List<PlayListGradeRequest>): IntArray
+    @PUT("words-api/play-list/grades")
+    suspend fun updateGrades(
+        @Header("Authorization") token: String,
+        @Body grades: List<PlayListGradeRequest>
+    )
 
-    @DELETE("storage/play-list/delete")
-    suspend fun delete(@Header("Authorization") token: String,@QueryMap filter: Map<String,String>): Int
+    @DELETE("words-api/play-list/delete")
+    suspend fun delete(
+        @Header("Authorization") token: String,
+        @QueryMap filter: Map<String, String>
+    )
 }

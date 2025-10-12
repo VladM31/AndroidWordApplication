@@ -6,8 +6,9 @@ import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.generagames.happy.town.farm.wordandroid.databinding.BoxPlayListBinding
 import can.lucky.of.core.domain.models.data.playlists.PlayListCount
+import com.generagames.happy.town.farm.wordandroid.databinding.BoxPlayListBinding
+import java.time.format.DateTimeFormatter
 import can.lucky.of.core.R as CoreR
 
 class PlayListCountAdapter(
@@ -28,7 +29,7 @@ class PlayListCountAdapter(
 
             binding.name.text = playList.name
             binding.countAndDate.text = playListDetailsTemplate.format(
-                playList.dateOfCreated,
+                playList.createdAt.format(DATE_TIME_FORMAT),
                 playList.count
             )
             binding.open.setOnClickListener {
@@ -55,6 +56,10 @@ class PlayListCountAdapter(
 
     override fun onBindViewHolder(holder: PlayListViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+    }
+
+    companion object {
+        val DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     }
 
     private object PlayListCountDiffCallback : DiffUtil.ItemCallback<PlayListCount>() {

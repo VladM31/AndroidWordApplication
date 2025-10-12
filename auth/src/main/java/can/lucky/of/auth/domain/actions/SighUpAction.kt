@@ -4,6 +4,9 @@ import can.lucky.of.core.domain.models.enums.Currency
 
 internal sealed interface SighUpAction {
     data object Submit: SighUpAction
+
+    data class SetAgreed(val value: Boolean) : SighUpAction
+
     data class SetPhoneNumber(val value: String): SighUpAction
     data class SetPassword(val value: String): SighUpAction
     data class SetFirstName(val value: String): SighUpAction

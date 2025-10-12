@@ -8,5 +8,5 @@ interface LearningPlanManager {
 
     suspend fun createLearningPlan(learningPlan: LearningPlan): LearningPlan
 
-    suspend fun updateLearningPlan(learningPlan: LearningPlan): Int
+    suspend fun updateLearningPlan(learningPlan: LearningPlan)
 }

@@ -48,6 +48,7 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.5")
 
     implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
+    implementation("com.github.takusemba:spotlight:2.0.5")
 
     implementation "io.insert-koin:koin-core:3.4.3"
     implementation "io.insert-koin:koin-android:3.4.3"

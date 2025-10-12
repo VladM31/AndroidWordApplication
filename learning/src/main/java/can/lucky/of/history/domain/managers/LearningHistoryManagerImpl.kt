@@ -1,18 +1,16 @@
 package can.lucky.of.history.domain.managers
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
-import can.lucky.of.core.domain.models.enums.CEFR
-import can.lucky.of.core.domain.models.enums.Language
-import can.lucky.of.core.domain.models.enums.LearningHistoryType
+import can.lucky.of.core.domain.models.PagedModels
+import can.lucky.of.core.net.clients.LearningHistoryClient
+import can.lucky.of.core.net.responses.CountLearningHistoryResponse
+import can.lucky.of.core.net.responses.LearningHistoryResponse
+import can.lucky.of.core.net.responses.StatisticsLearningHistoryResponse
 import can.lucky.of.history.domain.models.data.CountLearningHistory
 import can.lucky.of.history.domain.models.data.LearningHistory
 import can.lucky.of.history.domain.models.data.StatisticsLearningHistory
 import can.lucky.of.history.domain.models.filters.LearningHistoryFilter
 import can.lucky.of.history.domain.models.filters.StatisticsLearningHistoryFilter
-import can.lucky.of.core.net.clients.LearningHistoryClient
-import can.lucky.of.core.net.responses.CountLearningHistoryResponse
-import can.lucky.of.core.net.responses.LearningHistoryResponse
-import can.lucky.of.core.net.responses.StatisticsLearningHistoryResponse
 import com.google.gson.Gson
 import java.time.LocalDate
 
@@ -24,22 +22,21 @@ internal class LearningHistoryManagerImpl(
     private val token: String
         get() = userCacheManager.token.value
 
-    override suspend fun getLearningHistory(filter: LearningHistoryFilter): List<LearningHistory> {
+    override suspend fun getLearningHistory(filter: LearningHistoryFilter): PagedModels<LearningHistory> {
         val query = filter.toQueryMap(gson) - "wordIds"
-
-        return client.getLearningHistory(token, query, filter.wordIds)
-            .filter { it.cefr != "Unknown CEFR" }
-            .map { it.toModel() }
+        val respond = client.getLearningHistory(token, query, filter.wordIds);
+        return PagedModels.of(respond) { it.toModel() }
     }
 
-    override suspend fun getLearningHistoryStatistic(filter: StatisticsLearningHistoryFilter): List<StatisticsLearningHistory> {
+    override suspend fun getLearningHistoryStatistic(filter: StatisticsLearningHistoryFilter): PagedModels<StatisticsLearningHistory> {
         val query = filter.toQueryMap(gson)
+        val respond = client.getLearningHistoryStatistic(token, query);
 
-        return client.getLearningHistoryStatistic(token, query).map { it.toModel() }
+        return PagedModels.of(respond) { it.toModel() }
     }
 
-    override suspend fun getCount(): List<CountLearningHistory> {
-        return client.getCount(token).map { it.toModel() }
+    override suspend fun getCount(): PagedModels<CountLearningHistory> {
+        return PagedModels.of(client.getCount(token)) { it.toModel() }
     }
 
     private fun LearningHistoryResponse.toModel(): LearningHistory {
@@ -48,11 +45,11 @@ internal class LearningHistoryManagerImpl(
             wordId = wordId,
             grade = grade,
             date = LocalDate.parse(date),
-            type = LearningHistoryType.valueOf(type),
+            type = type,
             original = original,
-            nativeLang = Language.fromShortName(nativeLang),
-            learningLang = Language.fromShortName(learningLang),
-            cefr = CEFR.valueOf(cefr)
+            nativeLang = nativeLang,
+            learningLang = learningLang,
+            cefr = cefr
         )
     }
 
@@ -61,7 +58,7 @@ internal class LearningHistoryManagerImpl(
             count = count,
             grades = grades,
             date = LocalDate.parse(date),
-            type = LearningHistoryType.valueOf(type)
+            type = type
         )
     }
 

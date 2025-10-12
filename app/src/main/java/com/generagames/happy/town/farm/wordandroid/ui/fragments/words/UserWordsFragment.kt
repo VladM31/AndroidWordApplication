@@ -9,13 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import can.lucky.of.core.domain.models.data.words.UserWordDetails
 import can.lucky.of.core.domain.models.enums.Language
-import can.lucky.of.core.domain.models.enums.UserWordSortBy
-import can.lucky.of.core.domain.models.filters.PageFilter
 import can.lucky.of.core.domain.models.filters.UserWordFilter
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.decorators.SpacesItemDecoration
-import can.lucky.of.core.utils.dp
-import can.lucky.of.core.utils.titleCase
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.actions.UserWordsAction
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentWordsBinding
@@ -147,15 +143,14 @@ class UserWordsFragment : Fragment(R.layout.fragment_words) {
 
     private fun UserWordFilterBundle.toFilter(): UserWordFilter {
         return UserWordFilter(
-            originalLang = originalLang?.let { Language.fromTitleCase(it) },
+            languages = originalLang?.let { setOf(Language.fromTitleCase(it)) } ?: emptySet(),
             original = original,
-            translateLang = translateLang?.let { Language.fromTitleCase(it) },
+            translateLanguages = translateLang?.let { setOf(Language.fromTitleCase(it)) }
+                ?: setOf(),
             translate = translate,
             categories = categories,
-            pagination = PageFilter(
-                sort = sortBy,
-                asc = asc
-            ),
+            sortField = sortBy,
+            asc = asc,
             cefrs = cefr?.let { listOf(it) }
         )
     }
@@ -174,12 +169,12 @@ class UserWordsFragment : Fragment(R.layout.fragment_words) {
 
     private fun UserWordFilter.toBundle(): UserWordFilterBundle {
         return UserWordFilterBundle(
-            originalLang= originalLang?.titleCase,
+            originalLang = languages?.firstOrNull()?.titleCase,
             original = original,
-            translateLang = translateLang?.titleCase,
+            translateLang = translateLanguages?.firstOrNull()?.titleCase,
             translate = translate,
-            categories = categories,
-            sortBy = pagination?.sort?: UserWordSortBy.DATE_OF_ADDED,
+            categories = categories?.toList(),
+            sortBy = sortField,
             asc = false,
             cefr = cefrs?.firstOrNull()
         )

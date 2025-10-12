@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_signUpFragment_to_confirmSignUpFragment"
             app:destination="@id/confirmSignUpFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_policyFragment2"
+            app:destination="@id/policyFragment2" />
     </fragment>
     <fragment
         android:id="@+id/startFragment"
@@ -72,5 +75,10 @@
             android:id="@+id/action_updateVersionFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/policyFragment2"
+        android:name="can.lucky.of.core.ui.fragments.infos.PolicyFragment"
+        android:label="fragment_policy"
+        tools:layout="@layout/fragment_policy" />
 
 </navigation>

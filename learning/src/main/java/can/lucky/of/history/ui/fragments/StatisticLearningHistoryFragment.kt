@@ -11,7 +11,6 @@ import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.models.ToolBarPopupButton
 import can.lucky.of.history.R
-import can.lucky.of.core.R as CoreR
 import can.lucky.of.history.databinding.FragmentStatisticLearningHistoryBinding
 import can.lucky.of.history.domain.actions.StatisticLearningHistoryAction
 import can.lucky.of.history.domain.models.data.StatisticsLearningHistory
@@ -26,7 +25,10 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
+import can.lucky.of.core.R as CoreR
 
 class StatisticLearningHistoryFragment : Fragment(R.layout.fragment_statistic_learning_history) {
     private var binding: FragmentStatisticLearningHistoryBinding? = null
@@ -61,7 +63,8 @@ class StatisticLearningHistoryFragment : Fragment(R.layout.fragment_statistic_le
                 .collectLatest {
                     statisticsHandler.setParamsToDiagram(
                         binding?.barChart ?: return@collectLatest,
-                        vm.state.value.toDate,
+                        vm.state.value.toDate.atZoneSameInstant(ZoneId.systemDefault())
+                            .toLocalDate(),
                         *it.toBarEntity().toTypedArray()
                     )
                 }
@@ -97,7 +100,11 @@ class StatisticLearningHistoryFragment : Fragment(R.layout.fragment_statistic_le
 
     private fun changeDate() {
         val listener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            vm.sent(StatisticLearningHistoryAction.SetDate(LocalDate.of(year, month + 1, dayOfMonth)))
+            val date = LocalDate.of(year, month + 1, dayOfMonth)
+            val dateTime = LocalDateTime.of(date, LocalTime.now())
+                .atZone(ZoneId.systemDefault())        // ZonedDateTime
+                .toOffsetDateTime()
+            vm.sent(StatisticLearningHistoryAction.SetDate(dateTime))
         }
 
         val date = vm.state.value.toDate
@@ -115,7 +122,11 @@ class StatisticLearningHistoryFragment : Fragment(R.layout.fragment_statistic_le
     }
 
     private fun List<StatisticsLearningHistory>.toBarEntity(): List<BarDataSet> {
-        return statisticsHandler.toBarEntity(StatisticLearningHistoryVm.STEP.toInt(), vm.state.value.toDate,this).map {
+        return statisticsHandler.toBarEntity(
+            StatisticLearningHistoryVm.STEP.toInt(),
+            vm.state.value.toDate.toLocalDate(),
+            this
+        ).map {
             BarDataSet(it.value, nameMapper(it.key)).apply {
                 color = colorMapper(it.key)
                 valueTextColor = statisticsHandler.primaryColor

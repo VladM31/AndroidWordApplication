@@ -1,15 +1,19 @@
 package can.lucky.of.core.domain.models.data.words
 
+import can.lucky.of.core.domain.models.enums.CEFR
+import can.lucky.of.core.domain.models.enums.Language
 import java.io.File
 
-data class InsertWord(
+data class SaveWord(
     val word: String,
-    val language: String,
-    val translationLanguage: String,
-    val translation: String? = null,
+    val translation: String,
+    val language: Language,
+    val translationLanguage: Language,
+    val cefr: CEFR,
+
     val category: String? = null,
     val description: String? = null,
-    val cefr: String? = null,
+
     var image: File? = null,
     var sound: File? = null,
     val needSound: Boolean = false,

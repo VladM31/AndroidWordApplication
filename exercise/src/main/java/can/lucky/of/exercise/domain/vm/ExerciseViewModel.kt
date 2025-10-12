@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
-import can.lucky.of.core.domain.managers.userwords.UserWordManager
 import can.lucky.of.core.domain.models.data.playlists.PlayListGrade
 import can.lucky.of.core.domain.models.data.words.GradeUserWord
 import can.lucky.of.core.domain.vms.MviViewModel
@@ -18,7 +17,6 @@ import can.lucky.of.exercise.domain.models.data.ExerciseWordDetails
 import can.lucky.of.exercise.domain.models.filters.ExerciseTransactionFilter
 import can.lucky.of.exercise.domain.models.filters.ExerciseWordFilter
 import can.lucky.of.exercise.domain.models.states.ExerciseState
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +27,6 @@ internal class ExerciseViewModel(
     private val exerciseTransactionManager: ExerciseTransactionManager,
     private val subscribeCacheManager: SubscribeCacheManager,
     private val playListManager: PlayListManager,
-    private val userWordManager: UserWordManager,
     private val exerciseStatisticalManager: ExerciseStatisticalManager
 ) : ViewModel(), MviViewModel<ExerciseState, ExerciseAction> {
     private val mutableState = MutableStateFlow(ExerciseState())
@@ -62,20 +59,12 @@ internal class ExerciseViewModel(
 
 
         if (state.value.playListId == null) {
-            saveByWordIds(newWords)
             return
         }
 
         saveByPlayListId(newWords)
     }
 
-    private fun saveByWordIds(newWords: MutableList<ExerciseWordDetails>){
-        viewModelScope.launch(Dispatchers.IO) {
-            userWordManager.runCatching {
-                putGrades(newWords.map { it.toGradeWord() })
-            }
-        }
-    }
 
     private fun saveByPlayListId(newWords: MutableList<ExerciseWordDetails>) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -120,7 +109,6 @@ internal class ExerciseViewModel(
     private fun ExerciseWordDetails.toPlayListGradeWord() : PlayListGrade {
         return PlayListGrade(
             wordId = this.userWordId,
-            playListGrade = this.grade.toLong(),
             wordGrade = this.grade.toLong()
         )
     }

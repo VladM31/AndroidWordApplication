@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDate
+import java.time.OffsetDateTime
 
 internal class StatisticLearningHistoryVm(
     private val manager: LearningHistoryManager
@@ -19,7 +19,7 @@ internal class StatisticLearningHistoryVm(
 
     private val mutableState = MutableStateFlow(
         StatisticLearningHistoryState(
-            toDate = LocalDate.now()
+            toDate = OffsetDateTime.now()
         )
     )
     override val state: StateFlow<StatisticLearningHistoryState> = mutableState
@@ -38,16 +38,16 @@ internal class StatisticLearningHistoryVm(
         }
     }
 
-    private fun fetch(date: LocalDate) {
+    private fun fetch(date: OffsetDateTime) {
         viewModelScope.launch(Dispatchers.IO) {
             val statistic = manager.getLearningHistoryStatistic(
                 filter = StatisticsLearningHistoryFilter(
                     date = Range(
-                        from = date.minusDays(STEP).toString(),
-                        to =date.toString()
+                        from = date.minusDays(STEP),
+                        to = date
                     )
                 )
-            )
+            ).content
             mutableState.value = mutableState.value.copy(statistic = statistic, toDate = date)
         }
     }

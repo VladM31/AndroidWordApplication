@@ -16,11 +16,9 @@ private fun appendQuery(obj: JsonObject, stringBuilder : MutableList<String>, pr
         }
 
         if (element.value.isJsonArray){
-            for (arrayElement in element.value.asJsonArray){
-                if (arrayElement.isJsonPrimitive){
-                    stringBuilder.add(((prefix + element.key) to arrayElement.asString).encode())
-                }
-            }
+            val currentKey = (prefix + element.key).encode()
+            val params = element.value.asJsonArray.joinToString(",") { it.asString.encode() }
+            stringBuilder.add("$currentKey=$params")
             continue
         }
 
@@ -36,26 +34,16 @@ private fun Pair<String,String>.encode() : String {
     }.getOrDefault("")
 }
 
+private fun String.encode(): String {
+    return runCatching {
+        URLEncoder.encode(this, StandardCharsets.UTF_8.name())
+    }.getOrDefault("")
+}
+
+
+
 
 interface Queryable {
-
-    fun toQuery(gson: com.google.gson.Gson): String{
-        val stringBuilder = mutableListOf<String>()
-        val jsonElement = gson.toJsonTree(this)
-
-        if (jsonElement.isJsonObject){
-           if (jsonElement.asJsonObject.entrySet().isEmpty()){
-               return ""
-           }
-            appendQuery(
-                jsonElement.asJsonObject,
-                stringBuilder
-            )
-            return stringBuilder.joinToString("&")
-        }
-
-        return ""
-    }
 
     fun toQueryMap(gson: com.google.gson.Gson): Map<String,String>{
         val stringBuilder = mutableListOf<String>()

@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_back"
                     android:padding="0dp"
-                    android:text="Reset"
+                    android:text="Set"
                     android:textAllCaps="false"
                     android:textColor="@color/primary_back"
                     android:textSize="24sp"

@@ -6,12 +6,12 @@ import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import can.lucky.of.core.R
 import can.lucky.of.core.domain.models.data.words.Word
 import can.lucky.of.core.domain.vms.MviViewModel
 import com.generagames.happy.town.farm.wordandroid.actions.WordsAction
 import com.generagames.happy.town.farm.wordandroid.databinding.BoxWordBinding
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.WordsState
-import can.lucky.of.core.R
 
 class WordAdapter(
     private val viewModel: MviViewModel<WordsState, WordsAction>,
@@ -28,8 +28,9 @@ class WordAdapter(
 
         fun bind(word: Word, position: Int?) {
             binding.category.text = categoryTemplate.format(word.category.orEmpty())
-            binding.originText.text = textTemplate.format(word.lang, word.original)
-            binding.translateText.text = textTemplate.format(word.translateLang, word.translate)
+            binding.originText.text = textTemplate.format(word.lang.fixedShortName, word.original)
+            binding.translateText.text =
+                textTemplate.format(word.translateLang.fixedShortName, word.translate)
 
             binding.hasImage.setVisibilityIfNotNull(word.imageLink)
             binding.hasSound.setVisibilityIfNotNull(word.soundLink)

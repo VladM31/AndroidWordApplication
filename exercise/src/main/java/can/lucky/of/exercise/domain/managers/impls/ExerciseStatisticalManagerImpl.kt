@@ -28,7 +28,8 @@ internal class ExerciseStatisticalManagerImpl(
             plan = runCatching { learningPlanClient.getPlan(userManager.token.value) }.getOrNull(),
             countMap = runCatching {
                 learningHistoryClient.getCount(userManager.token.value)
-                    .associate { LearningHistoryType.valueOf(it.type) to it.count }
+                    .content
+                    .associate { it.type to it.count }
             }.getOrDefault(emptyMap())
         ).runCatching {
             client.startExercise(this, userManager.toPair())
@@ -73,10 +74,10 @@ internal class ExerciseStatisticalManagerImpl(
     private fun LearningPlanResponse.toRequest(): StartExerciseTransactionRequest.LearningPlan {
         return StartExerciseTransactionRequest.LearningPlan(
             wordsPerDay = this.wordsPerDay,
-            nativeLang = this.nativeLang,
-            learningLang = this.learningLang,
-            cefr = this.cefr,
-            dateOfCreation = this.dateOfCreation.toString()
+            nativeLang = this.nativeLang.shortName,
+            learningLang = this.learningLang.shortName,
+            cefr = this.cefr.name,
+            dateOfCreation = this.createdAt.toLocalDateTime().toString()
         )
     }
 

@@ -2,17 +2,18 @@ package can.lucky.of.history.domain.vms
 
 import androidx.lifecycle.viewModelScope
 import can.lucky.of.core.domain.managers.LearningPlanManager
+import can.lucky.of.core.domain.models.PagedModels
 import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.models.data.LearningPlan
 import can.lucky.of.core.domain.models.enums.LearningHistoryType
 import can.lucky.of.core.domain.models.filters.Range
 import can.lucky.of.core.domain.vms.AbstractMviViewModel
-import can.lucky.of.history.domain.models.states.LearningPlanState
 import can.lucky.of.history.domain.actions.LearningPlanAction
 import can.lucky.of.history.domain.managers.LearningHistoryManager
 import can.lucky.of.history.domain.models.data.CountLearningHistory
 import can.lucky.of.history.domain.models.enums.PlanFragmentType
 import can.lucky.of.history.domain.models.filters.LearningHistoryFilter
+import can.lucky.of.history.domain.models.states.LearningPlanState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -66,9 +67,9 @@ internal class LearningPlanVm(
     }
 
     private suspend fun toLearnedWordsToDay(plan: LearningPlan): Int {
-        val historyFilter = LearningHistoryFilter(date = Range.of(LocalDate.now().toString()));
+        val historyFilter = LearningHistoryFilter(date = Range.of(LocalDate.now()));
 
-        val typeGroup = learningHistoryManager.getLearningHistory(historyFilter).filter {
+        val typeGroup = learningHistoryManager.getLearningHistory(historyFilter).content.filter {
             it.cefr == plan.cefr && it.learningLang == plan.learningLang && it.nativeLang == plan.nativeLang
         }.groupBy { it.type }
 
@@ -78,10 +79,10 @@ internal class LearningPlanVm(
         return addedToday.count { learnedToday.containsKey(it.wordId) }
     }
 
-    private fun List<CountLearningHistory>.toMap(): Map<LearningHistoryType, Int> {
+    private fun PagedModels<CountLearningHistory>.toMap(): Map<LearningHistoryType, Int> {
         val map = mutableMapOf<LearningHistoryType, Int>()
 
-        forEach { map[LearningHistoryType.valueOf(it.type)] = it.count }
+        content.forEach { map[it.type] = it.count }
 
         return map
     }

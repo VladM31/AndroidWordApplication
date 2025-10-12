@@ -9,4 +9,8 @@
     <string name="open_telegram_bot">Open telegram bot</string>
     <string name="input_phone_number">Input phone number</string>
     <string name="please_open_telegram_and_confirm_login">Please open telegram and confirm login</string>
+    <string name="i_agree_to_the_terms_of_service">I agree to the Terms of Service</string>
+    <string name="sign_in_with">Sign in with</string>
+    <string name="log_in_with_telegram">Log in with telegram</string>
+    <string name="log_in_with_biometric">Log in with biometric</string>
 </resources>

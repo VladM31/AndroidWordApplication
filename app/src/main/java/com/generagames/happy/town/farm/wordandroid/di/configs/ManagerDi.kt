@@ -1,22 +1,28 @@
 package com.generagames.happy.town.farm.wordandroid.di.configs
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.domain.managers.infos.InstructionManager
+import can.lucky.of.core.domain.managers.infos.PolicyManager
 import can.lucky.of.core.domain.managers.media.MediaManager
+import can.lucky.of.core.domain.managers.playlist.PlayListManager
+import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
 import can.lucky.of.core.domain.managers.userwords.UserWordManager
 import can.lucky.of.core.domain.managers.word.WordManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.cache.SharedUserCacheManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.media.ExoCacheMediaManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManagerImpl
-import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
-import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
-import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PinPlayListManagerImpl
-import can.lucky.of.core.domain.managers.playlist.PlayListManager
-import com.generagames.happy.town.farm.wordandroid.domain.managers.media.ExoCacheMediaManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.PolicyManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.SharePlayListManager
+import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PinPlayListManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.PlayListManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.impl.SharePlayListManagerImpl
+import com.generagames.happy.town.farm.wordandroid.domain.managers.spotlight.SpotlightManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.subscribe.SharedPrefSubscribeCacheManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.userwords.UserWordManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.word.WordManagerImpl
@@ -31,7 +37,7 @@ val managerModule = module {
     single<WordManager> {
         WordManagerImpl(
             wordClient = get(),
-            context = androidContext()
+            userCacheManager = get()
         )
     }
 
@@ -46,7 +52,9 @@ val managerModule = module {
     single<UserWordManager> {
         UserWordManagerImpl(
             userWordClient = get(),
-            userCacheManager = get()
+            userCacheManager = get(),
+            fileClient = get(),
+            context = androidContext()
         )
     }
 
@@ -87,6 +95,26 @@ val managerModule = module {
 
     single< PayPropositionManager> {
         PayPropositionManagerImpl(
+            context = androidContext()
+        )
+    }
+
+    single<InstructionManager> {
+        InstructionManagerImpl(
+            downloadClient = get(),
+            context = androidContext()
+        )
+    }
+
+    single<SpotlightManager> {
+        SpotlightManagerImpl(
+            context = androidContext()
+        )
+    }
+
+    single<PolicyManager> {
+        PolicyManagerImpl(
+            downloadClient = get(),
             context = androidContext()
         )
     }

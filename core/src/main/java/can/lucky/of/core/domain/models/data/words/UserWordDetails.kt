@@ -2,25 +2,26 @@ package can.lucky.of.core.domain.models.data.words
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.time.OffsetDateTime
 
 data class UserWordDetails(
     val userWordId: String,
     val learningGrade: Long,
-    val dateOfAdded: String,
-    val lastReadDate: String,
+    val createdAt: OffsetDateTime,
+    val lastReadDate: OffsetDateTime,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
         parcel.readLong(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty()
+        OffsetDateTime.parse(parcel.readString().orEmpty()),
+        OffsetDateTime.parse(parcel.readString().orEmpty()),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userWordId)
         parcel.writeLong(learningGrade)
-        parcel.writeString(dateOfAdded)
-        parcel.writeString(lastReadDate)
+        parcel.writeString(createdAt.toString())
+        parcel.writeString(lastReadDate.toString())
     }
 
     override fun describeContents(): Int {
@@ -40,7 +41,7 @@ data class UserWordDetails(
             return UserWordDetails(
                 userWordId = userWord.id,
                 learningGrade = userWord.learningGrade,
-                dateOfAdded = userWord.dateOfAdded,
+                createdAt = userWord.createdAt,
                 lastReadDate = userWord.lastReadDate
             )
         }

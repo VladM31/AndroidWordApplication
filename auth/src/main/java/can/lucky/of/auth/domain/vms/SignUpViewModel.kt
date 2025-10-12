@@ -2,10 +2,10 @@ package can.lucky.of.auth.domain.vms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import can.lucky.of.auth.domain.actions.SighUpAction
 import can.lucky.of.auth.domain.managers.AuthManager
 import can.lucky.of.auth.domain.models.data.SignUpModel
 import can.lucky.of.auth.domain.models.states.SignUpState
-import can.lucky.of.auth.domain.actions.SighUpAction
 import can.lucky.of.auth.ui.validation.signUpValidator
 import can.lucky.of.core.domain.models.data.ErrorMessage
 import can.lucky.of.core.domain.vms.MviViewModel
@@ -43,6 +43,9 @@ internal class SignUpViewModel(
                 mutableState.value = state.value.copy(email = action.value)
             }
             SighUpAction.Submit -> handleSubmit()
+            is SighUpAction.SetAgreed -> {
+                mutableState.value = state.value.copy(agreed = action.value)
+            }
         }
     }
 

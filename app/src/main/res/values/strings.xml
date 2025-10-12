@@ -14,7 +14,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update">Update</string>
     <string name="please_update_the_app_to_continue">Please update the app to continue</string>
-    <string name="current_version">1.0.0</string>
+    <string name="current_version">1.0.1</string>
     <string name="google_pay">Google pay</string>
     <string name="card_pay">Card pay</string>
+    <string name="add_word">Add word</string>
+    <string name="instruction">Instruction</string>
+    <string name="profile">Profile</string>
+    <string name="policy">Policy</string>
+    <string name="history">History</string>
 </resources>

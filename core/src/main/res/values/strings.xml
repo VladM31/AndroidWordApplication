@@ -50,13 +50,13 @@
     <string name="save_changes">Save changes</string>
     <string name="last_date_read_template">Last date read: %s</string>
     <string name="date_of_add_template">Date of add: %s</string>
-    <string name="date_of_creation_template">Date of creation: %s</string>
+    <string name="date_of_creation_template">Created At: %s</string>
 
-    <string name="user_word_title_template">User words %s</string>
+    <string name="user_word_title_template">My words %s</string>
     <string name="changes_saved">Changes saved</string>
     <string name="add_play_list">Add play list</string>
     <string name="find_play_lists">Find play lists</string>
-    <string name="play_list_details_template">Date of creation: %s\nCount of words: %s</string>
+    <string name="play_list_details_template">Created at: %s\nCount of words: %s</string>
     <string name="apply">Apply</string>
     <string name="choose_playlist">Choose playlist</string>
     <string name="mark_chose">Mark chose</string>

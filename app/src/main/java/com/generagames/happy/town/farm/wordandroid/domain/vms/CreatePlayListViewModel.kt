@@ -2,10 +2,10 @@ package com.generagames.happy.town.farm.wordandroid.domain.vms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import can.lucky.of.core.domain.vms.MviViewModel
-import com.generagames.happy.town.farm.wordandroid.actions.CreatePlayListAction
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
 import can.lucky.of.core.domain.models.data.playlists.SavePlayList
+import can.lucky.of.core.domain.vms.MviViewModel
+import com.generagames.happy.town.farm.wordandroid.actions.CreatePlayListAction
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.CreatePlayListState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,9 +44,8 @@ class CreatePlayListViewModel(
                 SavePlayList(
                     name
                 )
-            )).run {
-                isNotEmpty() && first() != null
-            }
+            )
+            ).isSuccess
 
             mutableState.value = CreatePlayListState(
                 saveResult = result,

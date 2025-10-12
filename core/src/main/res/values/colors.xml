@@ -2,7 +2,8 @@
 <resources  xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary_green">#FF44F2C1</color>
+    <color name="primary_green">#44F2C1</color>
+    <color name="primary_green_60_opacity">#9944F2C1</color>
 
     <color name="primary_green_status">#4BC150</color>
 
@@ -18,4 +19,5 @@
     <color name="primary_gray">#B0B0B0</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true" >@color/primary_green</color>
 
+    <color name="spotlight_background">#DF000000</color>
 </resources>

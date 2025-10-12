@@ -5,11 +5,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import can.lucky.of.addword.R
 import can.lucky.of.addword.databinding.FragmentAddWordByTextBinding
-import can.lucky.of.addword.domain.actions.AddWordByImageAction
 import can.lucky.of.addword.domain.actions.AddWordByTextAction
 import can.lucky.of.addword.domain.models.keys.RecognizeWordTaskKeys
 import can.lucky.of.addword.domain.vms.AddWordByTextVm
@@ -17,15 +15,14 @@ import can.lucky.of.addword.ui.listeners.ItemSelectedListener
 import can.lucky.of.core.domain.models.enums.Language
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
 import can.lucky.of.core.utils.setContent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,22 +34,32 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddWordByTextBinding.bind(view)
 
+        initOrientation()
+
         setValues()
 
         setUiListeners()
 
         setStateListeners()
 
-        ToolBarController(
-            findNavController(),
-            binding?.toolBar ?: return,
-            "Recognize by Text",
-        ).setDefaultSettings()
+        initToolBar()
 
         vm.state.onEnd(lifecycleScope) {
             parentFragmentManager.setFragmentResult(RecognizeWordTaskKeys.REQUEST_CODE, bundleOf())
             findNavController().navigateUp()
         }
+    }
+
+    private fun initToolBar() {
+        ToolBarController(
+            findNavController(),
+            binding?.toolBar ?: return,
+            "Recognize by Text",
+        ).setDefaultSettings()
+    }
+
+    private fun initOrientation() {
+        binding?.menuGridLayout?.setColumnCountByOrientation(1, 3)
     }
 
     private fun setStateListeners() {
@@ -62,8 +69,8 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
 
         lifecycleScope.launch {
             vm.state.map { it.isLoading }.distinctUntilChanged().collectLatest {
-                binding?.addWordButton?.isEnabled = it.not()
-                binding?.addWordButton?.visibility = if (it) View.INVISIBLE else View.VISIBLE
+                binding?.addWordBtn?.isEnabled = it.not()
+                binding?.addWordBtn?.visibility = if (it) View.INVISIBLE else View.VISIBLE
                 binding?.loading?.root?.visibility = if (it) View.VISIBLE else View.INVISIBLE
             }
         }
@@ -86,7 +93,7 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
             vm.sent(AddWordByTextAction.SetTranslateLanguage(Language.fromTitleCase(title)))
         }
 
-        binding?.addWordButton?.setOnClickListener {
+        binding?.addWordBtn?.setOnClickListener {
             vm.sent(AddWordByTextAction.Recognize)
         }
     }
