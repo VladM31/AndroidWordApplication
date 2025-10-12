@@ -4,5 +4,5 @@ import org.koin.dsl.module
 
 
 val exportAddWordDi = module {
-    includes(clientModule,managerDi,viewModelDi)
+    includes(clientModule, managerDi, viewModelDi, listenerModule)
 }

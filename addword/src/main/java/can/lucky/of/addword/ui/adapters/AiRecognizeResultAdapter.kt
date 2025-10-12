@@ -27,7 +27,7 @@ class AiRecognizeResultAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(result: AiRecognizeResult) {
             binding.createdAt.text = result.createdAt.format(DATE_TIME_FORMAT)
-            binding.status.text = result.status.name
+            setStatusText(result)
 
             setStatusColor(result)
             setButton(result)
@@ -61,6 +61,17 @@ class AiRecognizeResultAdapter(
             )
             drawableCopy?.setColor(ContextCompat.getColor(binding.root.context, color))
             binding.status.background = drawableCopy
+        }
+
+        private fun setStatusText(result: AiRecognizeResult) {
+            binding.status.text = when (result.status) {
+                RecognizeStatus.SUCCESS -> "Recognized"
+                RecognizeStatus.FAILED -> "Failed"
+                RecognizeStatus.SEND -> "In queue"
+                RecognizeStatus.IN_PROGRESS -> "In progress"
+                RecognizeStatus.COMPLETED -> "Completed"
+                RecognizeStatus.CANCELLED -> "Cancelled"
+            }
         }
     }
 

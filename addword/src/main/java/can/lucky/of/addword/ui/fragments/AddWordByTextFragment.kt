@@ -1,5 +1,6 @@
 package can.lucky.of.addword.ui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -33,21 +34,36 @@ class AddWordByTextFragment : Fragment(R.layout.fragment_add_word_by_text)   {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddWordByTextBinding.bind(view)
 
+        initOrientation()
+
         setValues()
 
         setUiListeners()
 
         setStateListeners()
 
+        initToolBar()
+
+        vm.state.onEnd(lifecycleScope) {
+            parentFragmentManager.setFragmentResult(RecognizeWordTaskKeys.REQUEST_CODE, bundleOf())
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun initToolBar() {
         ToolBarController(
             findNavController(),
             binding?.toolBar ?: return,
             "Recognize by Text",
         ).setDefaultSettings()
+    }
 
-        vm.state.onEnd(lifecycleScope) {
-            parentFragmentManager.setFragmentResult(RecognizeWordTaskKeys.REQUEST_CODE, bundleOf())
-            findNavController().navigateUp()
+    private fun initOrientation() {
+        val orientation = resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding?.menuGridLayout?.columnCount = 3
+        } else {
+            binding?.menuGridLayout?.columnCount = 1
         }
     }
 

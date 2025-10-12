@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_back">
 
     <include
@@ -12,10 +15,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView android:layout_width="match_parent"
-        android:layout_marginTop="80dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        android:layout_marginTop="80dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,66 +26,87 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/byDefaultBtn"
-                android:layout_width="@dimen/input_width"
+            <GridLayout
+                android:id="@+id/menuGridLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="28sp"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
-                app:backgroundTint="@null"
-                android:text="@string/default_text" />
+                android:alignmentMode="alignMargins"
+                android:columnCount="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:useDefaultMargins="true"
+                tools:ignore="UselessParent">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/byQrCodeBtn"
-                android:layout_width="@dimen/input_width"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="28sp"
-                android:enabled="false"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/disable_back"
-                app:backgroundTint="@null"
-                android:text="@string/by_qr_code" />
+                    <Button
+                        android:id="@+id/byDefaultBtn"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_back"
+                        android:text="@string/default_text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary_back"
+                        android:textSize="28sp"
+                        app:backgroundTint="@null" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="10dp" />
+                    <Button
+                        android:id="@+id/byQrCodeBtn"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/disable_back"
+                        android:enabled="false"
+                        android:text="@string/by_qr_code"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary_back"
+                        android:textSize="28sp"
+                        app:backgroundTint="@null" />
 
-            <Button
-                android:id="@+id/byTextBtn"
-                android:layout_width="@dimen/input_width"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="28sp"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
-                app:backgroundTint="@null"
-                android:text="@string/recognize_by_text" />
+                </LinearLayout>
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="10dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/byImageBtn"
-                android:layout_width="@dimen/input_width"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="28sp"
-                android:enabled="false"
-                android:clickable="false"
-                android:textColor="@color/primary_back"
-                android:background="@drawable/button_back"
-                app:backgroundTint="@null"
-                android:text="@string/by_image" />
+                    <Button
+                        android:id="@+id/byTextBtn"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_back"
+                        android:text="@string/recognize_by_text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary_back"
+                        android:textSize="28sp"
+                        app:backgroundTint="@null" />
 
 
+                    <Button
+                        android:id="@+id/byImageBtn"
+                        android:layout_width="@dimen/input_width"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_back"
+                        android:clickable="false"
+                        android:enabled="false"
+                        android:text="@string/by_image"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary_back"
+                        android:textSize="28sp"
+                        app:backgroundTint="@null" />
+
+
+                </LinearLayout>
+            </GridLayout>
 
         </LinearLayout>
 
