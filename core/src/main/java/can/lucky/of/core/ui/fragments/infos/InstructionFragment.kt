@@ -1,18 +1,18 @@
-package com.generagames.happy.town.farm.wordandroid.ui.fragments.infos
+package can.lucky.of.core.ui.fragments.infos
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import can.lucky.of.core.R
+import can.lucky.of.core.actions.infos.InstructionAction
+import can.lucky.of.core.databinding.FragmentInstructionBinding
+import can.lucky.of.core.domain.vms.infos.InstructionViewModel
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
-import com.generagames.happy.town.farm.wordandroid.R
-import com.generagames.happy.town.farm.wordandroid.actions.infos.InstructionAction
-import com.generagames.happy.town.farm.wordandroid.databinding.FragmentInstructionBinding
-import com.generagames.happy.town.farm.wordandroid.domain.vms.infos.InstructionViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
@@ -60,16 +60,15 @@ class InstructionFragment : Fragment(R.layout.fragment_instruction) {
     }
 
     private fun showFile(file: File) {
-        binding?.let {
-            it.pdfView.fromFile(file)
-                .enableSwipe(true)
-                .swipeHorizontal(false)
-                .enableDoubletap(true)
-                .defaultPage(0)
-                .onPageChange { page, pageCount -> println("Page: $page of $pageCount") }
-                .onError { t -> vm.sent(InstructionAction.Error(t.message.orEmpty())) }
-                .load()
-        }
+        val currentBinding = binding ?: return
+        currentBinding.pdfView.fromFile(file)
+            .enableSwipe(true)
+            .swipeHorizontal(false)
+            .enableDoubletap(true)
+            .defaultPage(0)
+            .onPageChange { page, pageCount -> println("Page: $page of $pageCount") }
+            .onError { t -> vm.sent(InstructionAction.Error(t.message.orEmpty())) }
+            .load()
     }
 
     override fun onDestroyView() {

@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.domain.managers.pdf
+package can.lucky.of.core.domain.managers.infos
 
 import java.io.File
 

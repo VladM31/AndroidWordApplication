@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_back"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.infos.InstructionFragment">
+    tools:context="can.lucky.of.core.ui.fragments.infos.PolicyFragment">
 
     <include
         android:id="@+id/toolBar"
@@ -22,3 +22,4 @@
         android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

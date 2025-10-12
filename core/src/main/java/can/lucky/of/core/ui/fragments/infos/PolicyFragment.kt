@@ -1,18 +1,18 @@
-package com.generagames.happy.town.farm.wordandroid.ui.fragments.infos
+package can.lucky.of.core.ui.fragments.infos
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import can.lucky.of.core.R
+import can.lucky.of.core.actions.infos.PolicyAction
+import can.lucky.of.core.databinding.FragmentPolicyBinding
+import can.lucky.of.core.domain.vms.infos.PolicyViewModel
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
-import com.generagames.happy.town.farm.wordandroid.R
-import com.generagames.happy.town.farm.wordandroid.actions.infos.PolicyAction
-import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPolicyBinding
-import com.generagames.happy.town.farm.wordandroid.domain.vms.infos.PolicyViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull

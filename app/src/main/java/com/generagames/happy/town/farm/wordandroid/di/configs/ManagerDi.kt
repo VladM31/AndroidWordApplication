@@ -1,6 +1,8 @@
 package com.generagames.happy.town.farm.wordandroid.di.configs
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.domain.managers.infos.InstructionManager
+import can.lucky.of.core.domain.managers.infos.PolicyManager
 import can.lucky.of.core.domain.managers.media.MediaManager
 import can.lucky.of.core.domain.managers.playlist.PlayListManager
 import can.lucky.of.core.domain.managers.spotlight.SpotlightManager
@@ -13,9 +15,7 @@ import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayMa
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.payment.PayPropositionManagerImpl
-import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManagerImpl
-import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.PolicyManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.PolicyManagerImpl
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.PinPlayListManager
 import com.generagames.happy.town.farm.wordandroid.domain.managers.playlist.SharePlayListManager

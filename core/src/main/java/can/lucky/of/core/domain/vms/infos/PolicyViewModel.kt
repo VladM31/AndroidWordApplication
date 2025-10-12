@@ -1,25 +1,26 @@
-package com.generagames.happy.town.farm.wordandroid.domain.vms.infos
+package can.lucky.of.core.domain.vms.infos
 
 import androidx.lifecycle.viewModelScope
+import can.lucky.of.core.actions.infos.PolicyAction
+import can.lucky.of.core.domain.managers.infos.PolicyManager
 import can.lucky.of.core.domain.models.data.ErrorMessage
+import can.lucky.of.core.domain.models.states.infos.PolicyState
 import can.lucky.of.core.domain.vms.AbstractMviViewModel
-import com.generagames.happy.town.farm.wordandroid.actions.infos.InstructionAction
-import com.generagames.happy.town.farm.wordandroid.domain.managers.pdf.InstructionManager
-import com.generagames.happy.town.farm.wordandroid.domain.models.states.infos.InstructionState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class InstructionViewModel(
-    private val instructionManager: InstructionManager
-) : AbstractMviViewModel<InstructionState, InstructionAction>() {
-    private val mutableState = MutableStateFlow(InstructionState())
+
+class PolicyViewModel(
+    private val policyManager: PolicyManager
+) : AbstractMviViewModel<PolicyState, PolicyAction>() {
+    private val mutableState = MutableStateFlow(PolicyState())
     override val state = mutableState
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val file = instructionManager.getInstructionFile()
+                val file = policyManager.getPolicyFile()
                 mutableState.value = state.value.copy(
                     file = file
                 )
@@ -31,9 +32,9 @@ class InstructionViewModel(
         }
     }
 
-    override fun sent(action: InstructionAction) {
+    override fun sent(action: PolicyAction) {
         when (action) {
-            is InstructionAction.End -> mutableState.value = state.value.copy(
+            is PolicyAction.End -> mutableState.value = state.value.copy(
                 isEnd = true
             )
         }

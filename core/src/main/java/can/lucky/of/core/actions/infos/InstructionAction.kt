@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.actions.infos
+package can.lucky.of.core.actions.infos
 
 interface InstructionAction {
 

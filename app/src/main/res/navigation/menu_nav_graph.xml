@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
-        android:name="com.generagames.happy.town.farm.wordandroid.ui.fragments.infos.InstructionFragment"
+        android:name="can.lucky.of.core.ui.fragments.infos.InstructionFragment"
         android:label="fragment_instruction"
         tools:layout="@layout/fragment_instruction" />
 

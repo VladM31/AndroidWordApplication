@@ -1,6 +1,7 @@
 package com.generagames.happy.town.farm.wordandroid.domain.managers.pdf
 
 import android.content.Context
+import can.lucky.of.core.domain.managers.infos.InstructionManager
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.DownloadClient
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.remoteConfig

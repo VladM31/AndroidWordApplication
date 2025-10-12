@@ -50,7 +50,6 @@ dependencies {
     implementation("io.github.g00fy2.quickie:quickie-bundled:1.10.0")
 
     implementation("com.github.takusemba:spotlight:2.0.5")
-    implementation 'com.github.barteksc:AndroidPdfViewer:master-SNAPSHOT'
 
     implementation "androidx.media3:media3-exoplayer:$media3_version"
     implementation "androidx.media3:media3-exoplayer-dash:$media3_version"
