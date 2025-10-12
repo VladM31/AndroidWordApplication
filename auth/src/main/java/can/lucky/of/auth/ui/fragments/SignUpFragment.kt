@@ -176,7 +176,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             navController = findNavController(),
             binding = toolBar,
             title = "Sign Up",
-            buttonImage = can.lucky.of.core.R.drawable.info,
+            buttonImage = can.lucky.of.core.R.drawable.info_in_circle,
             buttonAction = {
                 authNavigator.navigateToPolicy(findNavController())
             }
