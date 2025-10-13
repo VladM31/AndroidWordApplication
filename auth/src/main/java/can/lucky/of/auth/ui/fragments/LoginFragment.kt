@@ -16,6 +16,7 @@ import can.lucky.of.auth.domain.vms.LoginViewModel
 import can.lucky.of.auth.ui.navigations.AuthNavigator
 import can.lucky.of.auth.ui.navigations.TelegramLoginNavigator
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.NumberInputFilter
 import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
 import can.lucky.of.core.utils.onEnd
@@ -117,6 +118,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         newBinding.inputPhone.setText(viewModel.state.value.phoneNumber)
+        newBinding.inputPhone.filters = arrayOf(NumberInputFilter())
         newBinding.inputPhone.addDebounceAfterTextChangedListener(200) {
             viewModel.sent(LoginAction.SetPhoneNumber(it))
         }

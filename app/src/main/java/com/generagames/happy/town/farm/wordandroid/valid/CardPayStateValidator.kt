@@ -1,6 +1,7 @@
 package com.generagames.happy.town.farm.wordandroid.valid
 
 import com.generagames.happy.town.farm.wordandroid.domain.models.states.pay.CardPayState
+import java.time.Year
 
 object CardPayStateValidator {
     private val cardNumberValidators = listOf(
@@ -16,17 +17,20 @@ object CardPayStateValidator {
         LengthRangeStringValidator(1..60)
     )
 
-    private val expiryDateValidators = listOf(
-        BlankValidator,
-        EmptyStringValidator,
-        YearMonthFutureValidator
-    )
+
 
     private val cvv2Validator = RegexStringValidator("[0-9]{3}".toRegex())
 
 
     fun valid(state: CardPayState): String? {
-        cardNumberValidators.firstNotNullOfOrNull { it.valid(state.cardNumber) }?.let {
+        cardNumberValidators.firstNotNullOfOrNull {
+            it.valid(
+                state.cardNumber.replace(
+                    "\\s+".toRegex(),
+                    ""
+                )
+            )
+        }?.let {
             return@valid "Card number: $it"
         }
 
@@ -34,9 +38,10 @@ object CardPayStateValidator {
             return@valid "Card name: $it"
         }
 
-        expiryDateValidators.firstNotNullOfOrNull { it.valid(state.expiryDate) }?.let {
-            return@valid "Expiry date: $it"
+        if (state.expiryYear == Year.now().value && state.expiryMonth <= java.time.MonthDay.now().monthValue) {
+            return "Expiry date: Expiry date must be in the future"
         }
+
 
         cvv2Validator.valid(state.cvv2)?.let {
             return@valid "CVV2: $it"
