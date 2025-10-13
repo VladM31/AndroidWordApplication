@@ -20,6 +20,7 @@ import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.actions.CardPayAction
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentCardPayBinding
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
+import com.generagames.happy.town.farm.wordandroid.ui.handels.ScanCardHandler
 import com.generagames.happy.town.farm.wordandroid.ui.utils.CardNumberFormatTextWatcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -36,17 +37,21 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
     private var binding: FragmentCardPayBinding? = null
     private val viewModel by viewModel<CardPayViewModel>()
 
-    private val disableDraw by lazy {
-        requireContext().getDrawable(can.lucky.of.core.R.drawable.disable_back)
-    }
-    private val enableDraw by lazy {
-        requireContext().getDrawable(can.lucky.of.core.R.drawable.button_back)
-    }
+    private val scanCardHandler = ScanCardHandler(this)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val newBinding = FragmentCardPayBinding.bind(view)
         binding = newBinding
+
+        newBinding.scanCardBtn.setOnClickListener {
+            scanCardHandler.checkCameraPermissionAndScan()
+        }
+
+        scanCardHandler.setOnSuccessScanListener {
+            newBinding.cardNumberInput.setText(it)
+        }
 
         newBinding.cardNumberInput.addTextChangedListener(
             CardNumberFormatTextWatcher(
@@ -110,8 +115,8 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
         lifecycleScope.launch {
             viewModel.state.map { it.submitEnabled }.distinctUntilChanged().collectLatest {
                 binding?.confirmPayButton?.isClickable = it
-                binding?.confirmPayButton?.background = if (it) enableDraw else disableDraw
-                binding?.progressBar?.root?.visibility = if (!it) View.VISIBLE else View.GONE
+                binding?.confirmPayButton?.visibility = if (it) View.VISIBLE else View.GONE
+                binding?.progressBar?.root?.visibility = if (it.not()) View.VISIBLE else View.GONE
             }
         }
     }
@@ -163,4 +168,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
         super.onDestroyView()
         binding = null
     }
+
+
 }

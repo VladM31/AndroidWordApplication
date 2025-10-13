@@ -29,38 +29,57 @@
             android:orientation="horizontal"
             android:rowCount="6">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNumberLayout"
+            <LinearLayout
                 android:layout_width="@dimen/input_width"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_height="wrap_content">
 
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:textColorHint="@color/primary_green"
-                app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
-                app:boxStrokeWidth="2dp"
-
-                app:counterTextColor="@color/primary_green"
-                app:cursorColor="@color/primary_green"
-                app:hintTextColor="@color/primary_green"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolBar"
-                tools:ignore="PrivateResource">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNumberInput"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cardNumberLayout"
+                    android:layout_width="255dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/card_number"
-                    android:inputType="number"
-                    android:textColor="@color/primary_green"
+                    android:layout_marginStart="5dp"
 
-                    android:textSize="24sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColorHint="@color/primary_green"
+                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                    app:boxStrokeWidth="2dp"
+
+                    app:counterTextColor="@color/primary_green"
+                    app:cursorColor="@color/primary_green"
+                    app:hintTextColor="@color/primary_green"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolBar"
+                    tools:ignore="PrivateResource">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardNumberInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/card_number"
+                        android:inputType="number"
+                        android:textColor="@color/primary_green"
+
+                        android:textSize="22sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/scanCardBtn"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/camera"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/camera"
+                    android:contentDescription="@string/scan_card_button" />
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cardNameLayout"
@@ -90,7 +109,7 @@
 
                     android:textColor="@color/primary_green"
 
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <GridLayout
@@ -165,7 +184,7 @@
 
                     android:textColor="@color/primary_green"
 
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -196,7 +215,7 @@
 
                     android:textColor="@color/primary_green"
 
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -228,7 +247,7 @@
 
                     android:textColor="@color/primary_green"
 
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </GridLayout>
 
@@ -252,6 +271,9 @@
         android:id="@+id/progressBar"
         layout="@layout/fragment_loading"
         android:visibility="invisible"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        app:backgroundTint="@null"
         android:layout_marginTop="@dimen/up_menu_height"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
