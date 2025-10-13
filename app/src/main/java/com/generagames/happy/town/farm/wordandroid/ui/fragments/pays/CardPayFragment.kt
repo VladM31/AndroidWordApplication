@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +21,6 @@ import com.generagames.happy.town.farm.wordandroid.actions.CardPayAction
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentCardPayBinding
 import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewModel
 import com.generagames.happy.town.farm.wordandroid.ui.utils.CardNumberFormatTextWatcher
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -60,9 +59,11 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
         setDateCacheListener()
         initStateListeners()
         initToolBar()
+        setConfirmPayBtnClickListener()
+    }
 
-
-
+    private fun setConfirmPayBtnClickListener() {
+        val newBinding = binding ?: return
         newBinding.confirmPayButton.setOnClickListener {
             viewModel.sent(
                 CardPayAction.ConfirmPay(
@@ -74,8 +75,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 )
             )
         }
-
-
     }
 
     private fun initStateValues() {
@@ -112,6 +111,7 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
             viewModel.state.map { it.submitEnabled }.distinctUntilChanged().collectLatest {
                 binding?.confirmPayButton?.isClickable = it
                 binding?.confirmPayButton?.background = if (it) enableDraw else disableDraw
+                binding?.progressBar?.root?.visibility = if (!it) View.VISIBLE else View.GONE
             }
         }
     }
@@ -120,11 +120,12 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
         lifecycleScope.launch {
             viewModel.state.map { it.dateCacheId }.filter { it.isNotBlank() }.distinctUntilChanged()
                 .collectLatest {
-                    Toast.makeText(
-                        requireContext(),
-                        "Open telegram bot. Please confirm the payment in the next 5 minutes.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    AlertDialog.Builder(requireActivity(), can.lucky.of.core.R.style.DialogStyle)
+                        .setMessage("Open telegram bot. Please confirm the payment in the next 5 minutes.")
+                        .setTitle("Information")
+                        .setPositiveButton("Ok") { _, _ -> }
+                        .create()
+                        .show()
                 }
         }
     }
@@ -135,10 +136,7 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
         }
 
         viewModel.state.onError(lifecycleScope) {
-            binding?.confirmPayButton?.isClickable = false
             requireActivity().showError(it.message).show()
-            delay(1000)
-            binding?.confirmPayButton?.isClickable = true
         }
     }
 
@@ -160,16 +158,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
             }
         ).setDefaultSettings()
     }
-
-
-//    override fun onStart() {
-//        super.onStart()
-//        lifecycleScope.launch {
-//            viewModel.state.map { it.isBack }.filter { it }.take(1).collectLatest {
-//                findNavController().popBackStack()
-//            }
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

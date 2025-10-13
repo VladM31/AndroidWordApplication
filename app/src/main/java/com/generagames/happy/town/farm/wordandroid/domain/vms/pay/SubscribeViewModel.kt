@@ -9,6 +9,11 @@ import com.generagames.happy.town.farm.wordandroid.domain.models.states.pay.Subs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+
 
 class SubscribeViewModel(
     private val subscribeCacheManager: SubscribeCacheManager
@@ -23,14 +28,17 @@ class SubscribeViewModel(
 
     private fun fetchSub() {
         viewModelScope.launch {
+            val expirationDate =
+                LocalDateTime.parse(subscribeCacheManager.cache().value?.expirationDate.toString())
+                    .plusHours(getCurrentTimeZoneOffset())
+
             val newState = SubscribeState(
                 condition = if (subscribeCacheManager.isActiveSubscribe()) {
                     SubscribeState.SubscribeCondition.ACTIVE
                 } else {
                     SubscribeState.SubscribeCondition.INACTIVE
                 },
-                expirationDate = subscribeCacheManager.cache().value?.expirationDate.toString()
-                    .replace("T", " ")
+                expirationDate = expirationDate.format(DATE_TIME_PATTERN)
             )
             mutableState.value = newState
         }
@@ -39,6 +47,16 @@ class SubscribeViewModel(
     override fun sent(action: SubscribeAction) {
         when (action) {
             is SubscribeAction.UpdateState -> fetchSub()
+        }
+    }
+
+    companion object {
+        private val DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        fun getCurrentTimeZoneOffset(): Long {
+            val zoneId = ZoneId.systemDefault()
+            val zoneOffset = zoneId.rules.getOffset(Instant.now())
+            return (zoneOffset.totalSeconds / 3600).toLong()
         }
     }
 }

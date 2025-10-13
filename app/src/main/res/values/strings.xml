@@ -24,4 +24,5 @@
     <string name="history">History</string>
     <string name="expiry_month">Expiry month</string>
     <string name="expiry_year">Expiry year</string>
+    <string name="confirm_pay">Confirm pay</string>
 </resources>
