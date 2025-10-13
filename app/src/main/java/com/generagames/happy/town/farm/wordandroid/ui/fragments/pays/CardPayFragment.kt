@@ -23,7 +23,7 @@ import com.generagames.happy.town.farm.wordandroid.domain.vms.pay.CardPayViewMod
 import com.generagames.happy.town.farm.wordandroid.ui.utils.CardNumberFormatTextWatcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -118,7 +118,7 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
 
     private fun setDateCacheListener() {
         lifecycleScope.launch {
-            viewModel.state.map { it.dateCacheId }.filter { it.isNotBlank() }.distinctUntilChanged()
+            viewModel.state.map { it.dateCacheId }.distinctUntilChanged().drop(1)
                 .collectLatest {
                     AlertDialog.Builder(requireActivity(), can.lucky.of.core.R.style.DialogStyle)
                         .setMessage("Open telegram bot. Please confirm the payment in the next 5 minutes.")
