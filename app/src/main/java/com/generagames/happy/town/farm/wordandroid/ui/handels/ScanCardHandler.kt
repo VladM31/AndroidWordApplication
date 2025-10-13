@@ -37,7 +37,11 @@ class ScanCardHandler(
             startScan()
             return@registerForActivityResult
         }
-        Toast.makeText(fragment.requireContext(), "Camera permission denied", Toast.LENGTH_SHORT)
+        Toast.makeText(
+            fragment.context ?: return@registerForActivityResult,
+            "Camera permission denied",
+            Toast.LENGTH_SHORT
+        )
             .show()
     }
 
@@ -75,9 +79,5 @@ class ScanCardHandler(
             fragment.requireContext(),
             Manifest.permission.CAMERA
         ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    companion object {
-        private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
 }
