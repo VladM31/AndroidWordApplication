@@ -17,6 +17,7 @@ import can.lucky.of.auth.ui.navigations.AuthNavigator
 import can.lucky.of.core.domain.models.enums.Currency
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.NumberInputFilter
 import can.lucky.of.core.ui.utils.setColumnCountByOrientation
 import can.lucky.of.core.utils.setContent
 import kotlinx.coroutines.flow.SharingStarted
@@ -155,6 +156,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun setValues() {
         binding?.inputPhoneNumber?.setText(vm.state.value.phoneNumber)
+        binding?.inputPhoneNumber?.filters = arrayOf(NumberInputFilter())
         binding?.inputPassword?.setText(vm.state.value.password)
         binding?.inputFirstName?.setText(vm.state.value.firstName)
         binding?.inputLastName?.setText(vm.state.value.lastName)

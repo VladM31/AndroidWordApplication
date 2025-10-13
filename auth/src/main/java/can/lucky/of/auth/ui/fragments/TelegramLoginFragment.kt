@@ -14,6 +14,7 @@ import can.lucky.of.auth.domain.vms.TelegramLoginVm
 import can.lucky.of.auth.ui.navigations.TelegramLoginNavigator
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
+import can.lucky.of.core.ui.utils.NumberInputFilter
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
@@ -36,6 +37,7 @@ class TelegramLoginFragment : Fragment(R.layout.fragment_telegram_login) {
         binding = FragmentTelegramLoginBinding.bind(view)
 
         binding?.inputPhoneNumber?.setText(vm.state.value.phoneNumber)
+        binding?.inputPhoneNumber?.filters = arrayOf(NumberInputFilter())
 
         binding?.inputPhoneNumber?.addDebounceAfterTextChangedListener(100){
             vm.sent(TelegramLoginAction.SetPhoneNumber(it))

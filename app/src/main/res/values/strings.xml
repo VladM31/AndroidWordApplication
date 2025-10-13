@@ -22,4 +22,6 @@
     <string name="profile">Profile</string>
     <string name="policy">Policy</string>
     <string name="history">History</string>
+    <string name="expiry_month">Expiry month</string>
+    <string name="expiry_year">Expiry year</string>
 </resources>

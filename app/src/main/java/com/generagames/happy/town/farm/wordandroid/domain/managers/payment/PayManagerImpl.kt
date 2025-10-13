@@ -2,14 +2,15 @@ package com.generagames.happy.town.farm.wordandroid.domain.managers.payment
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
 import can.lucky.of.core.domain.models.enums.Currency
+import can.lucky.of.core.utils.getRespondMessage
 import can.lucky.of.core.utils.toPair
-import com.generagames.happy.town.farm.wordandroid.net.clients.payment.PayClient
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.CardPay
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.GooglePay
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.PayResult
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.SubCost
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.WaitExpirationDateResult
 import com.generagames.happy.town.farm.wordandroid.domain.models.keys.Platforms
+import com.generagames.happy.town.farm.wordandroid.net.clients.payment.PayClient
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.CardPayRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.pay.GooglePayRequest
 import kotlinx.coroutines.Dispatchers
@@ -70,7 +71,8 @@ class PayManagerImpl(
                     expirationDate = respond.expirationDate
                 )
             } catch (e: Exception){
-                WaitExpirationDateResult(errorMessage = e.message)
+
+                WaitExpirationDateResult(errorMessage = e.getRespondMessage())
             }
         }
     }
