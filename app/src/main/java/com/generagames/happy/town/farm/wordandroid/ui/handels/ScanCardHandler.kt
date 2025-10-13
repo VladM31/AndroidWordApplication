@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import lens24.intent.Card
@@ -31,6 +30,17 @@ class ScanCardHandler(
         scanCardCallback.onActivityResult(result)
     }
 
+    private val permissionWorker = fragment.registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { result ->
+        if (result) {
+            startScan()
+            return@registerForActivityResult
+        }
+        Toast.makeText(fragment.requireContext(), "Camera permission denied", Toast.LENGTH_SHORT)
+            .show()
+    }
+
     private var onSuccessScan: ((String) -> Unit)? = null
 
     fun checkCameraPermissionAndScan() {
@@ -39,11 +49,7 @@ class ScanCardHandler(
             return
         }
 
-        ActivityCompat.requestPermissions(
-            fragment.requireActivity(),
-            arrayOf(Manifest.permission.CAMERA),
-            CAMERA_PERMISSION_REQUEST_CODE
-        )
+        permissionWorker.launch(Manifest.permission.CAMERA)
     }
 
     fun setOnSuccessScanListener(listener: (String) -> Unit) {
