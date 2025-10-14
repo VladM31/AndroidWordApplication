@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.ui.utils.NumberInputFilter
+import can.lucky.of.core.utils.AppConstants
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
 import can.lucky.of.core.utils.onSelect
@@ -136,10 +137,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
     }
 
     private fun initStateListeners() {
-        viewModel.state.onEnd(lifecycleScope) {
-            findNavController().popBackStack(R.id.subscribeFragment, false)
-        }
-
         viewModel.state.onError(lifecycleScope) {
             requireActivity().showError(it.message).show()
         }
@@ -157,11 +154,18 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 requireContext().startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        "https://t.me/needlework_number_bot".toUri()
+                        AppConstants.telegramBotLink.toUri()
                     )
                 )
             }
         ).setDefaultSettings()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.state.onEnd(lifecycleScope) {
+            findNavController().popBackStack(R.id.subscribeFragment, false)
+        }
     }
 
     override fun onDestroyView() {
