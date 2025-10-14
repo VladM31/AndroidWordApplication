@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.ui.dialogs.showError
 import can.lucky.of.core.ui.utils.NumberInputFilter
+import can.lucky.of.core.utils.AppConstants
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.onError
 import can.lucky.of.core.utils.onSelect
@@ -153,7 +154,7 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 requireContext().startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        "https://t.me/needlework_number_bot".toUri()
+                        AppConstants.telegramBotLink.toUri()
                     )
                 )
             }

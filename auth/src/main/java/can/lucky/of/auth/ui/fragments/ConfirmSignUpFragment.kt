@@ -9,12 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import can.lucky.of.auth.R
 import can.lucky.of.auth.databinding.FragmentConfirmSignUpBinding
-import can.lucky.of.auth.domain.models.data.AuthResult
+import can.lucky.of.auth.domain.actions.ConfirmSignUpAction
 import can.lucky.of.auth.domain.models.data.LogInBundle
 import can.lucky.of.auth.domain.vms.ConfirmSignUpVm
-import can.lucky.of.auth.domain.actions.ConfirmSignUpAction
 import can.lucky.of.auth.ui.navigations.AuthNavigator
 import can.lucky.of.core.ui.controllers.ToolBarController
+import can.lucky.of.core.utils.AppConstants
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -48,7 +48,7 @@ class ConfirmSignUpFragment : Fragment(R.layout.fragment_confirm_sign_up) {
             requireContext().startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    "https://t.me/needlework_number_bot".toUri()
+                    AppConstants.telegramBotLink.toUri()
                 )
             )
         }
