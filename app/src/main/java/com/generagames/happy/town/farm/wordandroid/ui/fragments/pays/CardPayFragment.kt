@@ -136,10 +136,6 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
     }
 
     private fun initStateListeners() {
-        viewModel.state.onEnd(lifecycleScope) {
-            findNavController().popBackStack(R.id.subscribeFragment, false)
-        }
-
         viewModel.state.onError(lifecycleScope) {
             requireActivity().showError(it.message).show()
         }
@@ -162,6 +158,13 @@ class CardPayFragment : Fragment(R.layout.fragment_card_pay) {
                 )
             }
         ).setDefaultSettings()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.state.onEnd(lifecycleScope) {
+            findNavController().popBackStack(R.id.subscribeFragment, false)
+        }
     }
 
     override fun onDestroyView() {
