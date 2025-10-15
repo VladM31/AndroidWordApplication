@@ -1,8 +1,11 @@
 package can.lucky.of.core.utils
 
+import com.google.firebase.Firebase
+import com.google.firebase.remoteconfig.remoteConfig
+
 object AppConstants {
 
     val telegramBotLink: String by lazy {
-        "https://t.me/needlework_number_bot"
+        Firebase.remoteConfig.getString("telegram_bot_link")
     }
 }
