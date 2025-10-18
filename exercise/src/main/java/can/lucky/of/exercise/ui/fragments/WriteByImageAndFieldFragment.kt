@@ -1,20 +1,26 @@
 package can.lucky.of.exercise.ui.fragments
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import can.lucky.of.core.domain.factories.GlideHeaderFactory
 import can.lucky.of.core.domain.models.enums.Exercise
+import can.lucky.of.core.domain.models.enums.Language
+import can.lucky.of.core.domain.models.enums.Language.Companion.toBcp47Tag
 import can.lucky.of.core.ui.controllers.ToolBarController
 import can.lucky.of.core.utils.addDebounceAfterTextChangedListener
 import can.lucky.of.core.utils.onEnd
 import can.lucky.of.core.utils.setImage
 import can.lucky.of.exercise.R
+import can.lucky.of.exercise.databinding.FragmentWriteByImageAndTranslateExerciseBinding
 import can.lucky.of.exercise.domain.actions.ExerciseAction
 import can.lucky.of.exercise.domain.actions.WriteByImageAndTranslateExerciseAction
-import can.lucky.of.exercise.databinding.FragmentWriteByImageAndTranslateExerciseBinding
 import can.lucky.of.exercise.domain.models.data.ExerciseWord
 import can.lucky.of.exercise.domain.models.data.ExerciseWordDetails
 import can.lucky.of.exercise.domain.vm.WriteByImageAndFieldVm
@@ -43,6 +49,16 @@ open class WriteByImageAndFieldFragment(
     private val primaryRed by lazy {
         requireContext().resources.getColor(CoreR.color.primary_red, requireContext().theme)
     }
+
+    private val speechLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { res ->
+            if (res.resultCode == Activity.RESULT_OK) {
+                val data = res.data
+                val matches = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                val text = matches?.firstOrNull().orEmpty()
+                vm.sent(WriteByImageAndTranslateExerciseAction.UpdateText(text))
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,11 +102,26 @@ open class WriteByImageAndFieldFragment(
         }
 
         handleSetImage(newBinding)
-
+        handleSetOnMicroPhoneClickListener(newBinding)
 
         handleSetToolBar(newBinding)
 
         handleEnd()
+    }
+
+    private fun handleSetOnMicroPhoneClickListener(binding: FragmentWriteByImageAndTranslateExerciseBinding) {
+        binding.activateMicrophone.setOnClickListener {
+            val langTag = Language.valueOf(vm.state.value.currentWord().lang).toBcp47Tag()
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, langTag) // или Locale.getDefault()
+                putExtra(RecognizerIntent.EXTRA_PROMPT, "Say…")
+            }
+            speechLauncher.launch(intent)
+        }
     }
 
     private fun handleEnd() {

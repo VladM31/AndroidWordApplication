@@ -78,8 +78,8 @@
 
                 <ImageButton
                     android:id="@+id/addLetter"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/add_letter"
                     android:scaleType="fitXY"
@@ -89,6 +89,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/write_letters" />
+
+                <ImageButton
+                    android:id="@+id/activateMicrophone"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/use_microphone"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.12"
+                    app:layout_constraintStart_toEndOf="@+id/addLetter"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/microphone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

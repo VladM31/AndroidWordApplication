@@ -32,6 +32,17 @@ enum class Language(
         fun fromTitleCase(titleCase: String): Language {
             return mapTitleCase[titleCase] ?: UNDEFINED
         }
+
+        fun Language.toBcp47Tag(region: String? = null): String? = when (this) {
+            POLISH -> buildTag("pl", region ?: "PL")
+            ENGLISH -> buildTag("en", region)
+            GERMAN -> buildTag("de", region ?: "DE")
+            UKRAINIAN -> buildTag("ua", region ?: "UA")
+            UNDEFINED -> null
+        }
+
+        private fun buildTag(lang: String, region: String?): String =
+            if (region.isNullOrBlank()) lang else "$lang-$region"
     }
 
     val isDefined: Boolean
