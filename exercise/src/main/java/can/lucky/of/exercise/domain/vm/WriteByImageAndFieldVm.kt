@@ -79,29 +79,35 @@ internal class WriteByImageAndFieldVm(
     }
 
     private fun handleConfirm(){
-        val isConfirm = state.value.currentWord().original.lowercase() == state.value.wordText?.trim()?.lowercase()
+        val original = state.value.currentWord().original.lowercase().trim()
+        val inputWord = state.value.wordText?.trim()?.lowercase()
 
-        if (isConfirm) {
-            val grade = if(3 - state.value.mistakeCount > 0) 3 - state.value.mistakeCount else 0
-            viewModelScope.launch(Dispatchers.IO){
-                exerciseStatisticalManager.completeWord(state.value.toWordCompleted())
-            }
+        val isNotConfirm = original != inputWord
 
-            mutableState.value = state.value.copy(
+        if (isNotConfirm) {
+            mutableState.value = mutableState.value.copy(
+                isConfirm = false,
                 isEditEnable = false,
-                isConfirm = true,
-                mistakeCount = 0,
-                grades = state.value.grades + grade
+                mistakeCount = state.value.mistakeCount + 1
             )
+
+            viewModelScope.launch {
+                delay(1000)
+                mutableState.value = mutableState.value.copy(isEditEnable = true, isConfirm = null)
+            }
             return
         }
-
-        mutableState.value = mutableState.value.copy(isConfirm = false,isEditEnable = false, mistakeCount = state.value.mistakeCount + 1)
-
-        viewModelScope.launch {
-            delay(1000)
-            mutableState.value = mutableState.value.copy(isEditEnable = true, isConfirm = null)
+        val grade = if (3 - state.value.mistakeCount > 0) 3 - state.value.mistakeCount else 0
+        viewModelScope.launch(Dispatchers.IO) {
+            exerciseStatisticalManager.completeWord(state.value.toWordCompleted())
         }
+
+        mutableState.value = state.value.copy(
+            isEditEnable = false,
+            isConfirm = true,
+            mistakeCount = 0,
+            grades = state.value.grades + grade
+        )
     }
 
     private fun handleNextWord(){
