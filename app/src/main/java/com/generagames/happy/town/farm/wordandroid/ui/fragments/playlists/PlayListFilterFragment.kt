@@ -17,7 +17,6 @@ import com.generagames.happy.town.farm.wordandroid.domain.vms.PlayListFilterVm
 import com.generagames.happy.town.farm.wordandroid.ui.navigations.PlayListFilterNavigator
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 class PlayListFilterVm : AbstractMviViewModel<PlayListFilterState, PlayListFilterAction>() {
 
     private val mutableState = MutableStateFlow(PlayListFilterState())
-    override val state: StateFlow<PlayListFilterState> =mutableState
+    override val state: StateFlow<PlayListFilterState> = mutableState
 
     override fun sent(action: PlayListFilterAction) {
         when(action){
