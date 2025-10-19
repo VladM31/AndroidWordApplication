@@ -14,11 +14,9 @@ import can.lucky.of.core.choosers.AbstractChooser
 import can.lucky.of.core.choosers.ImageChooser
 import can.lucky.of.core.choosers.SoundChooser
 import can.lucky.of.core.domain.factories.GlideHeaderFactory
-import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
 import can.lucky.of.core.ui.controllers.ToolBarController
-import can.lucky.of.core.ui.dialogs.fragmentLoadDialog
 import can.lucky.of.core.utils.listeners.SoundClickListener
-import com.bumptech.glide.load.model.LazyHeaders
+import can.lucky.of.core.utils.onEnd
 import com.generagames.happy.town.farm.wordandroid.R
 import com.generagames.happy.town.farm.wordandroid.actions.PinUserWordsAction
 import com.generagames.happy.town.farm.wordandroid.databinding.FragmentPinUserWordsBinding
@@ -28,16 +26,15 @@ import com.generagames.happy.town.farm.wordandroid.ui.handels.pin.PinUserWordCol
 import com.generagames.happy.town.farm.wordandroid.ui.handels.pin.SetImageCollectHandler
 import com.generagames.happy.town.farm.wordandroid.ui.handels.pin.SetSoundCollectHandler
 import com.generagames.happy.town.farm.wordandroid.ui.handels.pin.WordTextCollectHandler
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import can.lucky.of.core.R as CoreR
-import can.lucky.of.core.utils.onEnd
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import can.lucky.of.core.R as CoreR
 
 
 class PinUserWordsFragment : Fragment(R.layout.fragment_pin_user_words) {
@@ -76,6 +73,8 @@ class PinUserWordsFragment : Fragment(R.layout.fragment_pin_user_words) {
             }
         }
 
+        initIndexListener()
+
         initToolBarController()
 
         val args = PinUserWordsFragmentArgs.fromBundle(requireArguments())
@@ -98,7 +97,40 @@ class PinUserWordsFragment : Fragment(R.layout.fragment_pin_user_words) {
 
         pinViewModel.sent(PinUserWordsAction.Load(args.wordIds.toList()))
 
+
     }
+
+    private fun initIndexListener() {
+        lifecycleScope.launch {
+            pinViewModel.state.distinctUntilChanged { old, new ->
+                old.index == new.index && old.words.size == new.words.size
+            }
+                .collectLatest { stateValue ->
+                    updateNavigationButtonsVisibility(stateValue.index, stateValue.words.size)
+                }
+        }
+    }
+
+    private fun updateNavigationButtonsVisibility(index: Int, size: Int) {
+        if (size == 1) {
+            binding?.nextBtn?.visibility = View.INVISIBLE
+            binding?.previousBtn?.visibility = View.INVISIBLE
+            return
+        }
+        if (index == 0) {
+            binding?.previousBtn?.visibility = View.INVISIBLE
+            binding?.nextBtn?.visibility = View.VISIBLE
+            return
+        }
+        if (index == size - 1) {
+            binding?.nextBtn?.visibility = View.INVISIBLE
+            binding?.previousBtn?.visibility = View.VISIBLE
+            return
+        }
+        binding?.nextBtn?.visibility = View.VISIBLE
+        binding?.previousBtn?.visibility = View.VISIBLE
+    }
+
 
     private fun handleStateLaunch(imageChooser: ImageChooser, soundChooser: SoundChooser) {
 
@@ -127,7 +159,6 @@ class PinUserWordsFragment : Fragment(R.layout.fragment_pin_user_words) {
             }
         }
     }
-
 
 
     private fun initToolBarController() {
@@ -208,7 +239,10 @@ class PinUserWordsFragment : Fragment(R.layout.fragment_pin_user_words) {
         return listOf(
             NumberTextCollectHandler,
             WordTextCollectHandler(getString(CoreR.string.text_template)),
-            SetImageCollectHandler(context = requireContext(), headers = headerFactory.createHeaders()),
+            SetImageCollectHandler(
+                context = requireContext(),
+                headers = headerFactory.createHeaders()
+            ),
             SetSoundCollectHandler(
                 context = requireContext(),
                 headers = headerFactory.createHeaders(),
