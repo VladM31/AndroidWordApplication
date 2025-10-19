@@ -29,8 +29,9 @@ class PinnedWordAdapter(
             val word = pinnedWord.userWord.word
 
             binding.category.text = categoryTemplate.format(word.category.orEmpty())
-            binding.originText.text = textTemplate.format(word.lang, word.original)
-            binding.translateText.text = textTemplate.format(word.translateLang, word.translate)
+            binding.originText.text = textTemplate.format(word.lang.fixedShortName, word.original)
+            binding.translateText.text =
+                textTemplate.format(word.translateLang.fixedShortName, word.translate)
 
             binding.hasImage.visibility =  (word.imageLink != null).toVisibility()
             binding.hasSound.visibility = (word.soundLink != null).toVisibility()

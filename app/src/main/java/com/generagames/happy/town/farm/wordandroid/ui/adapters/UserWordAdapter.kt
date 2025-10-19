@@ -30,9 +30,13 @@ class UserWordAdapter(
         fun bind(userWord: UserWord, position: Int) {
             binding.apply {
                 category.text = categoryTemplate.format(userWord.word.category.orEmpty())
-                originText.text = textTemplate.format(userWord.word.lang, userWord.word.original)
+                originText.text =
+                    textTemplate.format(userWord.word.lang.fixedShortName, userWord.word.original)
                 translateText.text =
-                    textTemplate.format(userWord.word.translateLang, userWord.word.translate)
+                    textTemplate.format(
+                        userWord.word.translateLang.fixedShortName,
+                        userWord.word.translate
+                    )
                 lastDateRead.text =
                     lastDateReadTemplate.format(userWord.lastReadDate.toZoneDateTimeFormat())
                 openWordButton.setOnClickListener {
