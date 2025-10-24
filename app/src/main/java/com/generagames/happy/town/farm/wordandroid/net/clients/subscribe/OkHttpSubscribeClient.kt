@@ -2,8 +2,8 @@ package com.generagames.happy.town.farm.wordandroid.net.clients.subscribe
 
 import android.util.Log
 import can.lucky.of.core.domain.factories.HttpOkHeaderFactory
+import can.lucky.of.core.utils.AppConstants
 import com.generagames.happy.town.farm.wordandroid.net.models.responses.SubscribeRespond
-import com.generagames.happy.town.farm.wordandroid.utils.baseUrl
 import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
 import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonOffsetDateTimeAdapter.addOffsetDateTimeAdapter
 import com.google.gson.GsonBuilder
@@ -14,7 +14,7 @@ class OkHttpSubscribeClient(
     private val headerFactory: HttpOkHeaderFactory,
     private val httpClient: OkHttpClient
 ) : SubscribeClient {
-    private val url by lazy { "${baseUrl()}/pay/subscribe" }
+    private val url by lazy { "${AppConstants.baseUrl()}/pay/subscribe" }
     private val gson = GsonBuilder().addLocalDateTimeAdapter().addOffsetDateTimeAdapter().create()
 
     override suspend fun fetch(): SubscribeRespond? {

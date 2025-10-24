@@ -1,6 +1,7 @@
 package can.lucky.of.exercise.net.clients.impls
 
 import android.util.Log
+import can.lucky.of.core.utils.AppConstants
 import can.lucky.of.exercise.net.clients.ExerciseStatisticalClient
 import can.lucky.of.exercise.net.requests.EndExerciseTransactionRequest
 import can.lucky.of.exercise.net.requests.StartExerciseTransactionRequest
@@ -13,7 +14,9 @@ internal class OkHttpExerciseStatisticalClient(
     private val okHttpClient : okhttp3.OkHttpClient
 ) : ExerciseStatisticalClient {
     private val gson = Gson()
-    private val baseUrl = "http://vps2498837.fastwebserver.de:8030/api/v1/statistical"
+    private val baseUrl by lazy {
+        AppConstants.baseUrl() + "/stat-api/statistical"
+    }
 
     override suspend fun startExercise(request: StartExerciseTransactionRequest, vararg additionalHeaders: Pair<String, String>) {
         executeRequest(request, "/start", additionalHeaders)

@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import can.lucky.of.core.domain.managers.subscribe.SubscribeCacheManager
-import can.lucky.of.core.utils.setHost
 import com.generagames.happy.town.farm.wordandroid.R
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.remoteConfig
@@ -26,10 +25,6 @@ class StartFragment : Fragment(can.lucky.of.core.R.layout.fragment_loading) {
         lifecycleScope.launch(Dispatchers.IO){
             Firebase.remoteConfig.reset().await()
             Firebase.remoteConfig.fetchAndActivate().await()
-
-            Firebase.remoteConfig.getString("local_host").let {
-                setHost(it)
-            }
 
             val currentVersion = getString(R.string.current_version)
             val remoteVersion = Firebase.remoteConfig.getString("version")

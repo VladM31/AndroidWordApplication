@@ -11,8 +11,7 @@ import org.koin.dsl.module
 internal val clientDi = module{
     single<AuthClient> {
         OkHttpAuthClient(
-            client = get<MainOkClientKeeper>().okHttpClient,
-            baseUrlStore = get()
+            client = get<MainOkClientKeeper>().okHttpClient
         )
     }
 

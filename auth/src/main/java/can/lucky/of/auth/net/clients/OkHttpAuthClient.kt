@@ -5,7 +5,7 @@ import can.lucky.of.auth.net.models.requests.LoginRequest
 import can.lucky.of.auth.net.models.requests.SignUpRequest
 import can.lucky.of.auth.net.models.responses.AuthResponse
 import can.lucky.of.auth.net.models.responses.SignUpResponse
-import can.lucky.of.core.domain.storages.BaseUrlStore
+import can.lucky.of.core.utils.AppConstants
 import com.google.gson.Gson
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -14,13 +14,12 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 
 internal class OkHttpAuthClient(
-    private val client: OkHttpClient,
-    private val baseUrlStore: BaseUrlStore
+    private val client: OkHttpClient
 ) : AuthClient {
     private val jsonMapper = Gson()
-    private val logInUrl by lazy { "${baseUrlStore.getBaseUrl()}/auth/login".toHttpUrl() }
-    private val signUpUrl by lazy {"${baseUrlStore.getBaseUrl()}/auth/sign-up".toHttpUrl()}
-    private val isRegisteredUrl by lazy {"${baseUrlStore.getBaseUrl()}/auth/is-registered".toHttpUrl()}
+    private val logInUrl by lazy { "${AppConstants.baseUrl()}/auth/login".toHttpUrl() }
+    private val signUpUrl by lazy { "${AppConstants.baseUrl()}/auth/sign-up".toHttpUrl() }
+    private val isRegisteredUrl by lazy { "${AppConstants.baseUrl()}/auth/is-registered".toHttpUrl() }
 
     override suspend fun logIn(req: LoginRequest): AuthResponse {
         val request = postReq(logInUrl, req)

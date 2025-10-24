@@ -3,6 +3,7 @@ package com.generagames.happy.town.farm.wordandroid.di.configs
 
 import can.lucky.of.core.domain.keepers.MainOkClientKeeper
 import can.lucky.of.core.domain.keepers.MainRetrofitKeeper
+import can.lucky.of.core.utils.AppConstants
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.DownloadClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.files.FileApiClientImpl
@@ -15,7 +16,6 @@ import com.generagames.happy.town.farm.wordandroid.net.clients.subscribe.Subscri
 import com.generagames.happy.town.farm.wordandroid.net.clients.userword.UserWordClient
 import com.generagames.happy.town.farm.wordandroid.net.clients.word.WordClient
 import com.generagames.happy.town.farm.wordandroid.utils.ToStringConverterFactory
-import com.generagames.happy.town.farm.wordandroid.utils.baseUrl
 import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonLocalDateTimeAdapter.addLocalDateTimeAdapter
 import com.generagames.happy.town.farm.wordandroid.utils.gson.GsonOffsetDateTimeAdapter.addOffsetDateTimeAdapter
 import com.google.gson.GsonBuilder
@@ -36,7 +36,7 @@ val clientModule = module {
 
     single{
         MainRetrofitKeeper(retrofit = Retrofit.Builder()
-            .baseUrl( baseUrl() )
+            .baseUrl(AppConstants.baseUrl())
             .addConverterFactory(ToStringConverterFactory())
             .addConverterFactory(
                 GsonConverterFactory.create(

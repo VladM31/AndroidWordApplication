@@ -6,7 +6,6 @@ import can.lucky.of.addword.di.exportAddWordDi
 import can.lucky.of.auth.di.exportAuthDi
 import can.lucky.of.core.domain.keepers.MainOkClientKeeper
 import can.lucky.of.core.domain.managers.media.MediaManager
-import can.lucky.of.core.utils.setHost
 import can.lucky.of.exercise.di.exerciseDi
 import can.lucky.of.history.di.historyExportDi
 import can.lucky.of.profile.di.profileExport
@@ -19,11 +18,8 @@ import com.generagames.happy.town.farm.wordandroid.di.configs.headerDiModule
 import com.generagames.happy.town.farm.wordandroid.di.configs.listenerDiModule
 import com.generagames.happy.town.farm.wordandroid.di.configs.managerModule
 import com.generagames.happy.town.farm.wordandroid.di.configs.navigateDi
-import com.generagames.happy.town.farm.wordandroid.di.configs.storeDi
 import com.generagames.happy.town.farm.wordandroid.di.configs.viewModelModule
 import com.generagames.happy.town.farm.wordandroid.ui.listeners.LifecycleFragmentListener
-import com.google.firebase.Firebase
-import com.google.firebase.remoteconfig.remoteConfig
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -35,15 +31,10 @@ class WordsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Firebase.remoteConfig.getString("local_host").let {
-            setHost(it)
-        }
-
         startKoin {
             androidContext(this@WordsApplication)
             modules(
                 navigateDi,
-                storeDi,
                 clientModule,
                 managerModule,
                 headerDiModule,

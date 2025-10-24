@@ -1,10 +1,10 @@
 package com.generagames.happy.town.farm.wordandroid.net.clients.files
 
 import can.lucky.of.core.domain.managers.cache.UserCacheManager
+import can.lucky.of.core.utils.AppConstants
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.files.AudioGenerationRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.files.SaveFileRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.responses.UploadRespond
-import com.generagames.happy.town.farm.wordandroid.utils.baseUrl
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -19,8 +19,8 @@ class FileApiClientImpl(
     private val userCacheManager: UserCacheManager,
     private val gson: Gson = Gson()
 ) : FileApiClient {
-    private val saveFileUrl by lazy { "${baseUrl()}/files/upload" }
-    private val textToAudioUrl by lazy { "${baseUrl()}/files/text-to-audio" }
+    private val saveFileUrl by lazy { "${AppConstants.baseUrl()}/files/upload" }
+    private val textToAudioUrl by lazy { "${AppConstants.baseUrl()}/files/text-to-audio" }
 
     override suspend fun uploadFile(request: SaveFileRequest): UploadRespond {
         return upload(request.content, request.fileName)
