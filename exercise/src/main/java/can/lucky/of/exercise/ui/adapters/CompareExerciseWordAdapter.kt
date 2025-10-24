@@ -41,18 +41,22 @@ internal class CompareExerciseWordAdapter(
             if (compareBox.isMistake) {
                 binding.root.setBackgroundResource(R.drawable.box_red_back)
                 binding.content.setTextColor(state.primaryRed)
+                binding.root.isEnabled = true
             } else if(compareBox.position != null) {
                 binding.root.setBackgroundResource(R.drawable.button_back)
                 binding.content.setTextColor(state.primaryBack)
+                binding.root.isEnabled = false
             }else{
                 binding.root.setBackgroundResource(R.drawable.box_back)
                 binding.content.setTextColor(state.primaryColor)
+                binding.root.isEnabled = true
             }
 
             binding.root.setOnClickListener {
                 if (state.isEnable().not()) {
                     return@setOnClickListener
                 }
+
                 state.onClick(compareBox.word.wordId, adapterPosition)
                 binding.root.setBackgroundResource(R.drawable.button_back)
                 binding.content.setTextColor(state.primaryBack)
