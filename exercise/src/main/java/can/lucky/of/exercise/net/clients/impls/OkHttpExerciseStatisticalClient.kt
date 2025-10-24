@@ -27,7 +27,11 @@ internal class OkHttpExerciseStatisticalClient(
         executeRequest(request, "/end", additionalHeaders)
     }
 
-    private suspend fun executeRequest(body: Any, endpoint: String, additionalHeaders: Array<out Pair<String, String>>) {
+    private fun executeRequest(
+        body: Any,
+        endpoint: String,
+        additionalHeaders: Array<out Pair<String, String>>
+    ) {
         val json = gson.toJson(body)
 
         val headerBuilder = okhttp3.Headers.Builder()
