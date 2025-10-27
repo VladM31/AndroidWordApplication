@@ -1,4 +1,4 @@
-package com.generagames.happy.town.farm.wordandroid.net.models.responses
+package com.generagames.happy.town.farm.wordandroid.net.models.responses.pay
 
 data class SubCostRespond(
     val cost: Float,

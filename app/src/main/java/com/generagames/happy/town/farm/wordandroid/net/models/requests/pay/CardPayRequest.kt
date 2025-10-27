@@ -1,12 +1,12 @@
-package com.generagames.happy.town.farm.wordandroid.net.models.requests
+package com.generagames.happy.town.farm.wordandroid.net.models.requests.pay
 
 import com.generagames.happy.town.farm.wordandroid.domain.models.keys.Platforms
 
 data class CardPayRequest(
-    val phoneNumber : String,
-    val email : String,
+    val phoneNumber: String,
+    val email: String,
 
-    val cardNumber : String,
+    val cardNumber: String,
     val expiryDate: String,
     val cardName: String,
     val cvv2: String,

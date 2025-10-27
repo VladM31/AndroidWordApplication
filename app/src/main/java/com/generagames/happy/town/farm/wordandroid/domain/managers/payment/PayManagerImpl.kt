@@ -11,7 +11,7 @@ import com.generagames.happy.town.farm.wordandroid.domain.models.data.SubCost
 import com.generagames.happy.town.farm.wordandroid.domain.models.data.WaitExpirationDateResult
 import com.generagames.happy.town.farm.wordandroid.domain.models.keys.Platforms
 import com.generagames.happy.town.farm.wordandroid.net.clients.payment.PayClient
-import com.generagames.happy.town.farm.wordandroid.net.models.requests.CardPayRequest
+import com.generagames.happy.town.farm.wordandroid.net.models.requests.pay.CardPayRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.pay.GooglePayRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

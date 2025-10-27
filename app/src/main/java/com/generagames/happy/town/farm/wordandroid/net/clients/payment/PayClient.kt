@@ -1,10 +1,10 @@
 package com.generagames.happy.town.farm.wordandroid.net.clients.payment
 
-import com.generagames.happy.town.farm.wordandroid.net.models.requests.CardPayRequest
+import com.generagames.happy.town.farm.wordandroid.net.models.requests.pay.CardPayRequest
 import com.generagames.happy.town.farm.wordandroid.net.models.requests.pay.GooglePayRequest
-import com.generagames.happy.town.farm.wordandroid.net.models.responses.PayRespond
-import com.generagames.happy.town.farm.wordandroid.net.models.responses.SubCostRespond
-import com.generagames.happy.town.farm.wordandroid.net.models.responses.WaitCardPayRespond
+import com.generagames.happy.town.farm.wordandroid.net.models.responses.pay.PayRespond
+import com.generagames.happy.town.farm.wordandroid.net.models.responses.pay.SubCostRespond
+import com.generagames.happy.town.farm.wordandroid.net.models.responses.pay.WaitCardPayRespond
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
