@@ -3,10 +3,10 @@ package can.lucky.of.exercise.domain.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import can.lucky.of.core.domain.vms.MviViewModel
-import can.lucky.of.exercise.domain.actions.WriteByImageAndTranslateExerciseAction
+import can.lucky.of.exercise.domain.actions.WriteByImageAndFieldAction
 import can.lucky.of.exercise.domain.managers.ExerciseStatisticalManager
 import can.lucky.of.exercise.domain.mappers.toWordCompleted
-import can.lucky.of.exercise.domain.models.states.WriteByImageAndTranslateExerciseState
+import can.lucky.of.exercise.domain.models.states.WriteByImageAndFieldState
 import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.delay
@@ -17,19 +17,19 @@ import kotlinx.coroutines.launch
 internal class WriteByImageAndFieldVm(
     private val exerciseStatisticalManager: ExerciseStatisticalManager
 ) : ViewModel(),
-    MviViewModel<WriteByImageAndTranslateExerciseState, WriteByImageAndTranslateExerciseAction> {
+    MviViewModel<WriteByImageAndFieldState, WriteByImageAndFieldAction> {
 
-    private val mutableState = MutableStateFlow(WriteByImageAndTranslateExerciseState())
-    override val state: StateFlow<WriteByImageAndTranslateExerciseState>
+    private val mutableState = MutableStateFlow(WriteByImageAndFieldState())
+    override val state: StateFlow<WriteByImageAndFieldState>
         get() = mutableState
 
-    override fun sent(action: WriteByImageAndTranslateExerciseAction) {
+    override fun sent(action: WriteByImageAndFieldAction) {
         when(action){
-            is WriteByImageAndTranslateExerciseAction.Init -> handleInit(action)
-            is WriteByImageAndTranslateExerciseAction.UpdateText -> handleUpdateText(action)
-            is WriteByImageAndTranslateExerciseAction.Confirm -> handleConfirm()
-            is WriteByImageAndTranslateExerciseAction.NextWord -> handleNextWord()
-            is WriteByImageAndTranslateExerciseAction.AddLetter -> handleAddLetter()
+            is WriteByImageAndFieldAction.Init -> handleInit(action)
+            is WriteByImageAndFieldAction.UpdateText -> handleUpdateText(action)
+            is WriteByImageAndFieldAction.Confirm -> handleConfirm()
+            is WriteByImageAndFieldAction.NextWord -> handleNextWord()
+            is WriteByImageAndFieldAction.AddLetter -> handleAddLetter()
         }
     }
 
@@ -64,7 +64,7 @@ internal class WriteByImageAndFieldVm(
         mutableState.value = state.value.copy(wordText = textBuilder.toString())
     }
 
-    private fun handleInit(action: WriteByImageAndTranslateExerciseAction.Init){
+    private fun handleInit(action: WriteByImageAndFieldAction.Init) {
         mutableState.value = mutableState.value.copy(
             words = action.words.shuffled(),
             isInited = true,
@@ -74,7 +74,7 @@ internal class WriteByImageAndFieldVm(
         )
     }
 
-    private fun handleUpdateText(action: WriteByImageAndTranslateExerciseAction.UpdateText){
+    private fun handleUpdateText(action: WriteByImageAndFieldAction.UpdateText) {
         mutableState.value = mutableState.value.copy(wordText = action.text)
     }
 

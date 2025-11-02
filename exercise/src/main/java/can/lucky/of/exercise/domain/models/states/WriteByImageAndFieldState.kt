@@ -4,7 +4,7 @@ import can.lucky.of.core.domain.models.enums.Exercise
 import can.lucky.of.core.domain.models.states.EndetableState
 import can.lucky.of.exercise.domain.models.data.ExerciseWordDetails
 
-internal data class WriteByImageAndTranslateExerciseState(
+internal data class WriteByImageAndFieldState(
     val words: List<ExerciseWordDetails> = emptyList(),
     val wordIndex: Int = 0,
     val isConfirm: Boolean? = null,

@@ -20,7 +20,7 @@ import can.lucky.of.core.utils.setImage
 import can.lucky.of.exercise.R
 import can.lucky.of.exercise.databinding.FragmentWriteByImageAndTranslateExerciseBinding
 import can.lucky.of.exercise.domain.actions.ExerciseAction
-import can.lucky.of.exercise.domain.actions.WriteByImageAndTranslateExerciseAction
+import can.lucky.of.exercise.domain.actions.WriteByImageAndFieldAction
 import can.lucky.of.exercise.domain.models.data.ExerciseWord
 import can.lucky.of.exercise.domain.models.data.ExerciseWordDetails
 import can.lucky.of.exercise.domain.vm.WriteByImageAndFieldVm
@@ -56,7 +56,7 @@ open class WriteByImageAndFieldFragment(
                 val data = res.data
                 val matches = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                 val text = matches?.firstOrNull().orEmpty()
-                vm.sent(WriteByImageAndTranslateExerciseAction.UpdateText(text))
+                vm.sent(WriteByImageAndFieldAction.UpdateText(text))
             }
         }
 
@@ -75,11 +75,11 @@ open class WriteByImageAndFieldFragment(
         handleInit()
 
         newBinding.addLetter.setOnClickListener {
-            vm.sent(WriteByImageAndTranslateExerciseAction.AddLetter)
+            vm.sent(WriteByImageAndFieldAction.AddLetter)
         }
 
         newBinding.originalWordInput.addDebounceAfterTextChangedListener(300) {
-            vm.sent(WriteByImageAndTranslateExerciseAction.UpdateText(it))
+            vm.sent(WriteByImageAndFieldAction.UpdateText(it))
         }
 
         handleConfirmButton(newBinding)
@@ -144,7 +144,7 @@ open class WriteByImageAndFieldFragment(
         if (vm.state.value.isInited.not()) {
             (requireActivity() as? ExerciseActivity)?.state?.let {
                 vm.sent(
-                    WriteByImageAndTranslateExerciseAction
+                    WriteByImageAndFieldAction
                         .Init(
                             it.words,
                             transactionId = it.transactionId,
@@ -162,13 +162,13 @@ open class WriteByImageAndFieldFragment(
                 if (isConfirm == true) {
                     newBinding.nextButton.text = "Next"
                     newBinding.nextButton.setOnClickListener {
-                        vm.sent(WriteByImageAndTranslateExerciseAction.NextWord)
+                        vm.sent(WriteByImageAndFieldAction.NextWord)
                     }
                     return@collectLatest
                 }
                 newBinding.nextButton.text = "Confirm"
                 newBinding.nextButton.setOnClickListener {
-                    vm.sent(WriteByImageAndTranslateExerciseAction.Confirm)
+                    vm.sent(WriteByImageAndFieldAction.Confirm)
                 }
             }
         }

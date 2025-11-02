@@ -5,7 +5,7 @@ import can.lucky.of.exercise.domain.models.data.WordCompleted
 import can.lucky.of.exercise.domain.models.states.CompareExerciseState
 import can.lucky.of.exercise.domain.models.states.LettersMatchState
 import can.lucky.of.exercise.domain.models.states.SelectingAnOptionState
-import can.lucky.of.exercise.domain.models.states.WriteByImageAndTranslateExerciseState
+import can.lucky.of.exercise.domain.models.states.WriteByImageAndFieldState
 import java.time.Instant
 
 internal fun LettersMatchState.toWordCompleted() : WordCompleted {
@@ -49,7 +49,7 @@ internal fun SelectingAnOptionState.toWordCompleted()  : WordCompleted{
     )
 }
 
-internal fun WriteByImageAndTranslateExerciseState.toWordCompleted() : WordCompleted {
+internal fun WriteByImageAndFieldState.toWordCompleted(): WordCompleted {
     val currentWord = this.currentWord()
 
     return WordCompleted(
